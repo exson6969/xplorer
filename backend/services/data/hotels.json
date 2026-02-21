@@ -1,0 +1,1444 @@
+[
+  {
+    "hotel_id": "H001",
+    "name": "Premium Retreat ECR",
+    "latitude": 13.063,
+    "longitude": 80.261,
+    "location": "ECR, Chennai",
+    "gps": "13.063,80.261",
+    "description": "Premium Retreat ECR is a luxury hotel located in ECR, Chennai. It offers a range of amenities including AC, Balcony, Bathtub, Breakfast Included, City View, Coffee Maker, Gym Access, Lounge Access, Mini Bar, Pool View, Room Service, TV.",
+    "rooms": [
+      {
+        "room_id": "R1-101",
+        "room_type": "Deluxe",
+        "bed_type": "1 King Bed",
+        "max_guests": 3,
+        "price_per_night": 4000,
+        "total_rooms": 16,
+        "available_rooms": 4,
+        "amenities": [
+          "Room Service",
+          "City View",
+          "Bathtub",
+          "Lounge Access",
+          "Balcony",
+          "TV",
+          "Pool View",
+          "Gym Access"
+        ]
+      },
+      {
+        "room_id": "R1-201",
+        "room_type": "Executive",
+        "bed_type": "1 Bed",
+        "max_guests": 2,
+        "price_per_night": 3000,
+        "total_rooms": 22,
+        "available_rooms": 2,
+        "amenities": [
+          "AC",
+          "TV",
+          "Mini Bar",
+          "City View",
+          "Coffee Maker"
+        ]
+      },
+      {
+        "room_id": "R1-301",
+        "room_type": "Luxury",
+        "bed_type": "1 Queen Bed",
+        "max_guests": 4,
+        "price_per_night": 6000,
+        "total_rooms": 13,
+        "available_rooms": 8,
+        "amenities": [
+          "Breakfast Included",
+          "Lounge Access",
+          "Gym Access"
+        ]
+      }
+    ],
+    "reviews": [
+      {
+        "review_text": "Highly recommend Premium Retreat ECR for anyone visiting the city. The service was top-notch and the breakfast was delicious.",
+        "rating": 4.5,
+        "date_time": "2025-05-20T00:00:00Z"
+      },
+      {
+        "review_text": "A very comfortable and luxurious experience at Premium Retreat ECR. We will definitely be coming back.",
+        "rating": 4.0,
+        "date_time": "2025-08-25T00:00:00Z"
+      }
+    ]
+  },
+  {
+    "hotel_id": "H002",
+    "name": "Grand Towers OMR",
+    "latitude": 12.8693,
+    "longitude": 80.2601,
+    "location": "OMR, Chennai",
+    "gps": "12.8693,80.2601",
+    "description": "Grand Towers OMR is a luxury hotel located in OMR, Chennai. It offers a range of amenities including AC, Balcony, Breakfast Included, City View, Coffee Maker, Lounge Access, Pool View, TV, WiFi.",
+    "rooms": [
+      {
+        "room_id": "R2-101",
+        "room_type": "Standard",
+        "bed_type": "1 Queen Bed",
+        "max_guests": 4,
+        "price_per_night": 5000,
+        "total_rooms": 26,
+        "available_rooms": 7,
+        "amenities": [
+          "City View",
+          "TV",
+          "Balcony",
+          "Breakfast Included"
+        ]
+      },
+      {
+        "room_id": "R2-201",
+        "room_type": "Premium",
+        "bed_type": "1 King Bed",
+        "max_guests": 3,
+        "price_per_night": 15000,
+        "total_rooms": 28,
+        "available_rooms": 5,
+        "amenities": [
+          "WiFi",
+          "Coffee Maker",
+          "AC",
+          "Pool View",
+          "Balcony",
+          "Lounge Access"
+        ]
+      }
+    ],
+    "reviews": [
+      {
+        "review_text": "Great value for money. Grand Towers OMR exceeded our expectations, especially with how convenient it is to travel around the city.",
+        "rating": 5.0,
+        "date_time": "2025-08-07T00:00:00Z"
+      },
+      {
+        "review_text": "Beautiful property! The check-in process at Grand Towers OMR was seamless and the room view was great.",
+        "rating": 4.5,
+        "date_time": "2025-08-26T00:00:00Z"
+      }
+    ]
+  },
+  {
+    "hotel_id": "H003",
+    "name": "Suites Grand T Nagar",
+    "latitude": 13.0854,
+    "longitude": 80.2623,
+    "location": "T Nagar, Chennai",
+    "gps": "13.0854,80.2623",
+    "description": "Suites Grand T Nagar is a luxury hotel located in T Nagar, Chennai. It offers a range of amenities including AC, Balcony, Bathtub, Breakfast Included, City View, Coffee Maker, Gym Access, Lounge Access, Room Service, Sea View, TV, WiFi.",
+    "rooms": [
+      {
+        "room_id": "R3-101",
+        "room_type": "Executive",
+        "bed_type": "2 Beds",
+        "max_guests": 4,
+        "price_per_night": 5000,
+        "total_rooms": 14,
+        "available_rooms": 7,
+        "amenities": [
+          "Lounge Access",
+          "TV",
+          "City View",
+          "Coffee Maker",
+          "Gym Access",
+          "WiFi"
+        ]
+      },
+      {
+        "room_id": "R3-201",
+        "room_type": "Deluxe",
+        "bed_type": "1 King Bed",
+        "max_guests": 3,
+        "price_per_night": 17000,
+        "total_rooms": 24,
+        "available_rooms": 15,
+        "amenities": [
+          "TV",
+          "Room Service",
+          "Sea View"
+        ]
+      },
+      {
+        "room_id": "R3-301",
+        "room_type": "Suite",
+        "bed_type": "2 Beds",
+        "max_guests": 3,
+        "price_per_night": 17000,
+        "total_rooms": 29,
+        "available_rooms": 24,
+        "amenities": [
+          "Sea View",
+          "Balcony",
+          "Coffee Maker",
+          "Bathtub",
+          "Breakfast Included"
+        ]
+      },
+      {
+        "room_id": "R3-401",
+        "room_type": "Standard",
+        "bed_type": "1 Queen Bed",
+        "max_guests": 4,
+        "price_per_night": 12000,
+        "total_rooms": 26,
+        "available_rooms": 21,
+        "amenities": [
+          "TV",
+          "AC",
+          "City View",
+          "Breakfast Included",
+          "Coffee Maker"
+        ]
+      }
+    ],
+    "reviews": [
+      {
+        "review_text": "Great value for money. Suites Grand T Nagar exceeded our expectations, especially with how convenient it is to travel around the city.",
+        "rating": 4.5,
+        "date_time": "2025-04-26T00:00:00Z"
+      },
+      {
+        "review_text": "Beautiful property! The check-in process at Suites Grand T Nagar was seamless and the room view was great.",
+        "rating": 4.5,
+        "date_time": "2025-09-16T00:00:00Z"
+      }
+    ]
+  },
+  {
+    "hotel_id": "H004",
+    "name": "Elite Inn Anna Nagar",
+    "latitude": 12.8787,
+    "longitude": 80.1553,
+    "location": "Anna Nagar, Chennai",
+    "gps": "12.8787,80.1553",
+    "description": "Elite Inn Anna Nagar is a luxury hotel located in Anna Nagar, Chennai. It offers a range of amenities including Balcony, Bathtub, City View, Coffee Maker, Gym Access, Lounge Access, Mini Bar, Room Service, Sea View, Spa Access, TV, WiFi.",
+    "rooms": [
+      {
+        "room_id": "R4-101",
+        "room_type": "Premium",
+        "bed_type": "2 Beds",
+        "max_guests": 2,
+        "price_per_night": 5000,
+        "total_rooms": 11,
+        "available_rooms": 1,
+        "amenities": [
+          "Spa Access",
+          "Bathtub",
+          "Room Service",
+          "TV",
+          "Mini Bar",
+          "City View"
+        ]
+      },
+      {
+        "room_id": "R4-201",
+        "room_type": "Executive",
+        "bed_type": "1 King Bed",
+        "max_guests": 2,
+        "price_per_night": 8000,
+        "total_rooms": 29,
+        "available_rooms": 19,
+        "amenities": [
+          "Sea View",
+          "City View",
+          "Room Service",
+          "Gym Access",
+          "Coffee Maker",
+          "Lounge Access",
+          "Balcony",
+          "WiFi"
+        ]
+      }
+    ],
+    "reviews": [
+      {
+        "review_text": "Highly recommend Elite Inn Anna Nagar for anyone visiting the city. The service was top-notch and the breakfast was delicious.",
+        "rating": 5.0,
+        "date_time": "2025-04-02T00:00:00Z"
+      },
+      {
+        "review_text": "A very comfortable and luxurious experience at Elite Inn Anna Nagar. We will definitely be coming back.",
+        "rating": 4.5,
+        "date_time": "2025-12-29T00:00:00Z"
+      }
+    ]
+  },
+  {
+    "hotel_id": "H005",
+    "name": "Premium Residency Mylapore",
+    "latitude": 13.0045,
+    "longitude": 80.2033,
+    "location": "Mylapore, Chennai",
+    "gps": "13.0045,80.2033",
+    "description": "Premium Residency Mylapore is a luxury hotel located in Mylapore, Chennai. It offers a range of amenities including AC, Breakfast Included, City View, Coffee Maker, Gym Access, Lounge Access, Mini Bar, Pool View, Room Service, Sea View, Spa Access, TV, WiFi.",
+    "rooms": [
+      {
+        "room_id": "R5-101",
+        "room_type": "Deluxe",
+        "bed_type": "1 King Bed",
+        "max_guests": 4,
+        "price_per_night": 19000,
+        "total_rooms": 18,
+        "available_rooms": 11,
+        "amenities": [
+          "Pool View",
+          "Breakfast Included",
+          "City View",
+          "Lounge Access",
+          "Sea View",
+          "Room Service",
+          "AC"
+        ]
+      },
+      {
+        "room_id": "R5-201",
+        "room_type": "Premium",
+        "bed_type": "1 King Bed",
+        "max_guests": 3,
+        "price_per_night": 19000,
+        "total_rooms": 17,
+        "available_rooms": 13,
+        "amenities": [
+          "WiFi",
+          "Room Service",
+          "Spa Access",
+          "Gym Access",
+          "Breakfast Included",
+          "AC",
+          "Pool View"
+        ]
+      },
+      {
+        "room_id": "R5-301",
+        "room_type": "Premium",
+        "bed_type": "1 Bed",
+        "max_guests": 3,
+        "price_per_night": 14000,
+        "total_rooms": 22,
+        "available_rooms": 10,
+        "amenities": [
+          "Breakfast Included",
+          "Pool View",
+          "Lounge Access",
+          "Spa Access",
+          "AC",
+          "Coffee Maker"
+        ]
+      },
+      {
+        "room_id": "R5-401",
+        "room_type": "Premium",
+        "bed_type": "2 Beds",
+        "max_guests": 3,
+        "price_per_night": 9000,
+        "total_rooms": 26,
+        "available_rooms": 21,
+        "amenities": [
+          "Mini Bar",
+          "TV",
+          "Coffee Maker",
+          "Spa Access"
+        ]
+      }
+    ],
+    "reviews": [
+      {
+        "review_text": "We had a wonderful stay at Premium Residency Mylapore. The staff was incredibly hospitable and the location in the city is perfect.",
+        "rating": 4.5,
+        "date_time": "2025-04-19T00:00:00Z"
+      },
+      {
+        "review_text": "The rooms at Premium Residency Mylapore are spacious and clean. Loved the amenities provided.",
+        "rating": 4.0,
+        "date_time": "2025-02-21T00:00:00Z"
+      }
+    ]
+  },
+  {
+    "hotel_id": "H006",
+    "name": "Oasis Luxury Mylapore",
+    "latitude": 12.9097,
+    "longitude": 80.2616,
+    "location": "Mylapore, Chennai",
+    "gps": "12.9097,80.2616",
+    "description": "Oasis Luxury Mylapore is a luxury hotel located in Mylapore, Chennai. It offers a range of amenities including Balcony, Breakfast Included, City View, Gym Access, Lounge Access, Mini Bar, Pool View, Room Service, Sea View, Spa Access, TV.",
+    "rooms": [
+      {
+        "room_id": "R6-101",
+        "room_type": "Premium",
+        "bed_type": "2 Beds",
+        "max_guests": 4,
+        "price_per_night": 6000,
+        "total_rooms": 25,
+        "available_rooms": 19,
+        "amenities": [
+          "TV",
+          "Breakfast Included",
+          "Mini Bar",
+          "Balcony"
+        ]
+      },
+      {
+        "room_id": "R6-201",
+        "room_type": "Suite",
+        "bed_type": "1 Bed",
+        "max_guests": 4,
+        "price_per_night": 16000,
+        "total_rooms": 13,
+        "available_rooms": 8,
+        "amenities": [
+          "Gym Access",
+          "Pool View",
+          "Room Service",
+          "Mini Bar",
+          "Sea View",
+          "TV"
+        ]
+      },
+      {
+        "room_id": "R6-301",
+        "room_type": "Suite",
+        "bed_type": "1 Queen Bed",
+        "max_guests": 4,
+        "price_per_night": 12000,
+        "total_rooms": 15,
+        "available_rooms": 12,
+        "amenities": [
+          "City View",
+          "Lounge Access",
+          "Breakfast Included",
+          "Balcony",
+          "Spa Access",
+          "Pool View",
+          "TV"
+        ]
+      }
+    ],
+    "reviews": [
+      {
+        "review_text": "We had a wonderful stay at Oasis Luxury Mylapore. The staff was incredibly hospitable and the location in the city is perfect.",
+        "rating": 4.5,
+        "date_time": "2025-04-25T00:00:00Z"
+      },
+      {
+        "review_text": "The rooms at Oasis Luxury Mylapore are spacious and clean. Loved the amenities provided.",
+        "rating": 4.0,
+        "date_time": "2025-09-28T00:00:00Z"
+      }
+    ]
+  },
+  {
+    "hotel_id": "H007",
+    "name": "Inn The Guindy",
+    "latitude": 12.9699,
+    "longitude": 80.1958,
+    "location": "Guindy, Chennai",
+    "gps": "12.9699,80.1958",
+    "description": "Inn The Guindy is a luxury hotel located in Guindy, Chennai. It offers a range of amenities including AC, Balcony, Bathtub, Breakfast Included, Gym Access, Mini Bar, Pool View, Sea View, WiFi.",
+    "rooms": [
+      {
+        "room_id": "R7-101",
+        "room_type": "Premium",
+        "bed_type": "2 Beds",
+        "max_guests": 2,
+        "price_per_night": 7000,
+        "total_rooms": 19,
+        "available_rooms": 17,
+        "amenities": [
+          "Bathtub",
+          "Balcony",
+          "Pool View",
+          "Sea View",
+          "Breakfast Included",
+          "WiFi"
+        ]
+      },
+      {
+        "room_id": "R7-201",
+        "room_type": "Deluxe",
+        "bed_type": "2 Beds",
+        "max_guests": 2,
+        "price_per_night": 17000,
+        "total_rooms": 17,
+        "available_rooms": 3,
+        "amenities": [
+          "Mini Bar",
+          "AC",
+          "Gym Access",
+          "Bathtub",
+          "Sea View"
+        ]
+      }
+    ],
+    "reviews": [
+      {
+        "review_text": "Highly recommend Inn The Guindy for anyone visiting the city. The service was top-notch and the breakfast was delicious.",
+        "rating": 5.0,
+        "date_time": "2025-06-15T00:00:00Z"
+      },
+      {
+        "review_text": "A very comfortable and luxurious experience at Inn The Guindy. We will definitely be coming back.",
+        "rating": 4.5,
+        "date_time": "2025-09-22T00:00:00Z"
+      }
+    ]
+  },
+  {
+    "hotel_id": "H008",
+    "name": "Boutique Royal Guindy",
+    "latitude": 12.8962,
+    "longitude": 80.1872,
+    "location": "Guindy, Chennai",
+    "gps": "12.8962,80.1872",
+    "description": "Boutique Royal Guindy is a luxury hotel located in Guindy, Chennai. It offers a range of amenities including AC, Balcony, Bathtub, Breakfast Included, City View, Coffee Maker, Lounge Access, Pool View, Room Service, Sea View, Spa Access, TV, WiFi.",
+    "rooms": [
+      {
+        "room_id": "R8-101",
+        "room_type": "Premium",
+        "bed_type": "1 King Bed",
+        "max_guests": 2,
+        "price_per_night": 4000,
+        "total_rooms": 13,
+        "available_rooms": 3,
+        "amenities": [
+          "Coffee Maker",
+          "Pool View",
+          "City View",
+          "Balcony",
+          "Lounge Access",
+          "Spa Access",
+          "Sea View"
+        ]
+      },
+      {
+        "room_id": "R8-201",
+        "room_type": "Executive",
+        "bed_type": "2 Beds",
+        "max_guests": 3,
+        "price_per_night": 18000,
+        "total_rooms": 26,
+        "available_rooms": 22,
+        "amenities": [
+          "AC",
+          "Breakfast Included",
+          "Lounge Access",
+          "TV",
+          "WiFi",
+          "Pool View",
+          "Balcony",
+          "Room Service"
+        ]
+      },
+      {
+        "room_id": "R8-301",
+        "room_type": "Deluxe",
+        "bed_type": "2 Beds",
+        "max_guests": 4,
+        "price_per_night": 9000,
+        "total_rooms": 21,
+        "available_rooms": 3,
+        "amenities": [
+          "TV",
+          "Balcony",
+          "Bathtub",
+          "Sea View"
+        ]
+      }
+    ],
+    "reviews": [
+      {
+        "review_text": "Great value for money. Boutique Royal Guindy exceeded our expectations, especially with how convenient it is to travel around the city.",
+        "rating": 5.0,
+        "date_time": "2025-04-17T00:00:00Z"
+      },
+      {
+        "review_text": "Beautiful property! The check-in process at Boutique Royal Guindy was seamless and the room view was great.",
+        "rating": 4.5,
+        "date_time": "2025-01-19T00:00:00Z"
+      }
+    ]
+  },
+  {
+    "hotel_id": "H009",
+    "name": "Palace Premium Alwarpet",
+    "latitude": 12.9122,
+    "longitude": 80.1821,
+    "location": "Alwarpet, Chennai",
+    "gps": "12.9122,80.1821",
+    "description": "Palace Premium Alwarpet is a luxury hotel located in Alwarpet, Chennai. It offers a range of amenities including AC, Balcony, Bathtub, City View, Gym Access, Lounge Access, Pool View, Sea View, Spa Access.",
+    "rooms": [
+      {
+        "room_id": "R9-101",
+        "room_type": "Deluxe",
+        "bed_type": "1 Bed",
+        "max_guests": 4,
+        "price_per_night": 7000,
+        "total_rooms": 16,
+        "available_rooms": 16,
+        "amenities": [
+          "Spa Access",
+          "AC",
+          "Gym Access",
+          "Sea View",
+          "Pool View"
+        ]
+      },
+      {
+        "room_id": "R9-201",
+        "room_type": "Executive",
+        "bed_type": "1 Bed",
+        "max_guests": 2,
+        "price_per_night": 7000,
+        "total_rooms": 17,
+        "available_rooms": 16,
+        "amenities": [
+          "Balcony",
+          "City View",
+          "Bathtub",
+          "Lounge Access",
+          "Pool View"
+        ]
+      }
+    ],
+    "reviews": [
+      {
+        "review_text": "Great value for money. Palace Premium Alwarpet exceeded our expectations, especially with how convenient it is to travel around the city.",
+        "rating": 5.0,
+        "date_time": "2025-03-17T00:00:00Z"
+      },
+      {
+        "review_text": "Beautiful property! The check-in process at Palace Premium Alwarpet was seamless and the room view was great.",
+        "rating": 5.0,
+        "date_time": "2025-09-10T00:00:00Z"
+      }
+    ]
+  },
+  {
+    "hotel_id": "H010",
+    "name": "Luxury Oasis Royapettah",
+    "latitude": 13.0713,
+    "longitude": 80.2475,
+    "location": "Royapettah, Chennai",
+    "gps": "13.0713,80.2475",
+    "description": "Luxury Oasis Royapettah is a luxury hotel located in Royapettah, Chennai. It offers a range of amenities including AC, Balcony, Bathtub, Coffee Maker, Gym Access, Lounge Access, Mini Bar, Pool View, Room Service, Sea View, TV, WiFi.",
+    "rooms": [
+      {
+        "room_id": "R10-101",
+        "room_type": "Standard",
+        "bed_type": "1 Bed",
+        "max_guests": 3,
+        "price_per_night": 10000,
+        "total_rooms": 16,
+        "available_rooms": 15,
+        "amenities": [
+          "AC",
+          "TV",
+          "Lounge Access",
+          "Bathtub",
+          "Balcony",
+          "Gym Access",
+          "Pool View",
+          "WiFi"
+        ]
+      },
+      {
+        "room_id": "R10-201",
+        "room_type": "Standard",
+        "bed_type": "1 Queen Bed",
+        "max_guests": 4,
+        "price_per_night": 20000,
+        "total_rooms": 18,
+        "available_rooms": 7,
+        "amenities": [
+          "AC",
+          "Coffee Maker",
+          "Gym Access",
+          "Sea View",
+          "Mini Bar",
+          "Room Service",
+          "Lounge Access"
+        ]
+      }
+    ],
+    "reviews": [
+      {
+        "review_text": "Highly recommend Luxury Oasis Royapettah for anyone visiting the city. The service was top-notch and the breakfast was delicious.",
+        "rating": 4.5,
+        "date_time": "2025-05-10T00:00:00Z"
+      },
+      {
+        "review_text": "A very comfortable and luxurious experience at Luxury Oasis Royapettah. We will definitely be coming back.",
+        "rating": 5.0,
+        "date_time": "2025-08-08T00:00:00Z"
+      }
+    ]
+  },
+  {
+    "hotel_id": "H011",
+    "name": "Towers The Velachery",
+    "latitude": 13.0827,
+    "longitude": 80.2603,
+    "location": "Velachery, Chennai",
+    "gps": "13.0827,80.2603",
+    "description": "Towers The Velachery is a luxury hotel located in Velachery, Chennai. It offers a range of amenities including AC, Balcony, Bathtub, Breakfast Included, City View, Coffee Maker, Gym Access, Lounge Access, Mini Bar, Pool View, Room Service, Sea View, Spa Access, TV, WiFi.",
+    "rooms": [
+      {
+        "room_id": "R11-101",
+        "room_type": "Standard",
+        "bed_type": "2 Beds",
+        "max_guests": 2,
+        "price_per_night": 17000,
+        "total_rooms": 18,
+        "available_rooms": 8,
+        "amenities": [
+          "Gym Access",
+          "Breakfast Included",
+          "Lounge Access",
+          "City View",
+          "WiFi",
+          "AC",
+          "Sea View",
+          "TV"
+        ]
+      },
+      {
+        "room_id": "R11-201",
+        "room_type": "Deluxe",
+        "bed_type": "1 Bed",
+        "max_guests": 2,
+        "price_per_night": 15000,
+        "total_rooms": 27,
+        "available_rooms": 15,
+        "amenities": [
+          "Mini Bar",
+          "Spa Access",
+          "Balcony",
+          "Room Service",
+          "Pool View",
+          "TV",
+          "Lounge Access",
+          "City View"
+        ]
+      },
+      {
+        "room_id": "R11-301",
+        "room_type": "Deluxe",
+        "bed_type": "1 Bed",
+        "max_guests": 3,
+        "price_per_night": 7000,
+        "total_rooms": 28,
+        "available_rooms": 6,
+        "amenities": [
+          "Pool View",
+          "Breakfast Included",
+          "TV",
+          "Bathtub",
+          "Room Service",
+          "Mini Bar",
+          "Spa Access",
+          "Coffee Maker"
+        ]
+      },
+      {
+        "room_id": "R11-401",
+        "room_type": "Standard",
+        "bed_type": "2 Beds",
+        "max_guests": 2,
+        "price_per_night": 17000,
+        "total_rooms": 17,
+        "available_rooms": 8,
+        "amenities": [
+          "Balcony",
+          "Room Service",
+          "Gym Access",
+          "Bathtub",
+          "Coffee Maker",
+          "Pool View"
+        ]
+      }
+    ],
+    "reviews": [
+      {
+        "review_text": "Highly recommend Towers The Velachery for anyone visiting the city. The service was top-notch and the breakfast was delicious.",
+        "rating": 4.5,
+        "date_time": "2025-04-23T00:00:00Z"
+      },
+      {
+        "review_text": "A very comfortable and luxurious experience at Towers The Velachery. We will definitely be coming back.",
+        "rating": 4.0,
+        "date_time": "2025-09-05T00:00:00Z"
+      }
+    ]
+  },
+  {
+    "hotel_id": "H012",
+    "name": "Oasis Royal Mylapore",
+    "latitude": 12.9886,
+    "longitude": 80.1774,
+    "location": "Mylapore, Chennai",
+    "gps": "12.9886,80.1774",
+    "description": "Oasis Royal Mylapore is a luxury hotel located in Mylapore, Chennai. It offers a range of amenities including AC, Balcony, Bathtub, Room Service, Sea View, Spa Access, TV.",
+    "rooms": [
+      {
+        "room_id": "R12-101",
+        "room_type": "Deluxe",
+        "bed_type": "2 Beds",
+        "max_guests": 4,
+        "price_per_night": 16000,
+        "total_rooms": 10,
+        "available_rooms": 9,
+        "amenities": [
+          "Spa Access",
+          "Sea View",
+          "AC",
+          "Balcony"
+        ]
+      },
+      {
+        "room_id": "R12-201",
+        "room_type": "Deluxe",
+        "bed_type": "1 Bed",
+        "max_guests": 3,
+        "price_per_night": 15000,
+        "total_rooms": 21,
+        "available_rooms": 7,
+        "amenities": [
+          "Sea View",
+          "Bathtub",
+          "Balcony",
+          "Spa Access",
+          "TV",
+          "Room Service"
+        ]
+      }
+    ],
+    "reviews": [
+      {
+        "review_text": "Great value for money. Oasis Royal Mylapore exceeded our expectations, especially with how convenient it is to travel around the city.",
+        "rating": 4.5,
+        "date_time": "2025-08-06T00:00:00Z"
+      },
+      {
+        "review_text": "Beautiful property! The check-in process at Oasis Royal Mylapore was seamless and the room view was great.",
+        "rating": 4.0,
+        "date_time": "2025-07-20T00:00:00Z"
+      }
+    ]
+  },
+  {
+    "hotel_id": "H013",
+    "name": "Residency Elite Guindy",
+    "latitude": 13.0033,
+    "longitude": 80.1713,
+    "location": "Guindy, Chennai",
+    "gps": "13.0033,80.1713",
+    "description": "Residency Elite Guindy is a luxury hotel located in Guindy, Chennai. It offers a range of amenities including AC, Bathtub, City View, Coffee Maker, Gym Access, Lounge Access, Mini Bar, Pool View, Room Service, Sea View, Spa Access, TV, WiFi.",
+    "rooms": [
+      {
+        "room_id": "R13-101",
+        "room_type": "Deluxe",
+        "bed_type": "1 Bed",
+        "max_guests": 3,
+        "price_per_night": 14000,
+        "total_rooms": 24,
+        "available_rooms": 4,
+        "amenities": [
+          "TV",
+          "WiFi",
+          "Sea View",
+          "Spa Access",
+          "Room Service",
+          "AC",
+          "Bathtub"
+        ]
+      },
+      {
+        "room_id": "R13-201",
+        "room_type": "Luxury",
+        "bed_type": "1 Queen Bed",
+        "max_guests": 2,
+        "price_per_night": 19000,
+        "total_rooms": 13,
+        "available_rooms": 2,
+        "amenities": [
+          "Lounge Access",
+          "Bathtub",
+          "City View",
+          "Coffee Maker",
+          "Gym Access",
+          "Mini Bar",
+          "Pool View"
+        ]
+      },
+      {
+        "room_id": "R13-301",
+        "room_type": "Premium",
+        "bed_type": "1 Queen Bed",
+        "max_guests": 4,
+        "price_per_night": 10000,
+        "total_rooms": 21,
+        "available_rooms": 14,
+        "amenities": [
+          "City View",
+          "WiFi",
+          "Pool View",
+          "Gym Access",
+          "Coffee Maker"
+        ]
+      }
+    ],
+    "reviews": [
+      {
+        "review_text": "Highly recommend Residency Elite Guindy for anyone visiting the city. The service was top-notch and the breakfast was delicious.",
+        "rating": 4.5,
+        "date_time": "2025-03-17T00:00:00Z"
+      },
+      {
+        "review_text": "A very comfortable and luxurious experience at Residency Elite Guindy. We will definitely be coming back.",
+        "rating": 5.0,
+        "date_time": "2025-09-01T00:00:00Z"
+      }
+    ]
+  },
+  {
+    "hotel_id": "H014",
+    "name": "Palace Royal OMR",
+    "latitude": 12.9077,
+    "longitude": 80.2831,
+    "location": "OMR, Chennai",
+    "gps": "12.9077,80.2831",
+    "description": "Palace Royal OMR is a luxury hotel located in OMR, Chennai. It offers a range of amenities including AC, Balcony, Bathtub, Breakfast Included, City View, Gym Access, Mini Bar, Sea View, Spa Access, TV, WiFi.",
+    "rooms": [
+      {
+        "room_id": "R14-101",
+        "room_type": "Premium",
+        "bed_type": "1 Queen Bed",
+        "max_guests": 3,
+        "price_per_night": 15000,
+        "total_rooms": 15,
+        "available_rooms": 6,
+        "amenities": [
+          "Balcony",
+          "AC",
+          "Breakfast Included",
+          "TV",
+          "Spa Access",
+          "Sea View"
+        ]
+      },
+      {
+        "room_id": "R14-201",
+        "room_type": "Deluxe",
+        "bed_type": "1 Queen Bed",
+        "max_guests": 2,
+        "price_per_night": 14000,
+        "total_rooms": 19,
+        "available_rooms": 17,
+        "amenities": [
+          "Bathtub",
+          "Mini Bar",
+          "Balcony",
+          "Breakfast Included",
+          "AC",
+          "Sea View"
+        ]
+      },
+      {
+        "room_id": "R14-301",
+        "room_type": "Deluxe",
+        "bed_type": "1 Queen Bed",
+        "max_guests": 2,
+        "price_per_night": 7000,
+        "total_rooms": 21,
+        "available_rooms": 5,
+        "amenities": [
+          "Gym Access",
+          "City View",
+          "Sea View",
+          "Breakfast Included",
+          "Bathtub",
+          "Balcony",
+          "WiFi"
+        ]
+      }
+    ],
+    "reviews": [
+      {
+        "review_text": "We had a wonderful stay at Palace Royal OMR. The staff was incredibly hospitable and the location in the city is perfect.",
+        "rating": 4.5,
+        "date_time": "2025-06-27T00:00:00Z"
+      },
+      {
+        "review_text": "The rooms at Palace Royal OMR are spacious and clean. Loved the amenities provided.",
+        "rating": 4.0,
+        "date_time": "2025-10-31T00:00:00Z"
+      }
+    ]
+  },
+  {
+    "hotel_id": "H015",
+    "name": "Suites Luxury Nungambakkam",
+    "latitude": 13.0938,
+    "longitude": 80.249,
+    "location": "Nungambakkam, Chennai",
+    "gps": "13.0938,80.249",
+    "description": "Suites Luxury Nungambakkam is a luxury hotel located in Nungambakkam, Chennai. It offers a range of amenities including AC, Bathtub, Breakfast Included, City View, Coffee Maker, Lounge Access, Mini Bar, Pool View, Room Service, Sea View, TV, WiFi.",
+    "rooms": [
+      {
+        "room_id": "R15-101",
+        "room_type": "Suite",
+        "bed_type": "1 Bed",
+        "max_guests": 3,
+        "price_per_night": 8000,
+        "total_rooms": 28,
+        "available_rooms": 1,
+        "amenities": [
+          "Room Service",
+          "City View",
+          "Lounge Access",
+          "TV",
+          "Pool View",
+          "Mini Bar"
+        ]
+      },
+      {
+        "room_id": "R15-201",
+        "room_type": "Executive",
+        "bed_type": "1 King Bed",
+        "max_guests": 2,
+        "price_per_night": 12000,
+        "total_rooms": 29,
+        "available_rooms": 14,
+        "amenities": [
+          "Bathtub",
+          "Sea View",
+          "AC",
+          "Breakfast Included",
+          "Coffee Maker",
+          "WiFi",
+          "Lounge Access",
+          "TV"
+        ]
+      }
+    ],
+    "reviews": [
+      {
+        "review_text": "Highly recommend Suites Luxury Nungambakkam for anyone visiting the city. The service was top-notch and the breakfast was delicious.",
+        "rating": 5.0,
+        "date_time": "2025-04-27T00:00:00Z"
+      },
+      {
+        "review_text": "A very comfortable and luxurious experience at Suites Luxury Nungambakkam. We will definitely be coming back.",
+        "rating": 5.0,
+        "date_time": "2025-08-27T00:00:00Z"
+      }
+    ]
+  },
+  {
+    "hotel_id": "H016",
+    "name": "Palace Royal ECR",
+    "latitude": 12.9682,
+    "longitude": 80.2603,
+    "location": "ECR, Chennai",
+    "gps": "12.9682,80.2603",
+    "description": "Palace Royal ECR is a luxury hotel located in ECR, Chennai. It offers a range of amenities including Balcony, Bathtub, City View, Gym Access, Lounge Access, Mini Bar, Pool View, Room Service, Sea View, Spa Access, TV.",
+    "rooms": [
+      {
+        "room_id": "R16-101",
+        "room_type": "Luxury",
+        "bed_type": "1 Bed",
+        "max_guests": 4,
+        "price_per_night": 12000,
+        "total_rooms": 14,
+        "available_rooms": 7,
+        "amenities": [
+          "TV",
+          "Pool View",
+          "Lounge Access",
+          "Spa Access",
+          "Mini Bar",
+          "Room Service",
+          "Balcony",
+          "Bathtub"
+        ]
+      },
+      {
+        "room_id": "R16-201",
+        "room_type": "Luxury",
+        "bed_type": "1 Queen Bed",
+        "max_guests": 4,
+        "price_per_night": 10000,
+        "total_rooms": 20,
+        "available_rooms": 10,
+        "amenities": [
+          "Spa Access",
+          "Mini Bar",
+          "Lounge Access",
+          "Pool View",
+          "City View",
+          "Balcony"
+        ]
+      },
+      {
+        "room_id": "R16-301",
+        "room_type": "Standard",
+        "bed_type": "1 King Bed",
+        "max_guests": 4,
+        "price_per_night": 15000,
+        "total_rooms": 21,
+        "available_rooms": 15,
+        "amenities": [
+          "Room Service",
+          "Pool View",
+          "Gym Access",
+          "Sea View",
+          "TV"
+        ]
+      }
+    ],
+    "reviews": [
+      {
+        "review_text": "We had a wonderful stay at Palace Royal ECR. The staff was incredibly hospitable and the location in the city is perfect.",
+        "rating": 5.0,
+        "date_time": "2025-10-19T00:00:00Z"
+      },
+      {
+        "review_text": "The rooms at Palace Royal ECR are spacious and clean. Loved the amenities provided.",
+        "rating": 4.0,
+        "date_time": "2025-12-22T00:00:00Z"
+      }
+    ]
+  },
+  {
+    "hotel_id": "H017",
+    "name": "The Oasis Egmore",
+    "latitude": 12.8577,
+    "longitude": 80.1771,
+    "location": "Egmore, Chennai",
+    "gps": "12.8577,80.1771",
+    "description": "The Oasis Egmore is a luxury hotel located in Egmore, Chennai. It offers a range of amenities including Balcony, Bathtub, Breakfast Included, Coffee Maker, Gym Access, Lounge Access, Pool View, Room Service, Sea View, Spa Access, TV.",
+    "rooms": [
+      {
+        "room_id": "R17-101",
+        "room_type": "Premium",
+        "bed_type": "1 Queen Bed",
+        "max_guests": 2,
+        "price_per_night": 18000,
+        "total_rooms": 12,
+        "available_rooms": 9,
+        "amenities": [
+          "Coffee Maker",
+          "Spa Access",
+          "TV",
+          "Pool View",
+          "Sea View"
+        ]
+      },
+      {
+        "room_id": "R17-201",
+        "room_type": "Suite",
+        "bed_type": "1 King Bed",
+        "max_guests": 3,
+        "price_per_night": 6000,
+        "total_rooms": 22,
+        "available_rooms": 7,
+        "amenities": [
+          "Balcony",
+          "Pool View",
+          "Breakfast Included"
+        ]
+      },
+      {
+        "room_id": "R17-301",
+        "room_type": "Suite",
+        "bed_type": "1 Queen Bed",
+        "max_guests": 3,
+        "price_per_night": 10000,
+        "total_rooms": 13,
+        "available_rooms": 10,
+        "amenities": [
+          "Bathtub",
+          "Coffee Maker",
+          "TV",
+          "Gym Access",
+          "Lounge Access",
+          "Room Service",
+          "Breakfast Included"
+        ]
+      }
+    ],
+    "reviews": [
+      {
+        "review_text": "Highly recommend The Oasis Egmore for anyone visiting the city. The service was top-notch and the breakfast was delicious.",
+        "rating": 4.5,
+        "date_time": "2025-11-20T00:00:00Z"
+      },
+      {
+        "review_text": "A very comfortable and luxurious experience at The Oasis Egmore. We will definitely be coming back.",
+        "rating": 4.5,
+        "date_time": "2025-02-22T00:00:00Z"
+      }
+    ]
+  },
+  {
+    "hotel_id": "H018",
+    "name": "Residency Elite Velachery",
+    "latitude": 13.0738,
+    "longitude": 80.2821,
+    "location": "Velachery, Chennai",
+    "gps": "13.0738,80.2821",
+    "description": "Residency Elite Velachery is a luxury hotel located in Velachery, Chennai. It offers a range of amenities including AC, Balcony, Bathtub, Breakfast Included, City View, Coffee Maker, Gym Access, Lounge Access, Pool View, Room Service, Sea View, Spa Access, TV, WiFi.",
+    "rooms": [
+      {
+        "room_id": "R18-101",
+        "room_type": "Suite",
+        "bed_type": "1 Bed",
+        "max_guests": 3,
+        "price_per_night": 18000,
+        "total_rooms": 11,
+        "available_rooms": 0,
+        "amenities": [
+          "AC",
+          "Bathtub",
+          "Room Service"
+        ]
+      },
+      {
+        "room_id": "R18-201",
+        "room_type": "Suite",
+        "bed_type": "2 Beds",
+        "max_guests": 4,
+        "price_per_night": 6000,
+        "total_rooms": 12,
+        "available_rooms": 5,
+        "amenities": [
+          "Gym Access",
+          "Balcony",
+          "AC"
+        ]
+      },
+      {
+        "room_id": "R18-301",
+        "room_type": "Premium",
+        "bed_type": "1 Queen Bed",
+        "max_guests": 2,
+        "price_per_night": 14000,
+        "total_rooms": 21,
+        "available_rooms": 12,
+        "amenities": [
+          "Breakfast Included",
+          "Sea View",
+          "Spa Access",
+          "WiFi",
+          "Pool View"
+        ]
+      },
+      {
+        "room_id": "R18-401",
+        "room_type": "Luxury",
+        "bed_type": "2 Beds",
+        "max_guests": 4,
+        "price_per_night": 20000,
+        "total_rooms": 25,
+        "available_rooms": 21,
+        "amenities": [
+          "TV",
+          "Spa Access",
+          "Bathtub",
+          "Room Service",
+          "Coffee Maker",
+          "City View",
+          "Lounge Access",
+          "Breakfast Included"
+        ]
+      }
+    ],
+    "reviews": [
+      {
+        "review_text": "Great value for money. Residency Elite Velachery exceeded our expectations, especially with how convenient it is to travel around the city.",
+        "rating": 4.5,
+        "date_time": "2025-09-10T00:00:00Z"
+      },
+      {
+        "review_text": "Beautiful property! The check-in process at Residency Elite Velachery was seamless and the room view was great.",
+        "rating": 4.0,
+        "date_time": "2025-09-23T00:00:00Z"
+      }
+    ]
+  },
+  {
+    "hotel_id": "H019",
+    "name": "Oasis Grand Alwarpet",
+    "latitude": 13.1115,
+    "longitude": 80.1559,
+    "location": "Alwarpet, Chennai",
+    "gps": "13.1115,80.1559",
+    "description": "Oasis Grand Alwarpet is a luxury hotel located in Alwarpet, Chennai. It offers a range of amenities including AC, Balcony, Bathtub, Breakfast Included, Coffee Maker, Gym Access, Lounge Access, Pool View, Room Service, Sea View, Spa Access, TV, WiFi.",
+    "rooms": [
+      {
+        "room_id": "R19-101",
+        "room_type": "Premium",
+        "bed_type": "2 Beds",
+        "max_guests": 2,
+        "price_per_night": 14000,
+        "total_rooms": 18,
+        "available_rooms": 11,
+        "amenities": [
+          "Sea View",
+          "TV",
+          "Room Service",
+          "WiFi",
+          "Lounge Access",
+          "Pool View",
+          "Gym Access"
+        ]
+      },
+      {
+        "room_id": "R19-201",
+        "room_type": "Deluxe",
+        "bed_type": "1 King Bed",
+        "max_guests": 4,
+        "price_per_night": 14000,
+        "total_rooms": 29,
+        "available_rooms": 19,
+        "amenities": [
+          "Coffee Maker",
+          "Gym Access",
+          "Sea View",
+          "Bathtub",
+          "Breakfast Included",
+          "AC"
+        ]
+      },
+      {
+        "room_id": "R19-301",
+        "room_type": "Luxury",
+        "bed_type": "1 King Bed",
+        "max_guests": 3,
+        "price_per_night": 19000,
+        "total_rooms": 26,
+        "available_rooms": 10,
+        "amenities": [
+          "Bathtub",
+          "Breakfast Included",
+          "Pool View",
+          "WiFi",
+          "Spa Access",
+          "Balcony",
+          "Room Service",
+          "Sea View"
+        ]
+      },
+      {
+        "room_id": "R19-401",
+        "room_type": "Standard",
+        "bed_type": "1 Bed",
+        "max_guests": 3,
+        "price_per_night": 3000,
+        "total_rooms": 15,
+        "available_rooms": 3,
+        "amenities": [
+          "Bathtub",
+          "AC",
+          "Breakfast Included",
+          "Pool View",
+          "Lounge Access",
+          "Spa Access"
+        ]
+      }
+    ],
+    "reviews": [
+      {
+        "review_text": "Great value for money. Oasis Grand Alwarpet exceeded our expectations, especially with how convenient it is to travel around the city.",
+        "rating": 4.5,
+        "date_time": "2025-04-10T00:00:00Z"
+      },
+      {
+        "review_text": "Beautiful property! The check-in process at Oasis Grand Alwarpet was seamless and the room view was great.",
+        "rating": 5.0,
+        "date_time": "2025-12-02T00:00:00Z"
+      }
+    ]
+  },
+  {
+    "hotel_id": "H020",
+    "name": "Suites Classic Nungambakkam",
+    "latitude": 13.0424,
+    "longitude": 80.2586,
+    "location": "Nungambakkam, Chennai",
+    "gps": "13.0424,80.2586",
+    "description": "Suites Classic Nungambakkam is a luxury hotel located in Nungambakkam, Chennai. It offers a range of amenities including AC, Bathtub, Breakfast Included, City View, Coffee Maker, Pool View, Room Service, Spa Access, TV.",
+    "rooms": [
+      {
+        "room_id": "R20-101",
+        "room_type": "Deluxe",
+        "bed_type": "2 Beds",
+        "max_guests": 4,
+        "price_per_night": 7000,
+        "total_rooms": 15,
+        "available_rooms": 8,
+        "amenities": [
+          "Spa Access",
+          "Bathtub",
+          "AC",
+          "City View",
+          "TV",
+          "Coffee Maker"
+        ]
+      },
+      {
+        "room_id": "R20-201",
+        "room_type": "Suite",
+        "bed_type": "1 King Bed",
+        "max_guests": 4,
+        "price_per_night": 19000,
+        "total_rooms": 19,
+        "available_rooms": 10,
+        "amenities": [
+          "Pool View",
+          "City View",
+          "Coffee Maker",
+          "Breakfast Included"
+        ]
+      },
+      {
+        "room_id": "R20-301",
+        "room_type": "Luxury",
+        "bed_type": "2 Beds",
+        "max_guests": 2,
+        "price_per_night": 10000,
+        "total_rooms": 25,
+        "available_rooms": 11,
+        "amenities": [
+          "Pool View",
+          "TV",
+          "Coffee Maker",
+          "Spa Access",
+          "Room Service",
+          "City View",
+          "Breakfast Included"
+        ]
+      }
+    ],
+    "reviews": [
+      {
+        "review_text": "Great value for money. Suites Classic Nungambakkam exceeded our expectations, especially with how convenient it is to travel around the city.",
+        "rating": 4.5,
+        "date_time": "2025-04-12T00:00:00Z"
+      },
+      {
+        "review_text": "Beautiful property! The check-in process at Suites Classic Nungambakkam was seamless and the room view was great.",
+        "rating": 4.5,
+        "date_time": "2025-04-14T00:00:00Z"
+      }
+    ]
+  }
+]
