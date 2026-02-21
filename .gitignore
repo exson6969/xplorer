@@ -1,0 +1,14 @@
+# System
+.DS_Store
+Thumbs.db
+
+# IDEs
+.cursor/
+.vscode/
+.idea/
+
+# Environments
+.env
+
+# Ignore node_modules globally just in case
+node_modules/

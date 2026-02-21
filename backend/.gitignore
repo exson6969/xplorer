@@ -1,6 +1,7 @@
 # Secrets — NEVER commit these
 .env
-*.json
+credentials.json
+service-account.json
 
 # Python cache
 __pycache__/
