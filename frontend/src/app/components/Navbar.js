@@ -1,101 +1,47 @@
-"use client";
-
 import Link from "next/link";
-import { useState } from "react";
+import { Search, Compass, LogIn } from "lucide-react";
 
 export default function Navbar() {
-    const [mobileOpen, setMobileOpen] = useState(false);
-
-    const navLinks = [
-        { href: "/home", label: "Home" },
-        { href: "/trips", label: "Trips" },
-        { href: "/history", label: "History" },
-    ];
-
     return (
-        <header className="w-full px-6 py-6 md:px-12 lg:px-20 flex items-center justify-between z-50 relative">
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 group">
-                <div className="size-9 text-primary bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                    <span className="material-symbols-outlined text-[22px]">explore</span>
-                </div>
-                <h2 className="text-slate-900 text-xl font-bold tracking-tight">
-                    EXPLORER
-                </h2>
-            </Link>
-
-            {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-8">
-                {navLinks.map((link) => (
-                    <Link
-                        key={link.href}
-                        href={link.href}
-                        className="text-sm font-medium text-slate-600 hover:text-primary transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full"
-                    >
-                        {link.label}
+        <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-zinc-200 dark:bg-zinc-950/80 dark:border-zinc-800 transition-colors">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex justify-between items-center h-16">
+                    {/* Logo */}
+                    <Link href="/" className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-600 to-indigo-800 text-white flex items-center justify-center font-bold text-xl">
+                            E
+                        </div>
+                        <span className="font-bold text-xl tracking-tight text-zinc-900 dark:text-zinc-50">
+                            EXPLORER
+                        </span>
                     </Link>
-                ))}
-            </nav>
 
-            {/* Right Actions */}
-            <div className="flex items-center gap-4">
-                <Link
-                    href="/home"
-                    className="hidden sm:block text-sm font-medium text-slate-900 hover:text-primary transition-colors"
-                >
-                    Login
-                </Link>
-                <Link
-                    href="/home"
-                    className="bg-primary hover:bg-primary/90 text-white text-sm font-bold py-2.5 px-5 rounded-lg transition-all shadow-lg shadow-primary/20 hover:shadow-primary/30 hover:-translate-y-0.5 flex items-center gap-2"
-                >
-                    <span>Get Started</span>
-                    <span className="material-symbols-outlined text-[16px]">
-                        arrow_forward
-                    </span>
-                </Link>
-
-                {/* Mobile Hamburger */}
-                <button
-                    className="md:hidden flex flex-col gap-1.5 p-2"
-                    onClick={() => setMobileOpen(!mobileOpen)}
-                    aria-label="Toggle navigation"
-                >
-                    <span
-                        className={`block w-6 h-0.5 bg-slate-900 transition-transform duration-300 ${mobileOpen ? "rotate-45 translate-y-2" : ""}`}
-                    />
-                    <span
-                        className={`block w-6 h-0.5 bg-slate-900 transition-opacity duration-300 ${mobileOpen ? "opacity-0" : ""}`}
-                    />
-                    <span
-                        className={`block w-6 h-0.5 bg-slate-900 transition-transform duration-300 ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`}
-                    />
-                </button>
-            </div>
-
-            {/* Mobile Menu */}
-            {mobileOpen && (
-                <div className="absolute top-full left-0 w-full bg-white/95 backdrop-blur-xl border-b border-slate-100 shadow-lg md:hidden z-50 animate-fade-in">
-                    <nav className="flex flex-col px-6 py-4 gap-1">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                className="text-base font-medium text-slate-700 hover:text-primary py-3 px-4 rounded-lg hover:bg-primary/5 transition-all"
-                                onClick={() => setMobileOpen(false)}
-                            >
-                                {link.label}
-                            </Link>
-                        ))}
-                        <Link
-                            href="/home"
-                            className="text-base font-medium text-slate-700 hover:text-primary py-3 px-4 rounded-lg hover:bg-primary/5 transition-all"
-                        >
-                            Login
+                    {/* Center Links */}
+                    <div className="hidden md:flex space-x-8">
+                        <Link href="/features" className="text-zinc-600 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-indigo-400 font-medium transition-colors">
+                            Features
                         </Link>
-                    </nav>
+                        <Link href="/stories" className="text-zinc-600 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-indigo-400 font-medium transition-colors">
+                            Stories
+                        </Link>
+                        <Link href="/about" className="text-zinc-600 hover:text-indigo-600 dark:text-zinc-400 dark:hover:text-indigo-400 font-medium transition-colors">
+                            About
+                        </Link>
+                    </div>
+
+                    {/* Right Actions */}
+                    <div className="flex items-center gap-4">
+                        <Link href="/home" className="hidden sm:flex items-center gap-2 text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50 transition-colors">
+                            <LogIn className="w-4 h-4" />
+                            Sign In
+                        </Link>
+                        <Link href="/home" className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-full font-medium text-sm transition-all hover:shadow-lg hover:shadow-indigo-500/25 flex items-center gap-2">
+                            <Compass className="w-4 h-4" />
+                            Start Exploring
+                        </Link>
+                    </div>
                 </div>
-            )}
-        </header>
+            </div>
+        </nav>
     );
 }
