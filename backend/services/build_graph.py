@@ -49,6 +49,7 @@ class XplorerGraphBuilder:
             place.close_time = p.timings.closing_time,
             place.duration = p.visit.recommended_duration_minutes,
             place.ideal_blocks = p.visit.ideal_time_blocks,
+            place.best_visit_time = p.best_visit_time,
             place.weather_sensitive = p.visit.weather_sensitive,
             place.crowd_level = p.crowd.average_level,
             place.seasonal_peak_months = p.crowd.seasonal_peak_months,

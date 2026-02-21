@@ -24,7 +24,7 @@ class TravelPlannerAI:
         CALL db.index.vector.queryNodes('place_index', 5, $embedding)
         YIELD node, score
         RETURN node.name as name, node.description as desc, node.open_time as open, 
-               node.close_time as close, node.ideal_blocks as blocks, node.rating as rating
+               node.close_time as close, node.ideal_blocks as blocks, node.best_visit_time as best_time, node.rating as rating
         """
         emb = self.embeddings.embed_query(user_query)
         places = self.graph.query(vector_query, {"embedding": emb})
