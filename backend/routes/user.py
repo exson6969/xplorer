@@ -4,15 +4,25 @@ routes/user.py
 Protected endpoints (require valid Firebase ID token in Authorization header):
 
 Profile:
-  GET  /user/profile                            → Get current user's profile
-  PUT  /user/profile                            → Update profile fields
+  GET  /user/profile                               → Get current user's profile
+  PUT  /user/profile                               → Update profile fields
 
 Conversations:
-  POST /user/conversations/start                → Start a new conversation (get convo_id)
-  GET  /user/conversations                      → List all conversations ([] for new users)
-  GET  /user/conversations/{convo_id}           → Get full conversation + all messages
-  POST /user/conversations/{convo_id}/messages  → Add a message to a conversation
-  DELETE /user/conversations/{convo_id}         → Delete a conversation
+  POST /user/conversations/start                   → Start a new conversation
+  GET  /user/conversations                         → List all conversations
+  GET  /user/conversations/{convo_id}              → Get full conversation + messages
+  POST /user/conversations/{convo_id}/messages     → Add a message
+  DELETE /user/conversations/{convo_id}            → Delete a conversation
+
+Hotel Bookings:
+  POST   /user/hotel-bookings                      → Save a hotel booking
+  GET    /user/hotel-bookings                      → List all hotel bookings
+  DELETE /user/hotel-bookings/{booking_id}         → Delete a hotel booking
+
+Transport Bookings:
+  POST   /user/transport-bookings                  → Save a transport booking
+  GET    /user/transport-bookings                  → List all transport bookings
+  DELETE /user/transport-bookings/{booking_id}     → Delete a transport booking
 """
 
 from fastapi import APIRouter, Depends, status
@@ -24,6 +34,10 @@ from models.user import (
     MessageResponse,
     ConversationResponse,
     ConversationListItem,
+    HotelBookingRequest,
+    HotelBookingResponse,
+    TransportBookingRequest,
+    TransportBookingResponse,
 )
 from middleware.auth_middleware import get_current_user
 from services.firestore_service import (
@@ -34,6 +48,12 @@ from services.firestore_service import (
     get_conversation,
     list_conversations,
     delete_conversation,
+    save_hotel_booking,
+    get_hotel_bookings,
+    delete_hotel_booking,
+    save_transport_booking,
+    get_transport_bookings,
+    delete_transport_booking,
 )
 
 router = APIRouter(prefix="/user", tags=["User"])
@@ -171,3 +191,87 @@ def remove_conversation(
     uid = current_user["uid"]
     delete_conversation(uid, convo_id)
     return {"message": f"Conversation '{convo_id}' deleted successfully."}
+
+
+# ─── Hotel Bookings ────────────────────────────────────────────────────────────
+
+@router.post(
+    "/hotel-bookings",
+    response_model=HotelBookingResponse,
+    status_code=status.HTTP_201_CREATED,
+    summary="Save a hotel booking",
+    description="Records a hotel stay for the user. Used for history and personalization.",
+)
+def add_hotel_booking(
+    payload: HotelBookingRequest,
+    current_user: dict = Depends(get_current_user),
+):
+    uid = current_user["uid"]
+    saved = save_hotel_booking(uid, payload.model_dump())
+    return HotelBookingResponse(**saved)
+
+
+@router.get(
+    "/hotel-bookings",
+    response_model=list[HotelBookingResponse],
+    summary="List all hotel bookings",
+    description="Returns all hotel bookings for the user, newest first. Returns [] if none.",
+)
+def list_hotel_bookings(current_user: dict = Depends(get_current_user)):
+    uid = current_user["uid"]
+    return [HotelBookingResponse(**b) for b in get_hotel_bookings(uid)]
+
+
+@router.delete(
+    "/hotel-bookings/{booking_id}",
+    status_code=status.HTTP_200_OK,
+    summary="Delete a hotel booking",
+)
+def remove_hotel_booking(
+    booking_id: str,
+    current_user: dict = Depends(get_current_user),
+):
+    delete_hotel_booking(current_user["uid"], booking_id)
+    return {"message": f"Hotel booking '{booking_id}' deleted successfully."}
+
+
+# ─── Transport Bookings ────────────────────────────────────────────────────────
+
+@router.post(
+    "/transport-bookings",
+    response_model=TransportBookingResponse,
+    status_code=status.HTTP_201_CREATED,
+    summary="Save a transport booking",
+    description="Records a transport use for the user. Used for history and personalization.",
+)
+def add_transport_booking(
+    payload: TransportBookingRequest,
+    current_user: dict = Depends(get_current_user),
+):
+    uid = current_user["uid"]
+    saved = save_transport_booking(uid, payload.model_dump())
+    return TransportBookingResponse(**saved)
+
+
+@router.get(
+    "/transport-bookings",
+    response_model=list[TransportBookingResponse],
+    summary="List all transport bookings",
+    description="Returns all transport bookings for the user, newest first. Returns [] if none.",
+)
+def list_transport_bookings(current_user: dict = Depends(get_current_user)):
+    uid = current_user["uid"]
+    return [TransportBookingResponse(**b) for b in get_transport_bookings(uid)]
+
+
+@router.delete(
+    "/transport-bookings/{booking_id}",
+    status_code=status.HTTP_200_OK,
+    summary="Delete a transport booking",
+)
+def remove_transport_booking(
+    booking_id: str,
+    current_user: dict = Depends(get_current_user),
+):
+    delete_transport_booking(current_user["uid"], booking_id)
+    return {"message": f"Transport booking '{booking_id}' deleted successfully."}

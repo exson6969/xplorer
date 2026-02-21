@@ -295,3 +295,104 @@ def delete_conversation(uid: str, convo_id: str) -> None:
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Failed to delete conversation: {str(e)}",
         )
+
+
+# ─── Hotel Bookings ────────────────────────────────────────────────────────────
+
+def save_hotel_booking(uid: str, data: dict) -> dict:
+    """
+    Save a hotel booking under users/{uid}/hotel_bookings/{auto_id}.
+    Returns the saved doc with booking_id and booked_at.
+    """
+    db = get_firestore()
+    data["booked_at"] = _now_iso()
+
+    try:
+        ref = db.collection("users").document(uid).collection("hotel_bookings").add(data)
+        return {"booking_id": ref[1].id, **data}
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to save hotel booking: {str(e)}",
+        )
+
+
+def get_hotel_bookings(uid: str) -> list:
+    """
+    List all hotel bookings for a user, newest first.
+    Returns [] if none exist.
+    """
+    db = get_firestore()
+    try:
+        docs = (
+            db.collection("users").document(uid)
+            .collection("hotel_bookings")
+            .order_by("booked_at", direction="DESCENDING")
+            .stream()
+        )
+        return [{**doc.to_dict(), "booking_id": doc.id} for doc in docs]
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to fetch hotel bookings: {str(e)}",
+        )
+
+
+def delete_hotel_booking(uid: str, booking_id: str) -> None:
+    """Delete a single hotel booking."""
+    db = get_firestore()
+    ref = db.collection("users").document(uid).collection("hotel_bookings").document(booking_id)
+    if not ref.get().exists:
+        raise HTTPException(status_code=404, detail="Hotel booking not found.")
+    ref.delete()
+
+
+# ─── Transport Bookings ────────────────────────────────────────────────────────
+
+def save_transport_booking(uid: str, data: dict) -> dict:
+    """
+    Save a transport booking under users/{uid}/transport_bookings/{auto_id}.
+    Returns the saved doc with booking_id and booked_at.
+    """
+    db = get_firestore()
+    data["booked_at"] = _now_iso()
+
+    try:
+        ref = db.collection("users").document(uid).collection("transport_bookings").add(data)
+        return {"booking_id": ref[1].id, **data}
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to save transport booking: {str(e)}",
+        )
+
+
+def get_transport_bookings(uid: str) -> list:
+    """
+    List all transport bookings for a user, newest first.
+    Returns [] if none exist.
+    """
+    db = get_firestore()
+    try:
+        docs = (
+            db.collection("users").document(uid)
+            .collection("transport_bookings")
+            .order_by("booked_at", direction="DESCENDING")
+            .stream()
+        )
+        return [{**doc.to_dict(), "booking_id": doc.id} for doc in docs]
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to fetch transport bookings: {str(e)}",
+        )
+
+
+def delete_transport_booking(uid: str, booking_id: str) -> None:
+    """Delete a single transport booking."""
+    db = get_firestore()
+    ref = db.collection("users").document(uid).collection("transport_bookings").document(booking_id)
+    if not ref.get().exists:
+        raise HTTPException(status_code=404, detail="Transport booking not found.")
+    ref.delete()
+
