@@ -26,8 +26,13 @@ def search_travel_graph(query_type: str, params: dict):
     """
     return query_graph(query_type, params)
 
-async def get_chennai_weather(start_date: str, end_date: str) -> dict:
-    """Fetch weather forecast for Chennai from Open-Meteo."""
+@tool
+async def check_chennai_weather(start_date: str, end_date: str):
+    """
+    Fetch weather forecast for Chennai. 
+    Use this tool when you know the user's travel dates to check for extreme weather before planning the itinerary.
+    Format dates as YYYY-MM-DD.
+    """
     url = f"https://api.open-meteo.com/v1/forecast?latitude=13.0827&longitude=80.2707&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum&start_date={start_date}&end_date={end_date}&timezone=Asia%2FKolkata"
     async with httpx.AsyncClient() as client:
         try:
@@ -49,91 +54,47 @@ class XplorerAI:
         response = await llm.ainvoke([HumanMessage(content=prompt)])
         return response.content.strip()
 
-    async def process_chat(self, user_input: str, history: dict, submitted_data: dict = None):
+    async def process_chat(self, user_input: str, history: dict):
         # 1. Prepare System Prompt with User Context and JSON formatting
         system_prompt = f"""
-        You are Xplorer AI, a specialized travel agent for Chennai, India.
+        You are Xplorer AI, a specialized travel agent for Chennai, India. You will be interacting with users via a VOICE interface, so keep your responses conversational, natural, and concise.
         User Profile Context:
         - Name: {self.user_profile.get('full_name')}
         - Country: {self.user_profile.get('country')}
 
         YOUR GOALS & RULES:
-        1. UNDERSTAND USER INTENT: The user may want to generate a full travel itinerary, ONLY book a hotel, ONLY book a cab, or any combination of these. Address their specific intent.
-        2. DO NOT make up or assume any missing information.
-        3. DATA GATHERING: Depending on the intent, ask for the required info. 
-           - For itineraries: ask for exact travel dates (`start_date`, `end_date`), number of travelers, and interests and any other data whcih will help to give them more tuned repsonse.
-           - For hotels: ask for dates, number of guests, and any specific preferences (e.g., price limits, specific amenities like 'Pool View').
-           - For cabs: ask for dates, number of passengers, and preferred vehicle type (e.g., SUV, Sedan).
-        4. USE TOOLS: ALWAYS use the `search_travel_graph` tool to find REAL hotels, cabs, or places to suggest. If a user asks for "hotels with a pool under 5000", map that to the tool's parameters (`max_price`: 5000, `amenity`: "Pool View").
-        5. FOLLOW-UP FILTERING: If you previously suggested hotels/cabs and the user replies with more filters (e.g., "Any cheaper ones?"), use the tool again with updated parameters (e.g., lower `max_price`).
-        6. WEATHER CHECK: If weather data is provided in the context for an itinerary, evaluate it. If highly unfavorable (e.g., heavy precipitation, extreme heat), warn the user before proceeding.
-        7. Once you have the data from your tool, present the suggestions clearly.
+        1. UNDERSTAND USER INTENT: The user may want to generate a full travel itinerary, ONLY book a hotel, ONLY book a cab, or any combination of these.
+        2. CONVERSATIONAL DATA GATHERING: DO NOT make up missing information. If you need dates, number of travelers, or interests, simply ASK the user in a friendly, conversational way.
+        3. USE TOOLS: ALWAYS use the `search_travel_graph` tool to find REAL hotels, cabs, or places to suggest based on the user's intent and filters.
+        4. WEATHER CHECK: Once you know the user's dates, ALWAYS use the `check_chennai_weather` tool. If the weather is highly unfavorable (e.g., heavy precipitation, extreme heat over 40°C), warn the user conversationally and ask if they still want to proceed BEFORE generating the itinerary.
+        5. Once all required info is gathered and weather is deemed acceptable, provide the itinerary using the Travel Graph to suggest REAL places, hotels, and cabs. Format itineraries logically (Morning -> Afternoon -> Evening).
         
-        GENERATIVE UI DIRECTIVE:
-        If you need more information from the user, ask for it using structured UI elements.
-        
-        You MUST respond ONLY with a valid JSON object matching this schema:
+        OUTPUT FORMAT:
+        You MUST respond ONLY with a valid JSON object matching this schema. The `text` field is what will be spoken to the user via Text-to-Speech, so it must be natural text.
         {{
-            "text": "Your conversational reply here (including any tool results/suggestions)",
-            "ui_elements": [
-                {{
-                    "type": "text|date|select|number",
-                    "label": "Display label for the input",
-                    "key": "The variable name (e.g., 'start_date', 'max_price', 'amenity')",
-                    "suggested_values": ["Optional", "Array", "Of", "Suggestions"]
-                }}
-            ],
-            "itinerary": null // or an object containing booking/itinerary data ONLY when all info is gathered
+            "text": "Your conversational reply here (e.g. 'Great! I can help with that. When are you planning to travel?')",
+            "itinerary": null // or an object containing structured booking/itinerary data ONLY when the final plan is ready
         }}
         """
 
         # 2. Build the Message Chain
         messages = [SystemMessage(content=system_prompt)]
         
-        extracted_start_date = None
-        extracted_end_date = None
-
         # Add History
-        # Note: History from firestore comes as a dict with a 'messages' list
         past_messages = history.get('messages', [])
         for msg in past_messages:
-            # Combine text and any submitted form data into the human message context
-            human_text = msg.get('user_input', '') or ""
-            sub_data = msg.get('submitted_data')
-            if sub_data:
-                human_text += f"\n[User Submitted Data via UI: {json.dumps(sub_data)}]"
-                # Keep track of dates if they were submitted previously
-                if 'start_date' in sub_data:
-                    extracted_start_date = sub_data['start_date']
-                if 'end_date' in sub_data:
-                    extracted_end_date = sub_data['end_date']
-                
-            messages.append(HumanMessage(content=human_text))
+            messages.append(HumanMessage(content=msg.get('user_input', '')))
             
-            # The AI output might be a dict (JSON) or string. If dict, convert to json string for context.
             ai_out = msg.get('ai_generated_output', '')
             if isinstance(ai_out, dict):
                 ai_out = json.dumps(ai_out)
             messages.append(AIMessage(content=ai_out))
             
-        # Append current input and submitted data
-        current_human_text = user_input or ""
-        if submitted_data:
-            current_human_text += f"\n[User Submitted Data via UI: {json.dumps(submitted_data)}]"
-            if 'start_date' in submitted_data:
-                extracted_start_date = submitted_data['start_date']
-            if 'end_date' in submitted_data:
-                extracted_end_date = submitted_data['end_date']
-
-        # If we have both dates, fetch the weather and inject it
-        if extracted_start_date and extracted_end_date:
-            weather_data = await get_chennai_weather(extracted_start_date, extracted_end_date)
-            current_human_text += f"\n[SYSTEM: Weather forecast for {extracted_start_date} to {extracted_end_date} in Chennai: {json.dumps(weather_data)}]"
-
-        messages.append(HumanMessage(content=current_human_text))
+        # Append current input
+        messages.append(HumanMessage(content=user_input))
 
         # Bind tools to the LLM
-        llm_with_tools = llm.bind_tools([search_travel_graph])
+        llm_with_tools = llm.bind_tools([search_travel_graph, check_chennai_weather])
 
         # 3. Call LLM asynchronously
         response = await llm_with_tools.ainvoke(messages)
@@ -145,6 +106,9 @@ class XplorerAI:
                 if tool_call["name"] == "search_travel_graph":
                     tool_result = search_travel_graph.invoke(tool_call["args"])
                     messages.append(AIMessage(content=f"[SYSTEM: Tool returned: {json.dumps(tool_result)}]"))
+                elif tool_call["name"] == "check_chennai_weather":
+                    tool_result = await check_chennai_weather.invoke(tool_call["args"])
+                    messages.append(AIMessage(content=f"[SYSTEM: Weather tool returned: {json.dumps(tool_result)}]"))
             
             # Call the LLM again with the tool results so it can generate the final JSON response
             response = await llm_with_tools.ainvoke(messages)
@@ -162,6 +126,5 @@ class XplorerAI:
             # Fallback if the AI fails to generate valid JSON
             return {
                 "text": raw_text,
-                "ui_elements": None,
                 "itinerary": None
             }

@@ -22,7 +22,7 @@ class HotelBookingResponse(BaseModel):
 
 class TransportBookingRequest(BaseModel):
     agency_name: str
-    vehicle_category: str           # e.g. Cab, Bike
+    vehicle_category: str
     vehicle_type: str               # e.g. Sedan, SUV, Scooter
     model: str                      # e.g. Toyota Innova
     trip_date: str                  # YYYY-MM-DD
