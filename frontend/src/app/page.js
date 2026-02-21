@@ -55,10 +55,15 @@ export default function LandingPage() {
               {/* Social Proof */}
               <div className="mt-12 flex items-center gap-4">
                 <div className="flex -space-x-3">
-                  {[1, 2, 3, 4].map((i) => (
+                  {[
+                    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&w=100&h=100&fit=crop",
+                    "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&w=100&h=100&fit=crop",
+                    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&w=100&h=100&fit=crop",
+                    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&w=100&h=100&fit=crop"
+                  ].map((url, i) => (
                     <div key={i} className="w-10 h-10 rounded-full border-2 border-white dark:border-zinc-950 bg-zinc-200 dark:bg-zinc-800 overflow-hidden">
                       <Image
-                        src={`https://images.unsplash.com/photo-${1534528741775 + i * 100}?ixlib=rb-4.0.3&w=100&h=100&fit=crop`}
+                        src={url}
                         alt="User avatar"
                         width={40}
                         height={40}
@@ -94,7 +99,7 @@ export default function LandingPage() {
 
               <div className="absolute bottom-20 left-10 w-64 h-80 rounded-2xl overflow-hidden shadow-2xl shadow-purple-500/20 transform -rotate-3 hover:rotate-0 transition-transform duration-500 hover:-translate-y-2 z-20">
                 <Image
-                  src="https://images.unsplash.com/photo-1623861214349-9c5950d810f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                  src="https://images.unsplash.com/photo-1514222365289-40eafe525e98?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                   alt="Filter Coffee"
                   fill
                   className="object-cover"
