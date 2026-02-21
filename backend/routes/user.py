@@ -64,25 +64,38 @@ async def start_new_travel_consultation(
     uid = user["uid"]
     agent = XplorerAI(uid)
     
-    # Generate dynamic title based on first input
-    title = await agent.generate_title(payload.user_input)
+    try:
+        # Generate dynamic title based on first input
+        title = await agent.generate_title(payload.user_input)
+    except Exception as e:
+        print(f"❌ AI title generation failed: {e}")
+        title = "New Trip Plan"
     
     # Create the conversation in Firestore
     session = create_conversation(uid, title)
     convo_id = session["convo_id"]
     
-    # Process the first message
-    ai_response = await agent.process_chat(
-        user_input=payload.user_input,
-        history={"messages": []} # Empty history for a new chat
-    )
+    try:
+        # Process the first message
+        ai_response = await agent.process_chat(
+            user_input=payload.user_input,
+            history={"messages": []}, # Empty history for a new chat
+            submitted_data=payload.submitted_data
+        )
+    except Exception as e:
+        print(f"❌ AI chat failed: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail=f"AI service is temporarily unavailable. Please try again in a minute. Error: {type(e).__name__}"
+        )
     
     # Save the turn to Firestore
     saved_msg = add_message(
         uid=uid,
         convo_id=convo_id,
         user_input=payload.user_input,
-        ai_generated_output=ai_response # Contains text/itinerary data
+        ai_generated_output=ai_response, # Contains text/itinerary data
+        submitted_data=payload.submitted_data
     )
     
     return ConversationStartResponse(
@@ -102,7 +115,7 @@ async def send_message_to_agent(
     The main AI logic hub:
     1. Retrieves user preferences (Interests).
     2. Pulls chat history.
-    3. Uses LangChain to query Neo4j (Graph) and Gemini (LLM).
+    3. Uses GenAI to query Neo4j (Graph) and Gemini (LLM).
     4. Handles missing info by asking the user questions.
     """
     uid = user["uid"]
@@ -113,18 +126,27 @@ async def send_message_to_agent(
     # 2. Initialize Xplorer AI Agent
     agent = XplorerAI(uid)
     
-    # 3. Generate Intelligent Response (LangChain + Gemini + Neo4j)
-    ai_response = await agent.process_chat(
-        user_input=payload.user_input,
-        history=history
-    )
+    try:
+        # 3. Generate Intelligent Response (Gemini + Neo4j)
+        ai_response = await agent.process_chat(
+            user_input=payload.user_input,
+            history=history,
+            submitted_data=payload.submitted_data
+        )
+    except Exception as e:
+        print(f"❌ AI chat failed: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail=f"AI service is temporarily unavailable. Please try again in a minute. Error: {type(e).__name__}"
+        )
     
     # 4. Save the turn to Firestore
     saved_msg = add_message(
         uid=uid,
         convo_id=session_id,
         user_input=payload.user_input,
-        ai_generated_output=ai_response # Contains text or structured itinerary
+        ai_generated_output=ai_response, # Contains text or structured itinerary
+        submitted_data=payload.submitted_data
     )
     
     return MessageResponse(**saved_msg)

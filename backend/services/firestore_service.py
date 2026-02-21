@@ -149,7 +149,7 @@ def create_conversation(uid: str, conversation_title: str = None) -> dict:
         )
 
 
-def add_message(uid: str, convo_id: str, user_input: str, ai_generated_output: Union[dict, str]) -> dict:
+def add_message(uid: str, convo_id: str, user_input: str, ai_generated_output: Union[dict, str], submitted_data: dict = None) -> dict:
     """
     Add a message (user_input + ai_generated_output) to an existing conversation.
     Also updates the conversation's updated_at and increments message_count.
@@ -172,6 +172,7 @@ def add_message(uid: str, convo_id: str, user_input: str, ai_generated_output: U
     message_data = {
         "user_input": user_input,
         "ai_generated_output": ai_generated_output,
+        "submitted_data": submitted_data,
         "timestamp": now,
         "date": today,
     }

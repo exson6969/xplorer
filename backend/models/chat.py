@@ -7,6 +7,7 @@ class StartChatRequest(BaseModel):
     The backend will auto-generate the title.
     """
     user_input: str = Field(..., description="The first text message from the user to start the chat.")
+    submitted_data: Optional[Dict[str, Any]] = None
     
     model_config = {
         "json_schema_extra": {
@@ -38,6 +39,7 @@ class MessageResponse(BaseModel):
     message_id: str
     user_input: str
     ai_generated_output: Union[Dict[str, Any], str]  # native object or plain text
+    submitted_data: Optional[Dict[str, Any]] = None
     timestamp: str   # ISO datetime string
     date: str        # YYYY-MM-DD for easy filtering/display
 
@@ -58,8 +60,8 @@ class ConversationListItem(BaseModel):
     message_count: int
 
 class ChatRequest(BaseModel):
-    """The only thing the frontend needs to send"""
     user_input: str = Field(..., description="The text message from the user.")
+    submitted_data: Optional[Dict[str, Any]] = None
 
 class ChatResponse(BaseModel):
     """The structured response back to the user"""

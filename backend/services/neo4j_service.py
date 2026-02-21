@@ -1,7 +1,13 @@
-from neo4j import GraphDatabase
 import os
+from neo4j import GraphDatabase
+from dotenv import load_dotenv
+
+# Load environment variables
+_BACKEND_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+load_dotenv(dotenv_path=os.path.join(_BACKEND_DIR, ".env"))
 
 driver = GraphDatabase.driver(
+
     os.getenv("NEO4J_URI"), 
     auth=(os.getenv("NEO4J_USER"), os.getenv("NEO4J_PASSWORD"))
 )
