@@ -1,0 +1,1885 @@
+[
+  {
+    "name": "Marina Beach",
+    "category": "beach",
+    "sub_category": "urban beach",
+    "description": "India's longest urban beach along the Bay of Bengal, famous for evening walks, street food, and statues of historical figures. Ideal for sunset views and family outings.",
+    "location": {
+      "latitude": 13.05418,
+      "longitude": 80.28368,
+      "area": "Triplicane",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "00:00",
+      "closing_time": "23:59",
+      "closed_on": []
+    },
+    "visit": {
+      "recommended_duration_minutes": 90,
+      "ideal_time_blocks": [
+        "evening"
+      ],
+      "weather_sensitive": true
+    },
+    "crowd": {
+      "average_level": 4,
+      "peak_hours": [
+        {
+          "start": "17:00",
+          "end": "20:00"
+        },
+        {
+          "start": "10:00",
+          "end": "12:00"
+        }
+      ],
+      "seasonal_peak_months": [
+        "December",
+        "January",
+        "May"
+      ]
+    },
+    "pricing": {
+      "entry_fee": 0,
+      "ticket_required": false,
+      "average_wait_time_minutes": 0
+    },
+    "rules": {
+      "dress_code_required": false,
+      "security_check_time_minutes": 0
+    },
+    "experience": {
+      "tags": [
+        "beach",
+        "family-friendly",
+        "food"
+      ],
+      "suitable_for": [
+        "family",
+        "couples",
+        "solo"
+      ],
+      "indoor_outdoor": "outdoor"
+    },
+    "scores": {
+      "heritage": 3,
+      "instagrammability": 5,
+      "popularity_index": 95,
+      "user_rating": 4.5,
+      "travel_priority": 9.5
+    },
+    "id": 1
+  },
+  {
+    "name": "Kapaleeshwarar Temple",
+    "category": "temple",
+    "sub_category": "Shiva temple",
+    "description": "Iconic 7th-century Dravidian architecture temple in Mylapore dedicated to Lord Shiva, featuring a colorful gopuram and sacred tank.",
+    "location": {
+      "latitude": 13.0337,
+      "longitude": 80.2699,
+      "area": "Mylapore",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "05:30",
+      "closing_time": "21:30",
+      "closed_on": []
+    },
+    "visit": {
+      "recommended_duration_minutes": 60,
+      "ideal_time_blocks": [
+        "morning"
+      ],
+      "weather_sensitive": false
+    },
+    "crowd": {
+      "average_level": 4,
+      "peak_hours": [
+        {
+          "start": "05:30",
+          "end": "08:00"
+        },
+        {
+          "start": "18:00",
+          "end": "20:00"
+        }
+      ],
+      "seasonal_peak_months": [
+        "January",
+        "February"
+      ]
+    },
+    "pricing": {
+      "entry_fee": 0,
+      "ticket_required": false,
+      "average_wait_time_minutes": 15
+    },
+    "rules": {
+      "dress_code_required": true,
+      "security_check_time_minutes": 5
+    },
+    "experience": {
+      "tags": [
+        "heritage",
+        "temple",
+        "spiritual"
+      ],
+      "suitable_for": [
+        "family",
+        "solo"
+      ],
+      "indoor_outdoor": "outdoor"
+    },
+    "scores": {
+      "heritage": 5,
+      "instagrammability": 5,
+      "popularity_index": 92,
+      "user_rating": 4.6,
+      "travel_priority": 9
+    },
+    "id": 2
+  },
+  {
+    "name": "Fort St George",
+    "category": "heritage",
+    "sub_category": "fort museum",
+    "description": "17th-century British fort housing the Tamil Nadu Legislative Assembly, museum with artifacts from colonial era.",
+    "location": {
+      "latitude": 13.0731,
+      "longitude": 80.292,
+      "area": "Fort St George",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "09:00",
+      "closing_time": "17:00",
+      "closed_on": [
+        "Friday"
+      ]
+    },
+    "visit": {
+      "recommended_duration_minutes": 75,
+      "ideal_time_blocks": [
+        "morning"
+      ],
+      "weather_sensitive": false
+    },
+    "crowd": {
+      "average_level": 2,
+      "peak_hours": [
+        {
+          "start": "10:00",
+          "end": "12:00"
+        }
+      ],
+      "seasonal_peak_months": []
+    },
+    "pricing": {
+      "entry_fee": 15,
+      "ticket_required": true,
+      "average_wait_time_minutes": 5
+    },
+    "rules": {
+      "dress_code_required": false,
+      "security_check_time_minutes": 10
+    },
+    "experience": {
+      "tags": [
+        "heritage",
+        "museum",
+        "history"
+      ],
+      "suitable_for": [
+        "family",
+        "solo"
+      ],
+      "indoor_outdoor": "both"
+    },
+    "scores": {
+      "heritage": 5,
+      "instagrammability": 4,
+      "popularity_index": 85,
+      "user_rating": 4.3,
+      "travel_priority": 8.5
+    },
+    "id": 3
+  },
+  {
+    "name": "Elliot's Beach",
+    "category": "beach",
+    "sub_category": "urban beach",
+    "description": "Popular Besant Nagar beach known for calm waters, cafes, and Ashtalakshmi Temple nearby. Great for evening strolls and food.",
+    "location": {
+      "latitude": 12.9994,
+      "longitude": 80.2726,
+      "area": "Besant Nagar",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "00:00",
+      "closing_time": "23:59",
+      "closed_on": []
+    },
+    "visit": {
+      "recommended_duration_minutes": 90,
+      "ideal_time_blocks": [
+        "evening"
+      ],
+      "weather_sensitive": true
+    },
+    "crowd": {
+      "average_level": 4,
+      "peak_hours": [
+        {
+          "start": "16:00",
+          "end": "21:00"
+        }
+      ],
+      "seasonal_peak_months": [
+        "May",
+        "December"
+      ]
+    },
+    "pricing": {
+      "entry_fee": 0,
+      "ticket_required": false,
+      "average_wait_time_minutes": 0
+    },
+    "rules": {
+      "dress_code_required": false,
+      "security_check_time_minutes": 0
+    },
+    "experience": {
+      "tags": [
+        "beach",
+        "family-friendly",
+        "food"
+      ],
+      "suitable_for": [
+        "family",
+        "couples",
+        "kids"
+      ],
+      "indoor_outdoor": "outdoor"
+    },
+    "scores": {
+      "heritage": 2,
+      "instagrammability": 5,
+      "popularity_index": 88,
+      "user_rating": 4.4,
+      "travel_priority": 8.8
+    },
+    "id": 4
+  },
+  {
+    "name": "Government Museum",
+    "category": "museum",
+    "sub_category": "archaeology",
+    "description": "Oldest museum in India with Bronze Age artifacts, Egyptian mummies, and vast collections in Egmore.",
+    "location": {
+      "latitude": 13.0714,
+      "longitude": 80.2567,
+      "area": "Egmore",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "10:30",
+      "closing_time": "18:30",
+      "closed_on": [
+        "Friday"
+      ]
+    },
+    "visit": {
+      "recommended_duration_minutes": 120,
+      "ideal_time_blocks": [
+        "morning"
+      ],
+      "weather_sensitive": false
+    },
+    "crowd": {
+      "average_level": 3,
+      "peak_hours": [
+        {
+          "start": "11:00",
+          "end": "14:00"
+        }
+      ],
+      "seasonal_peak_months": []
+    },
+    "pricing": {
+      "entry_fee": 15,
+      "ticket_required": true,
+      "average_wait_time_minutes": 10
+    },
+    "rules": {
+      "dress_code_required": false,
+      "security_check_time_minutes": 5
+    },
+    "experience": {
+      "tags": [
+        "museum",
+        "heritage",
+        "history"
+      ],
+      "suitable_for": [
+        "family",
+        "solo"
+      ],
+      "indoor_outdoor": "indoor"
+    },
+    "scores": {
+      "heritage": 4,
+      "instagrammability": 3,
+      "popularity_index": 80,
+      "user_rating": 4.2,
+      "travel_priority": 8
+    },
+    "id": 5
+  },
+  {
+    "name": "Santhome Basilica",
+    "category": "church",
+    "sub_category": "basilica",
+    "description": "Minor basilica built over St. Thomas tomb, neo-Gothic architecture with stained glass windows.",
+    "location": {
+      "latitude": 13.0391,
+      "longitude": 80.2853,
+      "area": "Mylapore",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "06:00",
+      "closing_time": "20:00",
+      "closed_on": []
+    },
+    "visit": {
+      "recommended_duration_minutes": 45,
+      "ideal_time_blocks": [
+        "afternoon"
+      ],
+      "weather_sensitive": false
+    },
+    "crowd": {
+      "average_level": 3,
+      "peak_hours": [
+        {
+          "start": "08:00",
+          "end": "10:00"
+        },
+        {
+          "start": "17:00",
+          "end": "19:00"
+        }
+      ],
+      "seasonal_peak_months": [
+        "December"
+      ]
+    },
+    "pricing": {
+      "entry_fee": 0,
+      "ticket_required": false,
+      "average_wait_time_minutes": 5
+    },
+    "rules": {
+      "dress_code_required": true,
+      "security_check_time_minutes": 5
+    },
+    "experience": {
+      "tags": [
+        "heritage",
+        "spiritual",
+        "architecture"
+      ],
+      "suitable_for": [
+        "family",
+        "solo",
+        "couples"
+      ],
+      "indoor_outdoor": "both"
+    },
+    "scores": {
+      "heritage": 5,
+      "instagrammability": 4,
+      "popularity_index": 82,
+      "user_rating": 4.5,
+      "travel_priority": 8.2
+    },
+    "id": 6
+  },
+  {
+    "name": "Valluvar Kottam",
+    "category": "monument",
+    "sub_category": "chariot monument",
+    "description": "Chariot-shaped memorial to poet Thiruvalluvar with 1330 inscriptions from Thirukkural.",
+    "location": {
+      "latitude": 13.0526,
+      "longitude": 80.2384,
+      "area": "Nungambakkam",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "08:30",
+      "closing_time": "17:30",
+      "closed_on": []
+    },
+    "visit": {
+      "recommended_duration_minutes": 60,
+      "ideal_time_blocks": [
+        "morning"
+      ],
+      "weather_sensitive": false
+    },
+    "crowd": {
+      "average_level": 2,
+      "peak_hours": [
+        {
+          "start": "10:00",
+          "end": "12:00"
+        }
+      ],
+      "seasonal_peak_months": []
+    },
+    "pricing": {
+      "entry_fee": 10,
+      "ticket_required": true,
+      "average_wait_time_minutes": 5
+    },
+    "rules": {
+      "dress_code_required": false,
+      "security_check_time_minutes": 0
+    },
+    "experience": {
+      "tags": [
+        "heritage",
+        "literature",
+        "architecture"
+      ],
+      "suitable_for": [
+        "family",
+        "solo"
+      ],
+      "indoor_outdoor": "both"
+    },
+    "scores": {
+      "heritage": 4,
+      "instagrammability": 4,
+      "popularity_index": 78,
+      "user_rating": 4.1,
+      "travel_priority": 7.8
+    },
+    "id": 7
+  },
+  {
+    "name": "Guindy National Park",
+    "category": "park",
+    "sub_category": "national park",
+    "description": "Urban park with deer, birds, snake park, and walking trails near Raj Bhavan.",
+    "location": {
+      "latitude": 13.0071,
+      "longitude": 80.2263,
+      "area": "Guindy",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "09:00",
+      "closing_time": "17:30",
+      "closed_on": [
+        "Tuesday"
+      ]
+    },
+    "visit": {
+      "recommended_duration_minutes": 120,
+      "ideal_time_blocks": [
+        "morning"
+      ],
+      "weather_sensitive": true
+    },
+    "crowd": {
+      "average_level": 3,
+      "peak_hours": [
+        {
+          "start": "09:00",
+          "end": "11:00"
+        }
+      ],
+      "seasonal_peak_months": []
+    },
+    "pricing": {
+      "entry_fee": 20,
+      "ticket_required": true,
+      "average_wait_time_minutes": 10
+    },
+    "rules": {
+      "dress_code_required": false,
+      "security_check_time_minutes": 5
+    },
+    "experience": {
+      "tags": [
+        "nature",
+        "wildlife",
+        "family-friendly"
+      ],
+      "suitable_for": [
+        "family",
+        "kids",
+        "solo"
+      ],
+      "indoor_outdoor": "outdoor"
+    },
+    "scores": {
+      "heritage": 2,
+      "instagrammability": 4,
+      "popularity_index": 75,
+      "user_rating": 4.2,
+      "travel_priority": 7.5
+    },
+    "id": 8
+  },
+  {
+    "name": "Parthasarathy Temple",
+    "category": "temple",
+    "sub_category": "Vaishnavite temple",
+    "description": "6th-century temple dedicated to Krishna as Parthasarathy, one of Chennai's oldest structures.",
+    "location": {
+      "latitude": 13.0615,
+      "longitude": 80.277,
+      "area": "Triplicane",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "05:00",
+      "closing_time": "20:00",
+      "closed_on": []
+    },
+    "visit": {
+      "recommended_duration_minutes": 45,
+      "ideal_time_blocks": [
+        "morning"
+      ],
+      "weather_sensitive": false
+    },
+    "crowd": {
+      "average_level": 3,
+      "peak_hours": [
+        {
+          "start": "06:00",
+          "end": "09:00"
+        }
+      ],
+      "seasonal_peak_months": [
+        "April",
+        "May"
+      ]
+    },
+    "pricing": {
+      "entry_fee": 0,
+      "ticket_required": false,
+      "average_wait_time_minutes": 10
+    },
+    "rules": {
+      "dress_code_required": true,
+      "security_check_time_minutes": 5
+    },
+    "experience": {
+      "tags": [
+        "heritage",
+        "temple",
+        "spiritual"
+      ],
+      "suitable_for": [
+        "family",
+        "solo"
+      ],
+      "indoor_outdoor": "outdoor"
+    },
+    "scores": {
+      "heritage": 5,
+      "instagrammability": 4,
+      "popularity_index": 70,
+      "user_rating": 4.4,
+      "travel_priority": 7
+    },
+    "id": 9
+  },
+  {
+    "name": "Vivekananda House",
+    "category": "museum",
+    "sub_category": "memorial",
+    "description": "Ice House where Swami Vivekananda stayed in 1897, now a museum displaying his life and teachings.",
+    "location": {
+      "latitude": 13.0595,
+      "longitude": 80.2847,
+      "area": "Triplicane",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "10:00",
+      "closing_time": "19:30",
+      "closed_on": [
+        "Tuesday"
+      ]
+    },
+    "visit": {
+      "recommended_duration_minutes": 60,
+      "ideal_time_blocks": [
+        "afternoon"
+      ],
+      "weather_sensitive": false
+    },
+    "crowd": {
+      "average_level": 2,
+      "peak_hours": [
+        {
+          "start": "15:00",
+          "end": "17:00"
+        }
+      ],
+      "seasonal_peak_months": []
+    },
+    "pricing": {
+      "entry_fee": 30,
+      "ticket_required": true,
+      "average_wait_time_minutes": 5
+    },
+    "rules": {
+      "dress_code_required": false,
+      "security_check_time_minutes": 5
+    },
+    "experience": {
+      "tags": [
+        "heritage",
+        "spiritual",
+        "museum"
+      ],
+      "suitable_for": [
+        "solo",
+        "family"
+      ],
+      "indoor_outdoor": "indoor"
+    },
+    "scores": {
+      "heritage": 4,
+      "instagrammability": 3,
+      "popularity_index": 72,
+      "user_rating": 4.3,
+      "travel_priority": 7.2
+    },
+    "id": 10
+  },
+  {
+    "name": "Ashtalakshmi Temple",
+    "category": "temple",
+    "sub_category": "Lakshmi temple",
+    "description": "Seaside temple dedicated to eight forms of Lakshmi, popular for its serene location near Elliot's Beach.",
+    "location": {
+      "latitude": 12.9965,
+      "longitude": 80.272,
+      "area": "Besant Nagar",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "06:30",
+      "closing_time": "21:00",
+      "closed_on": []
+    },
+    "visit": {
+      "recommended_duration_minutes": 45,
+      "ideal_time_blocks": [
+        "evening"
+      ],
+      "weather_sensitive": true
+    },
+    "crowd": {
+      "average_level": 3,
+      "peak_hours": [
+        {
+          "start": "18:00",
+          "end": "20:00"
+        }
+      ],
+      "seasonal_peak_months": [
+        "October",
+        "November"
+      ]
+    },
+    "pricing": {
+      "entry_fee": 0,
+      "ticket_required": false,
+      "average_wait_time_minutes": 10
+    },
+    "rules": {
+      "dress_code_required": true,
+      "security_check_time_minutes": 5
+    },
+    "experience": {
+      "tags": [
+        "temple",
+        "spiritual",
+        "beach"
+      ],
+      "suitable_for": [
+        "family",
+        "couples"
+      ],
+      "indoor_outdoor": "outdoor"
+    },
+    "scores": {
+      "heritage": 3,
+      "instagrammability": 5,
+      "popularity_index": 68,
+      "user_rating": 4.5,
+      "travel_priority": 6.8
+    },
+    "id": 11
+  },
+  {
+    "name": "Connemara Public Library",
+    "category": "library",
+    "sub_category": "public library",
+    "description": "One of Asia's largest libraries with rare books, located within Government Museum complex.",
+    "location": {
+      "latitude": 13.071,
+      "longitude": 80.256,
+      "area": "Egmore",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "08:00",
+      "closing_time": "20:00",
+      "closed_on": []
+    },
+    "visit": {
+      "recommended_duration_minutes": 90,
+      "ideal_time_blocks": [
+        "morning"
+      ],
+      "weather_sensitive": false
+    },
+    "crowd": {
+      "average_level": 2,
+      "peak_hours": [
+        {
+          "start": "10:00",
+          "end": "14:00"
+        }
+      ],
+      "seasonal_peak_months": []
+    },
+    "pricing": {
+      "entry_fee": 0,
+      "ticket_required": false,
+      "average_wait_time_minutes": 0
+    },
+    "rules": {
+      "dress_code_required": false,
+      "security_check_time_minutes": 0
+    },
+    "experience": {
+      "tags": [
+        "heritage",
+        "literature",
+        "history"
+      ],
+      "suitable_for": [
+        "solo"
+      ],
+      "indoor_outdoor": "indoor"
+    },
+    "scores": {
+      "heritage": 4,
+      "instagrammability": 3,
+      "popularity_index": 65,
+      "user_rating": 4.2,
+      "travel_priority": 6.5
+    },
+    "id": 12
+  },
+  {
+    "name": "Rippon Building",
+    "category": "architecture",
+    "sub_category": "colonial building",
+    "description": "Neo-Gothic building serving as Chennai Corporation headquarters, known for its grand facade.",
+    "location": {
+      "latitude": 13.0833,
+      "longitude": 80.2722,
+      "area": "Park Town",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "10:00",
+      "closing_time": "17:00",
+      "closed_on": [
+        "Sunday"
+      ]
+    },
+    "visit": {
+      "recommended_duration_minutes": 30,
+      "ideal_time_blocks": [
+        "morning"
+      ],
+      "weather_sensitive": false
+    },
+    "crowd": {
+      "average_level": 1,
+      "peak_hours": [
+        {
+          "start": "11:00",
+          "end": "13:00"
+        }
+      ],
+      "seasonal_peak_months": []
+    },
+    "pricing": {
+      "entry_fee": 0,
+      "ticket_required": false,
+      "average_wait_time_minutes": 0
+    },
+    "rules": {
+      "dress_code_required": false,
+      "security_check_time_minutes": 0
+    },
+    "experience": {
+      "tags": [
+        "heritage",
+        "architecture"
+      ],
+      "suitable_for": [
+        "solo"
+      ],
+      "indoor_outdoor": "outdoor"
+    },
+    "scores": {
+      "heritage": 4,
+      "instagrammability": 4,
+      "popularity_index": 60,
+      "user_rating": 4,
+      "travel_priority": 6
+    },
+    "id": 13
+  },
+  {
+    "name": "Pondy Bazaar T Nagar",
+    "category": "shopping",
+    "sub_category": "street market",
+    "description": "Bustling shopping street in T Nagar famous for sarees, jewelry, electronics, and street food.",
+    "location": {
+      "latitude": 13.0425,
+      "longitude": 80.2325,
+      "area": "T Nagar",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "09:30",
+      "closing_time": "22:00",
+      "closed_on": []
+    },
+    "visit": {
+      "recommended_duration_minutes": 120,
+      "ideal_time_blocks": [
+        "evening"
+      ],
+      "weather_sensitive": true
+    },
+    "crowd": {
+      "average_level": 5,
+      "peak_hours": [
+        {
+          "start": "18:00",
+          "end": "21:00"
+        }
+      ],
+      "seasonal_peak_months": [
+        "October",
+        "January"
+      ]
+    },
+    "pricing": {
+      "entry_fee": 0,
+      "ticket_required": false,
+      "average_wait_time_minutes": 0
+    },
+    "rules": {
+      "dress_code_required": false,
+      "security_check_time_minutes": 0
+    },
+    "experience": {
+      "tags": [
+        "shopping",
+        "food"
+      ],
+      "suitable_for": [
+        "family",
+        "couples"
+      ],
+      "indoor_outdoor": "outdoor"
+    },
+    "scores": {
+      "heritage": 1,
+      "instagrammability": 3,
+      "popularity_index": 85,
+      "user_rating": 4.2,
+      "travel_priority": 8.5
+    },
+    "id": 14
+  },
+  {
+    "name": "Kalakshetra Foundation",
+    "category": "cultural",
+    "sub_category": "arts academy",
+    "description": "Renowned center for classical dance, music, and arts training with performances and campus.",
+    "location": {
+      "latitude": 12.975,
+      "longitude": 80.264,
+      "area": "Thiruvanmiyur",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "08:30",
+      "closing_time": "17:00",
+      "closed_on": [
+        "Sunday"
+      ]
+    },
+    "visit": {
+      "recommended_duration_minutes": 90,
+      "ideal_time_blocks": [
+        "morning"
+      ],
+      "weather_sensitive": false
+    },
+    "crowd": {
+      "average_level": 2,
+      "peak_hours": [
+        {
+          "start": "10:00",
+          "end": "12:00"
+        }
+      ],
+      "seasonal_peak_months": []
+    },
+    "pricing": {
+      "entry_fee": 20,
+      "ticket_required": true,
+      "average_wait_time_minutes": 5
+    },
+    "rules": {
+      "dress_code_required": false,
+      "security_check_time_minutes": 5
+    },
+    "experience": {
+      "tags": [
+        "cultural",
+        "dance",
+        "music"
+      ],
+      "suitable_for": [
+        "family",
+        "solo"
+      ],
+      "indoor_outdoor": "both"
+    },
+    "scores": {
+      "heritage": 3,
+      "instagrammability": 4,
+      "popularity_index": 62,
+      "user_rating": 4.4,
+      "travel_priority": 6.2
+    },
+    "id": 15
+  },
+  {
+    "name": "MGR Memorial",
+    "category": "memorial",
+    "sub_category": "political museum",
+    "description": "Memorial to former CM M.G. Ramachandran with his home, artifacts, and park.",
+    "location": {
+      "latitude": 13.071,
+      "longitude": 80.259,
+      "area": "Egmore",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "09:00",
+      "closing_time": "17:00",
+      "closed_on": []
+    },
+    "visit": {
+      "recommended_duration_minutes": 60,
+      "ideal_time_blocks": [
+        "morning"
+      ],
+      "weather_sensitive": false
+    },
+    "crowd": {
+      "average_level": 3,
+      "peak_hours": [
+        {
+          "start": "10:00",
+          "end": "12:00"
+        }
+      ],
+      "seasonal_peak_months": [
+        "January"
+      ]
+    },
+    "pricing": {
+      "entry_fee": 0,
+      "ticket_required": false,
+      "average_wait_time_minutes": 10
+    },
+    "rules": {
+      "dress_code_required": false,
+      "security_check_time_minutes": 5
+    },
+    "experience": {
+      "tags": [
+        "memorial",
+        "history"
+      ],
+      "suitable_for": [
+        "family"
+      ],
+      "indoor_outdoor": "both"
+    },
+    "scores": {
+      "heritage": 3,
+      "instagrammability": 3,
+      "popularity_index": 70,
+      "user_rating": 4.1,
+      "travel_priority": 7
+    },
+    "id": 16
+  },
+  {
+    "name": "Anna Memorial",
+    "category": "memorial",
+    "sub_category": "samadhi",
+    "description": "Memorial to DMK founder C.N. Annadurai on Marina Beach with museum and gardens.",
+    "location": {
+      "latitude": 13.0667,
+      "longitude": 80.2833,
+      "area": "Marina",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "09:00",
+      "closing_time": "18:00",
+      "closed_on": []
+    },
+    "visit": {
+      "recommended_duration_minutes": 45,
+      "ideal_time_blocks": [
+        "afternoon"
+      ],
+      "weather_sensitive": true
+    },
+    "crowd": {
+      "average_level": 2,
+      "peak_hours": [
+        {
+          "start": "16:00",
+          "end": "18:00"
+        }
+      ],
+      "seasonal_peak_months": []
+    },
+    "pricing": {
+      "entry_fee": 0,
+      "ticket_required": false,
+      "average_wait_time_minutes": 0
+    },
+    "rules": {
+      "dress_code_required": false,
+      "security_check_time_minutes": 0
+    },
+    "experience": {
+      "tags": [
+        "memorial",
+        "political"
+      ],
+      "suitable_for": [
+        "family",
+        "solo"
+      ],
+      "indoor_outdoor": "outdoor"
+    },
+    "scores": {
+      "heritage": 3,
+      "instagrammability": 4,
+      "popularity_index": 66,
+      "user_rating": 4,
+      "travel_priority": 6.6
+    },
+    "id": 17
+  },
+  {
+    "name": "Little Mount Shrine",
+    "category": "church",
+    "sub_category": "cave shrine",
+    "description": "Cave where St. Thomas hid, with footprint imprint and spring water.",
+    "location": {
+      "latitude": 13.0157,
+      "longitude": 80.2273,
+      "area": "Saidapet",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "07:00",
+      "closing_time": "19:00",
+      "closed_on": []
+    },
+    "visit": {
+      "recommended_duration_minutes": 30,
+      "ideal_time_blocks": [
+        "morning"
+      ],
+      "weather_sensitive": false
+    },
+    "crowd": {
+      "average_level": 2,
+      "peak_hours": [
+        {
+          "start": "08:00",
+          "end": "10:00"
+        }
+      ],
+      "seasonal_peak_months": [
+        "December"
+      ]
+    },
+    "pricing": {
+      "entry_fee": 0,
+      "ticket_required": false,
+      "average_wait_time_minutes": 5
+    },
+    "rules": {
+      "dress_code_required": true,
+      "security_check_time_minutes": 0
+    },
+    "experience": {
+      "tags": [
+        "spiritual",
+        "heritage",
+        "cave"
+      ],
+      "suitable_for": [
+        "solo",
+        "couples"
+      ],
+      "indoor_outdoor": "both"
+    },
+    "scores": {
+      "heritage": 4,
+      "instagrammability": 4,
+      "popularity_index": 55,
+      "user_rating": 4.3,
+      "travel_priority": 5.5
+    },
+    "id": 18
+  },
+  {
+    "name": "St. Thomas Mount",
+    "category": "church",
+    "sub_category": "hill shrine",
+    "description": "Hill where St. Thomas was martyred, with ancient church and panoramic city views.",
+    "location": {
+      "latitude": 12.9992,
+      "longitude": 80.226,
+      "area": "St Thomas Mount",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "06:00",
+      "closing_time": "20:00",
+      "closed_on": []
+    },
+    "visit": {
+      "recommended_duration_minutes": 60,
+      "ideal_time_blocks": [
+        "evening"
+      ],
+      "weather_sensitive": true
+    },
+    "crowd": {
+      "average_level": 3,
+      "peak_hours": [
+        {
+          "start": "17:00",
+          "end": "19:00"
+        }
+      ],
+      "seasonal_peak_months": []
+    },
+    "pricing": {
+      "entry_fee": 0,
+      "ticket_required": false,
+      "average_wait_time_minutes": 10
+    },
+    "rules": {
+      "dress_code_required": true,
+      "security_check_time_minutes": 5
+    },
+    "experience": {
+      "tags": [
+        "spiritual",
+        "viewpoint",
+        "heritage"
+      ],
+      "suitable_for": [
+        "family",
+        "couples"
+      ],
+      "indoor_outdoor": "outdoor"
+    },
+    "scores": {
+      "heritage": 5,
+      "instagrammability": 5,
+      "popularity_index": 64,
+      "user_rating": 4.4,
+      "travel_priority": 6.4
+    },
+    "id": 19
+  },
+  {
+    "name": "Natesan Park",
+    "category": "park",
+    "sub_category": "music park",
+    "description": "Themed park with musical instruments sculptures, walking paths near Valluvar Kottam.",
+    "location": {
+      "latitude": 13.05,
+      "longitude": 80.24,
+      "area": "Nungambakkam",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "05:00",
+      "closing_time": "22:00",
+      "closed_on": []
+    },
+    "visit": {
+      "recommended_duration_minutes": 45,
+      "ideal_time_blocks": [
+        "evening"
+      ],
+      "weather_sensitive": true
+    },
+    "crowd": {
+      "average_level": 3,
+      "peak_hours": [
+        {
+          "start": "17:00",
+          "end": "20:00"
+        }
+      ],
+      "seasonal_peak_months": []
+    },
+    "pricing": {
+      "entry_fee": 0,
+      "ticket_required": false,
+      "average_wait_time_minutes": 0
+    },
+    "rules": {
+      "dress_code_required": false,
+      "security_check_time_minutes": 0
+    },
+    "experience": {
+      "tags": [
+        "park",
+        "family-friendly",
+        "music"
+      ],
+      "suitable_for": [
+        "family",
+        "kids"
+      ],
+      "indoor_outdoor": "outdoor"
+    },
+    "scores": {
+      "heritage": 1,
+      "instagrammability": 4,
+      "popularity_index": 58,
+      "user_rating": 4.1,
+      "travel_priority": 5.8
+    },
+    "id": 20
+  },
+  {
+    "name": "S.D.M. Podhu Dikshitlu Park",
+    "category": "park",
+    "sub_category": "musical park",
+    "description": "Musical-themed park with instrument installations and open air stage.",
+    "location": {
+      "latitude": 13.051,
+      "longitude": 80.239,
+      "area": "Nungambakkam",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "05:00",
+      "closing_time": "22:00",
+      "closed_on": []
+    },
+    "visit": {
+      "recommended_duration_minutes": 45,
+      "ideal_time_blocks": [
+        "evening"
+      ],
+      "weather_sensitive": true
+    },
+    "crowd": {
+      "average_level": 3,
+      "peak_hours": [
+        {
+          "start": "18:00",
+          "end": "21:00"
+        }
+      ],
+      "seasonal_peak_months": []
+    },
+    "pricing": {
+      "entry_fee": 0,
+      "ticket_required": false,
+      "average_wait_time_minutes": 0
+    },
+    "rules": {
+      "dress_code_required": false,
+      "security_check_time_minutes": 0
+    },
+    "experience": {
+      "tags": [
+        "park",
+        "music",
+        "family-friendly"
+      ],
+      "suitable_for": [
+        "family",
+        "kids"
+      ],
+      "indoor_outdoor": "outdoor"
+    },
+    "scores": {
+      "heritage": 1,
+      "instagrammability": 4,
+      "popularity_index": 56,
+      "user_rating": 4,
+      "travel_priority": 5.6
+    },
+    "id": 21
+  },
+  {
+    "name": "Semmozhi Poonga",
+    "category": "park",
+    "sub_category": "botanical garden",
+    "description": "Japanese-styled botanical garden with exotic plants, fountains, and conservatory.",
+    "location": {
+      "latitude": 13.0528,
+      "longitude": 80.2456,
+      "area": "Cathedral Road",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "10:00",
+      "closing_time": "20:00",
+      "closed_on": [
+        "Tuesday"
+      ]
+    },
+    "visit": {
+      "recommended_duration_minutes": 90,
+      "ideal_time_blocks": [
+        "afternoon"
+      ],
+      "weather_sensitive": true
+    },
+    "crowd": {
+      "average_level": 4,
+      "peak_hours": [
+        {
+          "start": "16:00",
+          "end": "19:00"
+        }
+      ],
+      "seasonal_peak_months": []
+    },
+    "pricing": {
+      "entry_fee": 25,
+      "ticket_required": true,
+      "average_wait_time_minutes": 5
+    },
+    "rules": {
+      "dress_code_required": false,
+      "security_check_time_minutes": 5
+    },
+    "experience": {
+      "tags": [
+        "garden",
+        "nature",
+        "family-friendly"
+      ],
+      "suitable_for": [
+        "family",
+        "kids",
+        "couples"
+      ],
+      "indoor_outdoor": "outdoor"
+    },
+    "scores": {
+      "heritage": 1,
+      "instagrammability": 5,
+      "popularity_index": 74,
+      "user_rating": 4.3,
+      "travel_priority": 7.4
+    },
+    "id": 22
+  },
+  {
+    "name": "Broken Bridge",
+    "category": "scenic",
+    "sub_category": "viewpoint",
+    "description": "Abandoned bridge over Adyar river offering views of estuary and birds.",
+    "location": {
+      "latitude": 13.002,
+      "longitude": 80.265,
+      "area": "Thiruvanmiyur",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "00:00",
+      "closing_time": "23:59",
+      "closed_on": []
+    },
+    "visit": {
+      "recommended_duration_minutes": 30,
+      "ideal_time_blocks": [
+        "evening"
+      ],
+      "weather_sensitive": true
+    },
+    "crowd": {
+      "average_level": 3,
+      "peak_hours": [
+        {
+          "start": "17:00",
+          "end": "19:00"
+        }
+      ],
+      "seasonal_peak_months": []
+    },
+    "pricing": {
+      "entry_fee": 0,
+      "ticket_required": false,
+      "average_wait_time_minutes": 0
+    },
+    "rules": {
+      "dress_code_required": false,
+      "security_check_time_minutes": 0
+    },
+    "experience": {
+      "tags": [
+        "scenic",
+        "photography"
+      ],
+      "suitable_for": [
+        "couples",
+        "solo"
+      ],
+      "indoor_outdoor": "outdoor"
+    },
+    "scores": {
+      "heritage": 2,
+      "instagrammability": 5,
+      "popularity_index": 62,
+      "user_rating": 4.2,
+      "travel_priority": 6.2
+    },
+    "id": 23
+  },
+  {
+    "name": "Dr. Ambedkar Statue Park",
+    "category": "monument",
+    "sub_category": "statue park",
+    "description": "Park featuring giant statue of Dr. B.R. Ambedkar and marina views.",
+    "location": {
+      "latitude": 13.06,
+      "longitude": 80.28,
+      "area": "Marina",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "05:00",
+      "closing_time": "22:00",
+      "closed_on": []
+    },
+    "visit": {
+      "recommended_duration_minutes": 30,
+      "ideal_time_blocks": [
+        "evening"
+      ],
+      "weather_sensitive": true
+    },
+    "crowd": {
+      "average_level": 4,
+      "peak_hours": [
+        {
+          "start": "17:00",
+          "end": "20:00"
+        }
+      ],
+      "seasonal_peak_months": []
+    },
+    "pricing": {
+      "entry_fee": 0,
+      "ticket_required": false,
+      "average_wait_time_minutes": 0
+    },
+    "rules": {
+      "dress_code_required": false,
+      "security_check_time_minutes": 0
+    },
+    "experience": {
+      "tags": [
+        "monument",
+        "historical"
+      ],
+      "suitable_for": [
+        "family",
+        "solo"
+      ],
+      "indoor_outdoor": "outdoor"
+    },
+    "scores": {
+      "heritage": 3,
+      "instagrammability": 4,
+      "popularity_index": 60,
+      "user_rating": 4.1,
+      "travel_priority": 6
+    },
+    "id": 24
+  },
+  {
+    "name": "Annai Velankanni Church",
+    "category": "church",
+    "sub_category": "lady of health",
+    "description": "Popular church dedicated to Our Lady of Health, attracts devotees year-round.",
+    "location": {
+      "latitude": 13.03,
+      "longitude": 80.27,
+      "area": "Besant Nagar",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "05:30",
+      "closing_time": "21:00",
+      "closed_on": []
+    },
+    "visit": {
+      "recommended_duration_minutes": 45,
+      "ideal_time_blocks": [
+        "morning"
+      ],
+      "weather_sensitive": false
+    },
+    "crowd": {
+      "average_level": 4,
+      "peak_hours": [
+        {
+          "start": "06:00",
+          "end": "09:00"
+        },
+        {
+          "start": "18:00",
+          "end": "20:00"
+        }
+      ],
+      "seasonal_peak_months": [
+        "September"
+      ]
+    },
+    "pricing": {
+      "entry_fee": 0,
+      "ticket_required": false,
+      "average_wait_time_minutes": 15
+    },
+    "rules": {
+      "dress_code_required": true,
+      "security_check_time_minutes": 5
+    },
+    "experience": {
+      "tags": [
+        "spiritual",
+        "church"
+      ],
+      "suitable_for": [
+        "family"
+      ],
+      "indoor_outdoor": "both"
+    },
+    "scores": {
+      "heritage": 3,
+      "instagrammability": 3,
+      "popularity_index": 67,
+      "user_rating": 4.4,
+      "travel_priority": 6.7
+    },
+    "id": 25
+  },
+  {
+    "name": "Madras High Court",
+    "category": "architecture",
+    "sub_category": "colonial court",
+    "description": "Largest high court building in India with Indo-Saracenic architecture.",
+    "location": {
+      "latitude": 13.0844,
+      "longitude": 80.2711,
+      "area": "George Town",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "10:15",
+      "closing_time": "17:00",
+      "closed_on": [
+        "Saturday",
+        "Sunday"
+      ]
+    },
+    "visit": {
+      "recommended_duration_minutes": 30,
+      "ideal_time_blocks": [
+        "morning"
+      ],
+      "weather_sensitive": false
+    },
+    "crowd": {
+      "average_level": 3,
+      "peak_hours": [
+        {
+          "start": "10:30",
+          "end": "12:00"
+        }
+      ],
+      "seasonal_peak_months": []
+    },
+    "pricing": {
+      "entry_fee": 0,
+      "ticket_required": false,
+      "average_wait_time_minutes": 0
+    },
+    "rules": {
+      "dress_code_required": false,
+      "security_check_time_minutes": 10
+    },
+    "experience": {
+      "tags": [
+        "architecture",
+        "heritage"
+      ],
+      "suitable_for": [
+        "solo"
+      ],
+      "indoor_outdoor": "outdoor"
+    },
+    "scores": {
+      "heritage": 4,
+      "instagrammability": 5,
+      "popularity_index": 52,
+      "user_rating": 4.3,
+      "travel_priority": 5.2
+    },
+    "id": 26
+  },
+  {
+    "name": "Parrys Corner",
+    "category": "market",
+    "sub_category": "commercial district",
+    "description": "Historic commercial hub with wholesale markets, old buildings, and street vibe.",
+    "location": {
+      "latitude": 13.0889,
+      "longitude": 80.2856,
+      "area": "George Town",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "09:00",
+      "closing_time": "21:00",
+      "closed_on": []
+    },
+    "visit": {
+      "recommended_duration_minutes": 60,
+      "ideal_time_blocks": [
+        "morning"
+      ],
+      "weather_sensitive": true
+    },
+    "crowd": {
+      "average_level": 5,
+      "peak_hours": [
+        {
+          "start": "10:00",
+          "end": "14:00"
+        }
+      ],
+      "seasonal_peak_months": []
+    },
+    "pricing": {
+      "entry_fee": 0,
+      "ticket_required": false,
+      "average_wait_time_minutes": 0
+    },
+    "rules": {
+      "dress_code_required": false,
+      "security_check_time_minutes": 0
+    },
+    "experience": {
+      "tags": [
+        "market",
+        "shopping",
+        "historical"
+      ],
+      "suitable_for": [
+        "solo"
+      ],
+      "indoor_outdoor": "outdoor"
+    },
+    "scores": {
+      "heritage": 3,
+      "instagrammability": 4,
+      "popularity_index": 59,
+      "user_rating": 4,
+      "travel_priority": 5.9
+    },
+    "id": 27
+  },
+  {
+    "name": "Arignar Anna Zoological Park",
+    "category": "zoo",
+    "sub_category": "wildlife park",
+    "description": "Large zoo with animals in natural habitats, safari rides, located outside city.",
+    "location": {
+      "latitude": 12.8708,
+      "longitude": 80.1778,
+      "area": "Vandalur",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "09:00",
+      "closing_time": "17:00",
+      "closed_on": [
+        "Tuesday"
+      ]
+    },
+    "visit": {
+      "recommended_duration_minutes": 240,
+      "ideal_time_blocks": [
+        "morning"
+      ],
+      "weather_sensitive": true
+    },
+    "crowd": {
+      "average_level": 4,
+      "peak_hours": [
+        {
+          "start": "10:00",
+          "end": "14:00"
+        }
+      ],
+      "seasonal_peak_months": []
+    },
+    "pricing": {
+      "entry_fee": 50,
+      "ticket_required": true,
+      "average_wait_time_minutes": 20
+    },
+    "rules": {
+      "dress_code_required": false,
+      "security_check_time_minutes": 10
+    },
+    "experience": {
+      "tags": [
+        "zoo",
+        "wildlife",
+        "family-friendly"
+      ],
+      "suitable_for": [
+        "family",
+        "kids"
+      ],
+      "indoor_outdoor": "outdoor"
+    },
+    "scores": {
+      "heritage": 1,
+      "instagrammability": 4,
+      "popularity_index": 76,
+      "user_rating": 4.2,
+      "travel_priority": 7.6
+    },
+    "id": 28
+  },
+  {
+    "name": "DakshinaChitra",
+    "category": "museum",
+    "sub_category": "living museum",
+    "description": "Living museum showcasing South Indian heritage homes, crafts, and cultural shows.",
+    "location": {
+      "latitude": 12.8417,
+      "longitude": 80.2625,
+      "area": "Muttukadu",
+      "city": "Chennai"
+    },
+    "timings": {
+      "opening_time": "10:00",
+      "closing_time": "18:00",
+      "closed_on": [
+        "Monday"
+      ]
+    },
+    "visit": {
+      "recommended_duration_minutes": 180,
+      "ideal_time_blocks": [
+        "morning"
+      ],
+      "weather_sensitive": true
+    },
+    "crowd": {
+      "average_level": 3,
+      "peak_hours": [
+        {
+          "start": "11:00",
+          "end": "15:00"
+        }
+      ],
+      "seasonal_peak_months": []
+    },
+    "pricing": {
+      "entry_fee": 150,
+      "ticket_required": true,
+      "average_wait_time_minutes": 15
+    },
+    "rules": {
+      "dress_code_required": false,
+      "security_check_time_minutes": 5
+    },
+    "experience": {
+      "tags": [
+        "heritage",
+        "cultural",
+        "museum"
+      ],
+      "suitable_for": [
+        "family"
+      ],
+      "indoor_outdoor": "outdoor"
+    },
+    "scores": {
+      "heritage": 4,
+      "instagrammability": 5,
+      "popularity_index": 71,
+      "user_rating": 4.4,
+      "travel_priority": 7.1
+    },
+    "id": 29
+  }
+]
+
+this is what thecode gves
