@@ -23,10 +23,10 @@ export default function Sidebar() {
             <div className="h-16 flex items-center px-6 border-b border-zinc-200 dark:border-zinc-800">
                 <Link href="/" className="flex items-center gap-2">
                     <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-600 to-indigo-800 text-white flex items-center justify-center font-bold text-xl">
-                        E
+                        X
                     </div>
                     <span className="font-bold text-xl tracking-tight text-zinc-900 dark:text-zinc-50">
-                        EXPLORER
+                        XPLORER
                     </span>
                 </Link>
             </div>
@@ -39,8 +39,8 @@ export default function Sidebar() {
                             key={item.href}
                             href={item.href}
                             className={`flex items-center gap-3 px-3 py-2 rounded-lg font-medium transition-colors ${isActive
-                                    ? "bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
-                                    : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900"
+                                ? "bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
+                                : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900"
                                 }`}
                         >
                             <item.icon className="w-5 h-5" />
@@ -58,8 +58,8 @@ export default function Sidebar() {
                                 <Link
                                     href={`/chat?id=${session.convo_id}`}
                                     className={`flex-1 flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs transition-colors truncate ${pathname === "/chat" && new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '').get('id') === session.convo_id
-                                            ? "bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
-                                            : "text-zinc-500 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900"
+                                        ? "bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
+                                        : "text-zinc-500 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900"
                                         }`}
                                 >
                                     <MessageSquare className="w-3.5 h-3.5 shrink-0" />

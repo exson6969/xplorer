@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { chatService } from "../services/api";
+import { chatService, tripService } from "../services/api";
 
 /**
  * Helper: converts a backend message (MessageResponse) into an array of
@@ -30,6 +30,8 @@ const useChatStore = create((set, get) => ({
     currentSessionId: null,
     currentMessages: [],
     currentItinerary: null,
+    confirmedTrip: null,
+    routeData: null,
     isLoading: false,
     error: null,
 
@@ -144,11 +146,42 @@ const useChatStore = create((set, get) => ({
             await chatService.deleteChat(sessionId);
             set(state => ({
                 sessions: state.sessions.filter(s => s.convo_id !== sessionId),
-                ...(state.currentSessionId === sessionId ? { currentSessionId: null, currentMessages: [], currentItinerary: null } : {}),
+                ...(state.currentSessionId === sessionId ? { currentSessionId: null, currentMessages: [], currentItinerary: null, confirmedTrip: null, routeData: null } : {}),
             }));
         } catch (err) {
             set({ error: err.response?.data?.detail || err.message });
         }
+    },
+
+    confirmItinerary: async (placeNames, hotelName = null) => {
+        set({ isLoading: true });
+        try {
+            const resp = await tripService.planRoute(placeNames, hotelName);
+            set({
+                confirmedTrip: get().currentItinerary,
+                routeData: resp.data,
+                isLoading: false,
+            });
+        } catch (err) {
+            console.error("Route planning failed:", err);
+            // Still show the trip planner with whatever data we have
+            set({
+                confirmedTrip: get().currentItinerary,
+                routeData: {
+                    ordered_route: placeNames,
+                    legs: [],
+                    total_road_time_mins: null,
+                    places_detail: placeNames.map(n => ({ name: n })),
+                    hotels_detail: hotelName ? [{ name: hotelName }] : [],
+                    transport_options: [],
+                },
+                isLoading: false,
+            });
+        }
+    },
+
+    clearConfirmedTrip: () => {
+        set({ confirmedTrip: null, routeData: null });
     },
 }));
 

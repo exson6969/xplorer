@@ -249,7 +249,7 @@ function DayCard({ day, index }) {
 
 // ─── MAIN COMPONENT ───
 
-export default function ItineraryPanel({ itinerary }) {
+export default function ItineraryPanel({ itinerary, onConfirm }) {
     if (!itinerary) return null;
 
     const days = parseItinerary(itinerary);
@@ -314,8 +314,39 @@ export default function ItineraryPanel({ itinerary }) {
                     <DayCard key={i} day={day} index={i} />
                 ))}
 
+                {/* Confirm Button */}
+                {onConfirm && (
+                    <button
+                        onClick={() => {
+                            // Extract all place names from activities
+                            const placeNames = [];
+                            days.forEach(day => {
+                                day.activities.forEach(activity => {
+                                    const place = extractPlaceName(activity);
+                                    if (place && !placeNames.includes(place)) {
+                                        placeNames.push(place);
+                                    }
+                                });
+                            });
+                            // Try to find hotel name
+                            let hotelName = null;
+                            for (const day of days) {
+                                if (day.hotels) {
+                                    hotelName = typeof day.hotels === 'string' ? day.hotels : day.hotels.name;
+                                    break;
+                                }
+                            }
+                            onConfirm(placeNames, hotelName);
+                        }}
+                        className="w-full mt-6 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold py-3.5 rounded-2xl flex items-center justify-center gap-2 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-emerald-500/25"
+                    >
+                        <MapPin className="w-5 h-5" />
+                        Confirm & Plan Route
+                    </button>
+                )}
+
                 {/* Footer CTA */}
-                <div className="mt-6 p-4 rounded-2xl bg-gradient-to-br from-indigo-500/5 to-purple-500/5 border border-indigo-200/50 dark:border-indigo-500/10">
+                <div className="mt-4 p-4 rounded-2xl bg-gradient-to-br from-indigo-500/5 to-purple-500/5 border border-indigo-200/50 dark:border-indigo-500/10">
                     <p className="text-xs text-zinc-500 dark:text-zinc-400 text-center leading-relaxed">
                         💡 Click <strong>"Open in Maps"</strong> on any activity to get directions. Ask the AI to modify any part of your itinerary!
                     </p>

@@ -192,3 +192,31 @@ def get_all_my_itinerary_bookings(user: dict = Depends(get_current_user)):
         "hotels": get_hotel_bookings(uid),
         "transport": get_transport_bookings(uid)
     }
+
+# ─── 5. TRIP PLANNER (Route Optimization) ────────────────────────────────────
+
+from pydantic import BaseModel
+from services.neo4j_service import calculate_optimal_route
+
+class TripPlanRequest(BaseModel):
+    place_names: List[str]
+    hotel_name: str = None
+
+@router.post("/trip/plan")
+def plan_optimized_trip(
+    payload: TripPlanRequest,
+    user: dict = Depends(get_current_user)
+):
+    """
+    Given a list of place names from a confirmed itinerary,
+    compute the optimal visiting route using the Neo4j graph
+    and return full trip details (places, hotels, transport, route).
+    """
+    result = calculate_optimal_route(payload.place_names, payload.hotel_name)
+    return result
+
+@router.get("/maps/key")
+def get_maps_api_key(user: dict = Depends(get_current_user)):
+    """Returns the Google Maps API key for the frontend embed."""
+    import os
+    return {"key": os.getenv("GOOGLE_MAPS_API_KEY", "")}

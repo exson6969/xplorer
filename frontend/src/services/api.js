@@ -41,4 +41,10 @@ export const bookingService = {
     listAllBookings: () => api.get("/user/bookings/all"),
 };
 
+export const tripService = {
+    planRoute: (placeNames, hotelName = null) =>
+        api.post("/user/trip/plan", { place_names: placeNames, hotel_name: hotelName }),
+    getMapsKey: () => api.get("/user/maps/key"),
+};
+
 export default api;
