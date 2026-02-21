@@ -1,134 +1,69 @@
 import Link from "next/link";
+import { Twitter, Instagram, Github, MapPin } from "lucide-react";
 
 export default function Footer() {
     return (
-        <footer className="w-full px-6 md:px-12 lg:px-20 py-10 border-t border-slate-200 bg-bg-light">
-            <div className="max-w-6xl mx-auto">
-                {/* Top Row */}
-                <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-8">
-                    {/* Brand */}
-                    <div className="flex flex-col gap-3">
-                        <Link href="/" className="flex items-center gap-2">
-                            <div className="size-8 text-primary bg-primary/10 rounded-lg flex items-center justify-center">
-                                <span className="material-symbols-outlined text-[20px]">
-                                    explore
-                                </span>
+        <footer className="bg-zinc-50 border-t border-zinc-200 dark:bg-zinc-950 dark:border-zinc-800 pt-16 pb-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                    <div className="md:col-span-1">
+                        <Link href="/" className="flex items-center gap-2 mb-4">
+                            <div className="w-6 h-6 rounded bg-indigo-600 text-white flex items-center justify-center font-bold text-sm">
+                                E
                             </div>
-                            <span className="text-slate-900 text-lg font-bold tracking-tight">
-                                EXPLORER
-                            </span>
+                            <span className="font-bold text-lg text-zinc-900 dark:text-zinc-50">EXPLORER</span>
                         </Link>
-                        <p className="text-sm text-slate-500 max-w-xs">
-                            Your AI-powered journey through Chennai. Experience the soul of
-                            the city.
+                        <p className="text-zinc-500 dark:text-zinc-400 text-sm mb-6">
+                            Your intelligent companion for discovering the hidden gems and vibrant culture of Chennai.
                         </p>
+                        <div className="flex gap-4">
+                            <a href="#" className="text-zinc-400 hover:text-indigo-600 transition-colors">
+                                <Twitter className="w-5 h-5" />
+                            </a>
+                            <a href="#" className="text-zinc-400 hover:text-indigo-600 transition-colors">
+                                <Instagram className="w-5 h-5" />
+                            </a>
+                            <a href="#" className="text-zinc-400 hover:text-indigo-600 transition-colors">
+                                <Github className="w-5 h-5" />
+                            </a>
+                        </div>
                     </div>
 
-                    {/* Links */}
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-16 gap-y-3 text-sm">
-                        <div className="flex flex-col gap-2">
-                            <span className="font-bold text-slate-900 text-xs uppercase tracking-wider mb-1">
-                                Product
-                            </span>
-                            <Link
-                                href="/features"
-                                className="text-slate-500 hover:text-primary transition-colors"
-                            >
-                                Features
-                            </Link>
-                            <a
-                                href="#"
-                                className="text-slate-500 hover:text-primary transition-colors"
-                            >
-                                Pricing
-                            </a>
-                            <a
-                                href="#"
-                                className="text-slate-500 hover:text-primary transition-colors"
-                            >
-                                API
-                            </a>
-                        </div>
-                        <div className="flex flex-col gap-2">
-                            <span className="font-bold text-slate-900 text-xs uppercase tracking-wider mb-1">
-                                Company
-                            </span>
-                            <Link
-                                href="/about"
-                                className="text-slate-500 hover:text-primary transition-colors"
-                            >
-                                About
-                            </Link>
-                            <Link
-                                href="/stories"
-                                className="text-slate-500 hover:text-primary transition-colors"
-                            >
-                                Stories
-                            </Link>
-                            <a
-                                href="#"
-                                className="text-slate-500 hover:text-primary transition-colors"
-                            >
-                                Careers
-                            </a>
-                        </div>
-                        <div className="flex flex-col gap-2">
-                            <span className="font-bold text-slate-900 text-xs uppercase tracking-wider mb-1">
-                                Legal
-                            </span>
-                            <a
-                                href="#"
-                                className="text-slate-500 hover:text-primary transition-colors"
-                            >
-                                Privacy
-                            </a>
-                            <a
-                                href="#"
-                                className="text-slate-500 hover:text-primary transition-colors"
-                            >
-                                Terms
-                            </a>
-                            <a
-                                href="#"
-                                className="text-slate-500 hover:text-primary transition-colors"
-                            >
-                                Contact
-                            </a>
-                        </div>
+                    <div>
+                        <h4 className="font-semibold text-zinc-900 dark:text-zinc-50 mb-4">Product</h4>
+                        <ul className="space-y-3">
+                            <li><Link href="/features" className="text-sm text-zinc-500 hover:text-indigo-600 dark:text-zinc-400 transition-colors">Features</Link></li>
+                            <li><Link href="/stories" className="text-sm text-zinc-500 hover:text-indigo-600 dark:text-zinc-400 transition-colors">User Stories</Link></li>
+                            <li><Link href="#" className="text-sm text-zinc-500 hover:text-indigo-600 dark:text-zinc-400 transition-colors">Pricing</Link></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 className="font-semibold text-zinc-900 dark:text-zinc-50 mb-4">Resources</h4>
+                        <ul className="space-y-3">
+                            <li><a href="#" className="text-sm text-zinc-500 hover:text-indigo-600 dark:text-zinc-400 transition-colors">Help Center</a></li>
+                            <li><a href="#" className="text-sm text-zinc-500 hover:text-indigo-600 dark:text-zinc-400 transition-colors">City Guides</a></li>
+                            <li><a href="#" className="text-sm text-zinc-500 hover:text-indigo-600 dark:text-zinc-400 transition-colors">API Docs</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 className="font-semibold text-zinc-900 dark:text-zinc-50 mb-4">Company</h4>
+                        <ul className="space-y-3">
+                            <li><Link href="/about" className="text-sm text-zinc-500 hover:text-indigo-600 dark:text-zinc-400 transition-colors">About Us</Link></li>
+                            <li><a href="#" className="text-sm text-zinc-500 hover:text-indigo-600 dark:text-zinc-400 transition-colors">Contact</a></li>
+                            <li><a href="#" className="text-sm text-zinc-500 hover:text-indigo-600 dark:text-zinc-400 transition-colors">Privacy Policy</a></li>
+                        </ul>
                     </div>
                 </div>
 
-                {/* Bottom Row */}
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-slate-100">
-                    <p className="text-sm text-slate-400">
-                        © 2024 EXPLORER AI. All rights reserved.
+                <div className="pt-8 border-t border-zinc-200 dark:border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-4">
+                    <p className="text-sm text-zinc-500 dark:text-zinc-400 flex items-center gap-1">
+                        Made with <MapPin className="w-3 h-3 text-indigo-600" /> in Chennai
                     </p>
-                    <div className="flex gap-4">
-                        <a
-                            href="#"
-                            className="text-slate-400 hover:text-primary transition-colors"
-                        >
-                            <span className="material-symbols-outlined text-[20px]">
-                                public
-                            </span>
-                        </a>
-                        <a
-                            href="#"
-                            className="text-slate-400 hover:text-primary transition-colors"
-                        >
-                            <span className="material-symbols-outlined text-[20px]">
-                                share
-                            </span>
-                        </a>
-                        <a
-                            href="#"
-                            className="text-slate-400 hover:text-primary transition-colors"
-                        >
-                            <span className="material-symbols-outlined text-[20px]">
-                                mail
-                            </span>
-                        </a>
-                    </div>
+                    <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                        © {new Date().getFullYear()} EXPLORER. All rights reserved.
+                    </p>
                 </div>
             </div>
         </footer>
