@@ -6,17 +6,19 @@ Public endpoints (no token required):
   POST /auth/login     → Sign in, return Firebase ID token
 """
 
-from fastapi import APIRouter, HTTPException, status
-from models.user import (
+from fastapi import APIRouter, HTTPException, status, Depends
+from fastapi.security import OAuth2PasswordRequestForm
+from models.auth import (
     UserRegisterRequest,
     UserLoginRequest,
     AuthTokenResponse,
-    UserProfileResponse,
 )
+from models.user import UserProfileResponse
 from services.auth_service import (
     register_firebase_user,
     login_firebase_user,
     delete_firebase_user,
+    send_verification_email,
 )
 from services.firestore_service import create_user_profile, get_user_profile
 
@@ -28,7 +30,7 @@ router = APIRouter(prefix="/auth", tags=["Authentication"])
     response_model=UserProfileResponse,
     status_code=status.HTTP_201_CREATED,
     summary="Register a new user",
-    description="Creates a Firebase Auth user and stores profile data in Firestore.",
+    description="Creates a Firebase Auth user, saves profile, and sends a verification email.",
 )
 async def register(payload: UserRegisterRequest):
     """
@@ -58,6 +60,14 @@ async def register(payload: UserRegisterRequest):
 
     try:
         create_user_profile(uid, profile_data)
+        
+        # Authenticate briefly to send the verification email
+        firebase_response = await login_firebase_user(
+            email=payload.email,
+            password=payload.password,
+        )
+        await send_verification_email(firebase_response["idToken"])
+        
     except Exception as e:
         # Rollback: delete the Firebase Auth user we just created
         await delete_firebase_user(uid)
@@ -107,3 +117,41 @@ async def login(payload: UserLoginRequest):
         email=firebase_response["email"],
         full_name=full_name,
     )
+
+
+@router.post("/swagger_token", include_in_schema=False)
+async def swagger_login(form_data: OAuth2PasswordRequestForm = Depends()):
+    """
+    Hidden endpoint exclusively for the FastAPI Swagger UI to obtain a token.
+    Swagger sends data as form-urlencoded, not JSON.
+    """
+    firebase_response = await login_firebase_user(
+        email=form_data.username,
+        password=form_data.password,
+    )
+    
+    return {
+        "access_token": firebase_response["idToken"],
+        "token_type": "bearer"
+    }
+
+@router.post(
+    "/resend-verification",
+    summary="Resend verification email",
+    description="Resends the verification email to the user.",
+)
+async def resend_verification(payload: UserLoginRequest):
+    """
+    1. Authenticate via Firebase REST API (returns idToken)
+    2. Send verification email using idToken
+    """
+    # Step 1: Sign in with Firebase REST API to get idToken
+    firebase_response = await login_firebase_user(
+        email=payload.email,
+        password=payload.password,
+    )
+
+    # Step 2: Send verification email
+    await send_verification_email(firebase_response["idToken"])
+    
+    return {"message": "Verification email sent successfully."}

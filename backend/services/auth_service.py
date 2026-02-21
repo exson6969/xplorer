@@ -84,6 +84,21 @@ async def login_firebase_user(email: str, password: str) -> dict:
 
     return response.json()
 
+async def send_verification_email(id_token: str) -> None:
+    """
+    Sends a verification email to the user using Firebase REST API.
+    """
+    url = f"https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key={FIREBASE_WEB_API_KEY}"
+    payload = {
+        "requestType": "VERIFY_EMAIL",
+        "idToken": id_token
+    }
+    async with httpx.AsyncClient() as client:
+        response = await client.post(url, json=payload)
+    
+    if response.status_code != 200:
+        print(f"Failed to send verification email: {response.text}")
+
 
 async def delete_firebase_user(uid: str) -> None:
     """

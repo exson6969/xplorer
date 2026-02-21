@@ -21,6 +21,7 @@ Firestore structure:
 """
 
 from datetime import datetime, timezone
+from typing import Union
 from fastapi import HTTPException, status
 from config.firebase import get_firestore
 
@@ -148,7 +149,7 @@ def create_conversation(uid: str, conversation_title: str = None) -> dict:
         )
 
 
-def add_message(uid: str, convo_id: str, user_input: str, ai_generated_output: str) -> dict:
+def add_message(uid: str, convo_id: str, user_input: str, ai_generated_output: Union[dict, str]) -> dict:
     """
     Add a message (user_input + ai_generated_output) to an existing conversation.
     Also updates the conversation's updated_at and increments message_count.

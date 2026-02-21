@@ -12,22 +12,29 @@ Usage in any route:
 """
 
 from fastapi import Depends, HTTPException, status
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from fastapi.security import OAuth2PasswordBearer
 from services.auth_service import verify_id_token
 
 # Tells FastAPI to expect: Authorization: Bearer <token>
-bearer_scheme = HTTPBearer()
+# And points the Swagger UI Authorize button to our hidden token endpoint
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/swagger_token")
 
 
-def get_current_user(
-    credentials: HTTPAuthorizationCredentials = Depends(bearer_scheme),
-) -> dict:
+def get_current_user(token: str = Depends(oauth2_scheme)) -> dict:
     """
     Extracts the Bearer token from the Authorization header,
-    verifies it with Firebase Admin SDK, and returns decoded claims.
+    verifies it with Firebase Admin SDK, and checks for email verification.
 
-    Raises 401 if token is missing, expired, or invalid.
+    Raises 401 if token is missing or invalid.
+    Raises 403 if email is not verified.
     """
-    token = credentials.credentials
     decoded_token = verify_id_token(token)
+    
+    # Enforce email verification
+    if not decoded_token.get("email_verified", False):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Email is not verified. Please verify your email address to access this resource.",
+        )
+        
     return decoded_token  # Contains: uid, email, name, etc.

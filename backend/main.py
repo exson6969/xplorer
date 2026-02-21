@@ -24,10 +24,9 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="Xplorer Auth API",
+    title="Xplorer API",
     description=(
         "Authentication and user data API for Xplorer.\n\n"
-        "Uses Firebase Authentication for identity and Firestore for user profiles + chat history."
     ),
     version="1.0.0",
     lifespan=lifespan,
