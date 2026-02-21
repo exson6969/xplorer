@@ -5,7 +5,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain.schema import SystemMessage, HumanMessage, AIMessage
 from langchain.tools import tool
-from services.neo4j_service import query_graph # You will create this
+from services.neo4j_service import query_graph
 from services.firestore_service import get_user_profile
 
 # Initialize Gemini
