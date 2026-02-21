@@ -74,7 +74,8 @@ async def start_new_travel_consultation(
     # Process the first message
     ai_response = await agent.process_chat(
         user_input=payload.user_input,
-        history={"messages": []} # Empty history for a new chat
+        history={"messages": []}, # Empty history for a new chat
+        submitted_data=payload.submitted_data
     )
     
     # Save the turn to Firestore
@@ -82,7 +83,8 @@ async def start_new_travel_consultation(
         uid=uid,
         convo_id=convo_id,
         user_input=payload.user_input,
-        ai_generated_output=ai_response # Contains UI elements/itinerary data
+        ai_generated_output=ai_response, # Contains UI elements/itinerary data
+        submitted_data=payload.submitted_data
     )
     
     return ConversationStartResponse(
@@ -116,7 +118,8 @@ async def send_message_to_agent(
     # 3. Generate Intelligent Response (LangChain + Gemini + Neo4j)
     ai_response = await agent.process_chat(
         user_input=payload.user_input,
-        history=history
+        history=history,
+        submitted_data=payload.submitted_data
     )
     
     # 4. Save the turn to Firestore
@@ -124,7 +127,8 @@ async def send_message_to_agent(
         uid=uid,
         convo_id=session_id,
         user_input=payload.user_input,
-        ai_generated_output=ai_response # Contains text or structured itinerary
+        ai_generated_output=ai_response, # Contains text or structured itinerary
+        submitted_data=payload.submitted_data
     )
     
     return MessageResponse(**saved_msg)

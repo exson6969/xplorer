@@ -6,7 +6,7 @@ class UserProfileResponse(BaseModel):
     full_name: str
     email: str
     country: str
-    travel_style: List[str]
-    interests: List[str]
-    budget: str
+    travel_style: Optional[List[str]] = []
+    interests: Optional[List[str]] = []
+    budget: Optional[str] = None
     created_at: Optional[str] = None

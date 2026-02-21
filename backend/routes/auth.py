@@ -53,9 +53,6 @@ async def register(payload: UserRegisterRequest):
         "full_name": payload.full_name,
         "email": payload.email,
         "country": payload.country,
-        "travel_style": payload.travel_style,
-        "interests": payload.interests,
-        "budget": payload.budget,
     }
 
     try:

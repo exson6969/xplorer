@@ -3,7 +3,7 @@ from typing import List, Optional, Union, Dict, Any
 
 class UIElement(BaseModel):
     """Represents an interactive element for Generative UI."""
-    type: str = Field(..., description="The type of input: 'text', 'date', 'select', 'button'")
+    type: str = Field(..., description="The type of input: 'text', 'date', 'select', 'number', 'button'")
     label: str = Field(..., description="The label for the input field")
     key: str = Field(..., description="The state key to map this input to on the frontend")
     suggested_values: Optional[List[str]] = Field(default=None, description="Suggested quick-pick values")
@@ -19,7 +19,8 @@ class StartChatRequest(BaseModel):
     Called when the user begins a new conversation thread with their first message.
     The backend will auto-generate the title.
     """
-    user_input: str = Field(..., description="The first message from the user to start the chat.")
+    user_input: Optional[str] = Field(default=None, description="The first message from the user to start the chat.")
+    submitted_data: Optional[Dict[str, Any]] = Field(default=None, description="Data submitted from Generative UI fields.")
 
 class ConversationStartResponse(BaseModel):
     """Returned after creating a new conversation and processing the first message."""
@@ -33,6 +34,7 @@ class MessageRequest(BaseModel):
     A single chat turn — what the user said and what the AI responded.
     """
     user_input: str = Field(..., description="What the user typed or asked")
+    submitted_data: Optional[Dict[str, Any]] = Field(default=None, description="Data submitted from Generative UI fields.")
     ai_generated_output: Union[dict, list, str] = Field(
         ...,
         description="AI response — can be plain text OR a structured JSON object/array"
@@ -41,7 +43,8 @@ class MessageRequest(BaseModel):
 class MessageResponse(BaseModel):
     """Represents one message turn stored in Firestore."""
     message_id: str
-    user_input: str
+    user_input: Optional[str] = None
+    submitted_data: Optional[Dict[str, Any]] = None
     ai_generated_output: Union[Dict[str, Any], str]  # native object or plain text
     timestamp: str   # ISO datetime string
     date: str        # YYYY-MM-DD for easy filtering/display
@@ -64,7 +67,8 @@ class ConversationListItem(BaseModel):
 
 class ChatRequest(BaseModel):
     """The only thing the frontend needs to send"""
-    user_input: str
+    user_input: Optional[str] = Field(default=None, description="The text message from the user.")
+    submitted_data: Optional[Dict[str, Any]] = Field(default=None, description="Data submitted from Generative UI fields.")
 
 class ChatResponse(BaseModel):
     """The structured response back to the user"""

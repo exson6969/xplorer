@@ -39,15 +39,31 @@ class XplorerGraphBuilder:
         MERGE (place:Place {id: p.id})
         SET place.name = p.name,
             place.category = p.category,
+            place.sub_category = p.sub_category,
             place.description = p.description,
             place.lat = toFloat(p.location.latitude),
             place.lon = toFloat(p.location.longitude),
             place.area = p.location.area,
+            place.city = p.location.city,
             place.open_time = p.timings.opening_time,
             place.close_time = p.timings.closing_time,
             place.duration = p.visit.recommended_duration_minutes,
             place.ideal_blocks = p.visit.ideal_time_blocks,
-            place.rating = p.scores.user_rating
+            place.weather_sensitive = p.visit.weather_sensitive,
+            place.crowd_level = p.crowd.average_level,
+            place.seasonal_peak_months = p.crowd.seasonal_peak_months,
+            place.entry_fee = p.pricing.entry_fee,
+            place.ticket_required = p.pricing.ticket_required,
+            place.wait_time = p.pricing.average_wait_time_minutes,
+            place.dress_code_required = p.rules.dress_code_required,
+            place.experience_tags = p.experience.tags,
+            place.suitable_for = p.experience.suitable_for,
+            place.indoor_outdoor = p.experience.indoor_outdoor,
+            place.heritage_score = p.scores.heritage,
+            place.instagrammability_score = p.scores.instagrammability,
+            place.popularity_index = p.scores.popularity_index,
+            place.rating = p.scores.user_rating,
+            place.travel_priority = p.scores.travel_priority
         
         MERGE (city:City {name: 'Chennai'})
         MERGE (place)-[:LOCATED_IN]->(city)
@@ -68,20 +84,32 @@ class XplorerGraphBuilder:
                 "lat": float(h["latitude"]),
                 "lon": float(h["longitude"]), 
                 "area": area, 
+                "description": h.get("description", ""),
                 "rooms": h.get("rooms", [])
             })
         
         cypher = """
         UNWIND $data AS h
         MERGE (hotel:Hotel {id: h.id})
-        SET hotel.name = h.name, hotel.lat = h.lat, hotel.lon = h.lon, hotel.area = h.area
+        SET hotel.name = h.name, 
+            hotel.lat = h.lat, 
+            hotel.lon = h.lon, 
+            hotel.area = h.area,
+            hotel.description = h.description
+            
         MERGE (city:City {name: 'Chennai'})
         MERGE (hotel)-[:LOCATED_IN]->(city)
         
         WITH hotel, h.rooms as rooms
         UNWIND rooms as r
         MERGE (room:Room {id: r.room_id})
-        SET room.type = r.room_type, room.price = r.price_per_night
+        SET room.type = r.room_type, 
+            room.price = r.price_per_night,
+            room.bed_type = r.bed_type,
+            room.max_guests = r.max_guests,
+            room.total_rooms = r.total_rooms,
+            room.available_rooms = r.available_rooms,
+            room.amenities = r.amenities
         MERGE (hotel)-[:HAS_ROOM]->(room)
         """
         self.query(cypher, {"data": processed_hotels})
@@ -100,7 +128,10 @@ class XplorerGraphBuilder:
         UNWIND $data AS a
         MERGE (agency:Agency {id: a.agency_id})
         SET agency.name = a.agency_name, 
+            agency.contact_number = a.contact_number,
             agency.rating = a.overall_rating, 
+            agency.description = a.agency_description,
+            agency.detailed_review = a.detailed_review,
             agency.map_url = a.map_url_str
         
         MERGE (city:City {name: 'Chennai'})
@@ -110,14 +141,21 @@ class XplorerGraphBuilder:
         FOREACH (d IN a.drivers |
             MERGE (dr:Driver {id: d.driver_id}) 
             SET dr.status = d.availability_status,
+                dr.review_text = d.driver_review.review_text,
                 dr.rating = d.driver_review.rating 
             MERGE (agency)-[:EMPLOYS]->(dr)
         )
         FOREACH (v IN a.fleet |
             MERGE (veh:Vehicle {id: v.vehicle_id}) 
-            SET veh.model = v.model,
+            SET veh.category = v.vehicle_category,
                 veh.type = v.vehicle_type,
-                veh.price = v.day_package.fixed_price
+                veh.model = v.model,
+                veh.passenger_seats = v.seating_capacity.passenger_seats,
+                veh.price = v.day_package.fixed_price,
+                veh.included_km = v.day_package.included_km,
+                veh.extra_km_charge = v.day_package.extra_km_charge,
+                veh.status = v.availability_status,
+                veh.assigned_driver_id = v.assigned_driver_id
             MERGE (agency)-[:OWNS_VEHICLE]->(veh)
         )
         """
