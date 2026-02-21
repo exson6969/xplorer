@@ -22,7 +22,7 @@ def search_travel_graph(query_type: str, params: dict):
     """
     Queries the Neo4j Graph. 
     query_type can be: 'find_hotels', 'find_places', 'find_cabs', 'calculate_itinerary'
-    params: dictionary of filters (e.g., {"category": "beach", "budget": "luxury"})
+    params: dictionary of filters (e.g., {"max_price": 5000, "amenity": "Pool View", "vehicle_type": "SUV", "interests": ["beach"]})
     """
     return query_graph(query_type, params)
 
@@ -58,25 +58,28 @@ class XplorerAI:
         - Country: {self.user_profile.get('country')}
 
         YOUR GOALS & RULES:
-        1. Understand the user's travel intent.
+        1. UNDERSTAND USER INTENT: The user may want to generate a full travel itinerary, ONLY book a hotel, ONLY book a cab, or any combination of these. Address their specific intent.
         2. DO NOT make up or assume any missing information.
-        3. You MUST ask for the exact travel dates (using `start_date` and `end_date` keys), number of travelers (e.g., solo, couple, family), budget, and specific interests if they are not provided by the user. 
-        4. When asking for dates, use the `date` type in `ui_elements` for both `start_date` and `end_date`. Alternatively, ask for `start_date` and the duration in days, and calculate the end date.
-        5. If ANY required data is missing to build an itinerary, you MUST ONLY ask for that specific missing data using the `ui_elements` array. DO NOT provide an itinerary until all required info is gathered.
-        6. WEATHER CHECK: If weather data is provided in the context, evaluate it. If the weather is highly unfavorable (e.g., heavy precipitation, extreme heat over 40°C), you MUST warn the user and ask if they still want to proceed BEFORE generating the itinerary.
-        7. Once all required info is gathered and weather is deemed acceptable (or the user confirms they want to proceed despite bad weather), provide the itinerary using the Travel Graph to suggest REAL places, hotels, and cabs. Format itineraries logically (Morning -> Afternoon -> Evening).
+        3. DATA GATHERING: Depending on the intent, ask for the required info. 
+           - For itineraries: ask for exact travel dates (`start_date`, `end_date`), number of travelers, and interests and any other data whcih will help to give them more tuned repsonse.
+           - For hotels: ask for dates, number of guests, and any specific preferences (e.g., price limits, specific amenities like 'Pool View').
+           - For cabs: ask for dates, number of passengers, and preferred vehicle type (e.g., SUV, Sedan).
+        4. USE TOOLS: ALWAYS use the `search_travel_graph` tool to find REAL hotels, cabs, or places to suggest. If a user asks for "hotels with a pool under 5000", map that to the tool's parameters (`max_price`: 5000, `amenity`: "Pool View").
+        5. FOLLOW-UP FILTERING: If you previously suggested hotels/cabs and the user replies with more filters (e.g., "Any cheaper ones?"), use the tool again with updated parameters (e.g., lower `max_price`).
+        6. WEATHER CHECK: If weather data is provided in the context for an itinerary, evaluate it. If highly unfavorable (e.g., heavy precipitation, extreme heat), warn the user before proceeding.
+        7. Once you have the data from your tool, present the suggestions clearly.
         
         GENERATIVE UI DIRECTIVE:
-        If you need more information from the user to build an itinerary, ask for it using structured UI elements instead of just plain text.
+        If you need more information from the user, ask for it using structured UI elements.
         
         You MUST respond ONLY with a valid JSON object matching this schema:
         {{
-            "text": "Your conversational reply here",
+            "text": "Your conversational reply here (including any tool results/suggestions)",
             "ui_elements": [
                 {{
                     "type": "text|date|select|number",
                     "label": "Display label for the input",
-                    "key": "The variable name (e.g., 'start_date', 'end_date')",
+                    "key": "The variable name (e.g., 'start_date', 'max_price', 'amenity')",
                     "suggested_values": ["Optional", "Array", "Of", "Suggestions"]
                 }}
             ],
@@ -129,9 +132,23 @@ class XplorerAI:
 
         messages.append(HumanMessage(content=current_human_text))
 
+        # Bind tools to the LLM
+        llm_with_tools = llm.bind_tools([search_travel_graph])
+
         # 3. Call LLM asynchronously
-        response = await llm.ainvoke(messages)
+        response = await llm_with_tools.ainvoke(messages)
         
+        # If the LLM decided to use a tool, handle it
+        if response.tool_calls:
+            messages.append(response) # Add the AI's tool call request to history
+            for tool_call in response.tool_calls:
+                if tool_call["name"] == "search_travel_graph":
+                    tool_result = search_travel_graph.invoke(tool_call["args"])
+                    messages.append(AIMessage(content=f"[SYSTEM: Tool returned: {json.dumps(tool_result)}]"))
+            
+            # Call the LLM again with the tool results so it can generate the final JSON response
+            response = await llm_with_tools.ainvoke(messages)
+
         # 4. Attempt to parse JSON. If the LLM didn't return valid JSON (e.g., markdown block), strip it.
         raw_text = response.content.strip()
         if raw_text.startswith("```json"):
