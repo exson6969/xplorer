@@ -67,6 +67,12 @@ class XplorerGraphBuilder:
         
         MERGE (city:City {name: 'Chennai'})
         MERGE (place)-[:LOCATED_IN]->(city)
+        
+        WITH place, p
+        FOREACH (rev IN coalesce(p.reviews, []) |
+            MERGE (r:Review {text: rev.review_text, date: rev.date_time, rating: rev.rating})
+            MERGE (place)-[:HAS_REVIEW]->(r)
+        )
         """
         self.query(cypher, {"data": data})
 
@@ -85,7 +91,8 @@ class XplorerGraphBuilder:
                 "lon": float(h["longitude"]), 
                 "area": area, 
                 "description": h.get("description", ""),
-                "rooms": h.get("rooms", [])
+                "rooms": h.get("rooms", []),
+                "reviews": h.get("reviews", [])
             })
         
         cypher = """
@@ -99,6 +106,12 @@ class XplorerGraphBuilder:
             
         MERGE (city:City {name: 'Chennai'})
         MERGE (hotel)-[:LOCATED_IN]->(city)
+        
+        WITH hotel, h
+        FOREACH (rev IN coalesce(h.reviews, []) |
+            MERGE (r:Review {text: rev.review_text, date: rev.date_time, rating: rev.rating})
+            MERGE (hotel)-[:HAS_REVIEW]->(r)
+        )
         
         WITH hotel, h.rooms as rooms
         UNWIND rooms as r
@@ -157,6 +170,10 @@ class XplorerGraphBuilder:
                 veh.status = v.availability_status,
                 veh.assigned_driver_id = v.assigned_driver_id
             MERGE (agency)-[:OWNS_VEHICLE]->(veh)
+        )
+        FOREACH (rev IN coalesce(a.reviews, []) |
+            MERGE (r:Review {text: rev.review_text, date: rev.date_time, rating: rev.rating})
+            MERGE (agency)-[:HAS_REVIEW]->(r)
         )
         """
         self.query(cypher, {"data": processed})

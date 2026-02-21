@@ -45,7 +45,7 @@ def get_my_profile(user: dict = Depends(get_current_user)):
 @router.put("/profile")
 def update_my_preferences(updates: Dict[str, Any], user: dict = Depends(get_current_user)):
     """Update travel style, interests, or budget preferences."""
-    ALLOWED = {"full_name", "country", "travel_style", "interests", "budget"}
+    ALLOWED = {"full_name", "country", "travel_style", "interests"}
     filtered = {k: v for k, v in updates.items() if k in ALLOWED}
     update_user_profile(user["uid"], filtered)
     return {"message": "Preferences updated."}
@@ -74,8 +74,7 @@ async def start_new_travel_consultation(
     # Process the first message
     ai_response = await agent.process_chat(
         user_input=payload.user_input,
-        history={"messages": []}, # Empty history for a new chat
-        submitted_data=payload.submitted_data
+        history={"messages": []} # Empty history for a new chat
     )
     
     # Save the turn to Firestore
@@ -83,8 +82,7 @@ async def start_new_travel_consultation(
         uid=uid,
         convo_id=convo_id,
         user_input=payload.user_input,
-        ai_generated_output=ai_response, # Contains UI elements/itinerary data
-        submitted_data=payload.submitted_data
+        ai_generated_output=ai_response # Contains text/itinerary data
     )
     
     return ConversationStartResponse(
@@ -102,7 +100,7 @@ async def send_message_to_agent(
 ):
     """
     The main AI logic hub:
-    1. Retrieves user preferences (Interests, Budget).
+    1. Retrieves user preferences (Interests).
     2. Pulls chat history.
     3. Uses LangChain to query Neo4j (Graph) and Gemini (LLM).
     4. Handles missing info by asking the user questions.
@@ -118,8 +116,7 @@ async def send_message_to_agent(
     # 3. Generate Intelligent Response (LangChain + Gemini + Neo4j)
     ai_response = await agent.process_chat(
         user_input=payload.user_input,
-        history=history,
-        submitted_data=payload.submitted_data
+        history=history
     )
     
     # 4. Save the turn to Firestore
@@ -127,8 +124,7 @@ async def send_message_to_agent(
         uid=uid,
         convo_id=session_id,
         user_input=payload.user_input,
-        ai_generated_output=ai_response, # Contains text or structured itinerary
-        submitted_data=payload.submitted_data
+        ai_generated_output=ai_response # Contains text or structured itinerary
     )
     
     return MessageResponse(**saved_msg)

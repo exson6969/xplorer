@@ -8,5 +8,4 @@ class UserProfileResponse(BaseModel):
     country: str
     travel_style: Optional[List[str]] = []
     interests: Optional[List[str]] = []
-    budget: Optional[str] = None
     created_at: Optional[str] = None
