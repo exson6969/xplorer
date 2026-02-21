@@ -10,7 +10,7 @@ from services.firestore_service import get_user_profile
 
 # Initialize Gemini
 llm = ChatGoogleGenerativeAI(
-    model="gemini-3-flash-preview",
+    model="gemini-2.5-flash-lite",
     google_api_key=os.getenv("GOOGLE_API_KEY"),
     temperature=0.3
 )

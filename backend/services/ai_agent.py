@@ -9,7 +9,7 @@ load_dotenv()
 
 class TravelPlannerAI:
     def __init__(self):
-        self.llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", google_api_key=os.getenv("GOOGLE_API_KEY"))
+        self.llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash-lite", google_api_key=os.getenv("GOOGLE_API_KEY"))
         self.embeddings = GoogleGenerativeAIEmbeddings(model="models/text-embedding-004")
         self.graph = Neo4jGraph(
             url=os.getenv("NEO4J_URI"),
