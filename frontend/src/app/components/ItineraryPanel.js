@@ -381,38 +381,32 @@ export default function ItineraryPanel({ itinerary, onConfirm }) {
                 {onConfirm && (
                     <button
                         onClick={() => {
-                            // Extract all place names from activities
-                            let placeNames = [];
-                            days.forEach(day => {
+                            // Group place names by day
+                            const daysData = days.map(day => {
+                                const namesInDay = [];
                                 day.activities.forEach(activity => {
                                     const place = extractPlaceName(activity);
-                                    if (place && !placeNames.includes(place)) {
-                                        placeNames.push(place);
+                                    if (place && !namesInDay.includes(place)) {
+                                        namesInDay.push(place);
                                     }
                                 });
-                            });
-
-                            // Critical Fallback: if no names extracted, use the first 5 words of each activity
-                            if (placeNames.length === 0) {
-                                days.forEach(day => {
-                                    day.activities.forEach(activity => {
-                                        const fallback = activity.split(" ").slice(0, 5).join(" ");
-                                        if (fallback && !placeNames.includes(fallback)) {
-                                            placeNames.push(fallback);
-                                        }
-                                    });
-                                });
-                            }
+                                // Fallback for empty day
+                                if (namesInDay.length === 0 && day.activities.length > 0) {
+                                    namesInDay.push(day.activities[0].split(" ").slice(0, 5).join(" "));
+                                }
+                                return namesInDay;
+                            }).filter(d => d.length > 0);
 
                             // Try to find hotel name
                             let hotelName = null;
                             for (const day of days) {
                                 if (day.hotels) {
-                                    hotelName = typeof day.hotels === 'string' ? day.hotels : day.hotels.name;
+                                    hotelName = typeof day.hotels === 'string' ? day.hotels : (day.hotels.name || JSON.stringify(day.hotels));
                                     break;
                                 }
                             }
-                            onConfirm(placeNames, hotelName);
+                            
+                            onConfirm(daysData, hotelName, true);
                         }}
                         className="w-full mt-6 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold py-3.5 rounded-2xl flex items-center justify-center gap-2 transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-emerald-500/25"
                     >

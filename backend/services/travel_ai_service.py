@@ -3,10 +3,11 @@ import json
 import httpx
 from datetime import datetime
 from dotenv import load_dotenv
+import asyncio
 
 # Load environment variables
 _BACKEND_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-load_dotenv(dotenv_path=os.path.join(_BACKEND_DIR, ".env"), override=True)
+load_dotenv(dotenv_path=os.path.join(_BACKEND_DIR, ".env"))
 
 from google import genai
 from google.genai import types
@@ -17,7 +18,7 @@ from services.neo4j_service import query_graph
 from services.firestore_service import get_user_profile
 
 # Initialize Gemini
-MODEL = "gemini-3.1-pro-preview"
+MODEL = "gemini-2.5-flash"
 client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
 
 # ─── TOOLS FOR THE AI ───
@@ -119,11 +120,37 @@ class XplorerAI:
         5. Response: Provide the final plan or ask for missing info.
 
         RESPONSE FORMAT (JSON):
-        You MUST respond ONLY with a valid JSON object:
-        {{
-            "text": "Your natural speech response.",
-            "itinerary": null // or a structured object/list when the final plan is ready.
-        }}
+        You MUST respond ONLY with a valid JSON object.
+        If generating a multi-day itinerary, structure the `itinerary` key as an ARRAY of DAY OBJECTS. Each day object must have:
+        - `dayNumber`: (int)
+        - `theme`: (str, e.g., "Cultural Exploration")
+        - `activities`: (List[str], e.g., ["Morning: Visit Fort St. George", "Afternoon: Explore Government Museum"])
+        - `hotels`: (Optional[str], name of hotel or null)
+        - `transport`: (Optional[str], type of transport or null)
+        
+        Example for itinerary key:
+        "itinerary": [
+            {{
+                "dayNumber": 1,
+                "theme": "Historical Chennai",
+                "activities": [
+                    "Morning: Visit Fort St. George",
+                    "Afternoon: Explore Government Museum"
+                ],
+                "hotels": "The Leela Palace",
+                "transport": "Cab"
+            }},
+            {{
+                "dayNumber": 2,
+                "theme": "Beaches and Temples",
+                "activities": [
+                    "Morning: Sunrise at Marina Beach",
+                    "Afternoon: Visit Kapaleeshwarar Temple"
+                ],
+                "hotels": null,
+                "transport": "Auto-rickshaw"
+            }}
+        ]
         """
 
         # Build conversation contents
@@ -196,6 +223,9 @@ class XplorerAI:
                 role="user",
                 parts=tool_response_parts
             ))
+            
+            # Add a delay to prevent hitting rate limits
+            await asyncio.sleep(1) 
 
             # Get updated response
             response = await client.aio.models.generate_content(

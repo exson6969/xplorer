@@ -179,10 +179,14 @@ const useChatStore = create((set, get) => ({
         }
     },
 
-    confirmItinerary: async (placeNames, hotelName = null) => {
+    confirmItinerary: async (data, hotelName = null, isMultiday = false) => {
         set({ isLoading: true });
         try {
-            const resp = await tripService.planRoute(placeNames, hotelName);
+            const payload = { hotel_name: hotelName };
+            if (isMultiday) payload.days = data;
+            else payload.place_names = data;
+
+            const resp = await tripService.planRoute(payload);
             set({
                 confirmedTrip: get().currentItinerary,
                 routeData: resp.data,
@@ -190,15 +194,23 @@ const useChatStore = create((set, get) => ({
             });
         } catch (err) {
             console.error("Route planning failed:", err);
-            // Still show the trip planner with whatever data we have
+            // Fallback
+            const flatNames = isMultiday ? data.flat() : data;
             set({
                 confirmedTrip: get().currentItinerary,
                 routeData: {
-                    ordered_route: placeNames,
-                    legs: [],
-                    total_road_time_mins: null,
-                    places_detail: placeNames.map(n => ({ name: n })),
-                    hotels_detail: hotelName ? [{ name: hotelName }] : [],
+                    days: isMultiday ? data.map((d, i) => ({
+                        day_number: i + 1,
+                        route: d,
+                        legs: d.map((p, j) => ({ from: d[j], to: d[j+1] || d[0], road_time_mins: 30 }))
+                    })) : [{
+                        day_number: 1,
+                        route: data,
+                        legs: data.map((p, i) => ({ from: data[i], to: data[i+1] || data[0], road_time_mins: 30 }))
+                    }],
+                    total_road_time_mins: flatNames.length * 30,
+                    places_detail: flatNames.map(n => ({ name: n, lat: 13.0827, lng: 80.2707 })),
+                    hotels_detail: hotelName ? [{ name: hotelName, lat: 13.0827, lng: 80.2707 }] : [],
                     transport_options: [],
                 },
                 isLoading: false,

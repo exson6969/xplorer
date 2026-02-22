@@ -46,8 +46,8 @@ export const bookingService = {
 };
 
 export const tripService = {
-    planRoute: (placeNames, hotelName = null) =>
-        api.post("/user/trip/plan", { place_names: placeNames, hotel_name: hotelName }),
+    planRoute: (data) =>
+        api.post("/user/trip/plan", data),
     getMapsKey: () => api.get("/user/maps/key"),
 };
 

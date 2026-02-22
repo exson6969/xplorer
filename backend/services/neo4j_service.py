@@ -109,89 +109,87 @@ def query_graph(query_type, params):
         return {"error": f"Database temporarily unavailable. The AI will use its own knowledge instead. ({type(e).__name__})"}
 
 
-def calculate_optimal_route(place_names: list, hotel_name: str = None):
+def calculate_optimal_route(input_data: list, hotel_name: str = None, is_multiday: bool = False):
     """
-    Given a list of place names from a confirmed itinerary,
-    query the Neo4j graph for CONNECTED_TO edges with road_time_mins
-    and compute a greedy nearest-neighbor loop (TSP-lite).
+    Optimizes travel routes. 
+    If is_multiday is True, input_data is List[List[str]] (places per day).
+    Otherwise, it's a flat List[str].
     """
     try:
-        # Normalize inputs
-        place_names = [p.strip() for p in place_names if p and p.strip()]
-        lower_names = [p.lower() for p in place_names]
+        # 1. Normalize Structure
+        days_list = input_data if is_multiday else [input_data]
+        hotel_name = hotel_name.strip() if hotel_name else None
         
-        if hotel_name: 
-            hotel_name = hotel_name.strip()
-            lower_hotel = hotel_name.lower()
-        else:
-            lower_hotel = None
+        all_unique_names = set()
+        if hotel_name: all_unique_names.add(hotel_name)
+        for day in days_list:
+            for p in day: 
+                if p: all_unique_names.add(p.strip())
+        
+        lower_names = [n.lower() for n in all_unique_names]
 
         with driver.session() as session:
-            # 1. Get all road times between places (Case-Insensitive)
+            # 2. Pre-fetch All Road Times (Case-Insensitive)
             edges_result = session.run("""
-                MATCH (p1:Place)-[r:CONNECTED_TO]-(p2:Place)
-                WHERE toLower(p1.name) IN $names AND toLower(p2.name) IN $names
-                RETURN p1.name AS from_place, p2.name AS to_place, r.road_time_mins AS road_time
+                MATCH (n)-[r]-(m)
+                WHERE type(r) IN ['CONNECTED_TO', 'NEARBY_PLACE']
+                AND toLower(n.name) IN $names AND toLower(m.name) IN $names
+                RETURN n.name AS from_node, m.name AS to_node, r.road_time_mins AS road_time
             """, {"names": lower_names})
             
             edges = {}
             for record in edges_result:
-                key = (record["from_place"], record["to_place"])
-                edges[key] = record["road_time"]
-                edges[(record["to_place"], record["from_place"])] = record["road_time"]
-            
-            # 2. Hotel-to-place distances (Case-Insensitive)
-            if hotel_name:
-                hotel_edges_result = session.run("""
-                    MATCH (h:Hotel)-[r:NEARBY_PLACE]-(p:Place)
-                    WHERE toLower(h.name) = $hotel AND toLower(p.name) IN $names
-                    RETURN p.name AS place, r.road_time_mins AS road_time
-                """, {"hotel": lower_hotel, "names": lower_names})
-                
-                for record in hotel_edges_result:
-                    edges[(hotel_name, record["place"])] = record["road_time"]
-                    edges[(record["place"], hotel_name)] = record["road_time"]
-            
-            # 3. Greedy Nearest-Neighbor TSP
-            start = hotel_name if hotel_name else (place_names[0] if place_names else None)
-            if not start:
-                return {"error": "No places provided"}
-            
-            unvisited = set(place_names)
-            if start in unvisited: unvisited.remove(start)
-            
-            route = [start]
+                edges[(record["from_node"], record["to_node"])] = record["road_time"]
+                edges[(record["to_node"], record["from_node"])] = record["road_time"]
+
+            # 3. Optimize Each Day
+            optimized_days = []
             total_time = 0
-            legs = []
             
-            current = start
-            while unvisited:
-                best = None
-                best_time = float('inf')
-                for place in unvisited:
-                    # Check edges using normalized keys or just fallback
-                    t = edges.get((current, place), 30)
-                    if t < best_time:
-                        best_time = t
-                        best = place
+            for i, day_places in enumerate(days_list):
+                day_places = [p.strip() for p in day_places if p and p.strip()]
+                if not day_places: continue
                 
-                if best:
-                    legs.append({"from": current, "to": best, "road_time_mins": best_time})
-                    total_time += best_time
-                    route.append(best)
-                    unvisited.remove(best)
-                    current = best
-                else:
-                    break
-            
-            # Return to start (loop)
-            if hotel_name and route[-1] != hotel_name:
-                return_time = edges.get((current, hotel_name), 30)
-                legs.append({"from": current, "to": hotel_name, "road_time_mins": return_time})
-                total_time += return_time
-                route.append(hotel_name)
-            
-            # 4. Get place details (Flexible matching)
+                # Start/End at hotel if available
+                start = hotel_name if hotel_name else day_places[0]
+                unvisited = set(day_places)
+                if start in unvisited: unvisited.remove(start)
+                
+                day_route = [start]
+                day_legs = []
+                current = start
+                
+                while unvisited:
+                    best = None
+                    best_time = float('inf')
+                    for place in unvisited:
+                        t = edges.get((current, place), 30)
+                        if t < best_time:
+                            best_time = t
+                            best = place
+                    
+                    if best:
+                        day_legs.append({"from": current, "to": best, "road_time_mins": best_time})
+                        total_time += best_time
+                        day_route.append(best)
+                        unvisited.remove(best)
+                        current = best
+                    else: break
+                
+                # Return to hotel at end of day
+                if hotel_name and day_route[-1] != hotel_name:
+                    t = edges.get((current, hotel_name), 30)
+                    day_legs.append({"from": current, "to": hotel_name, "road_time_mins": t})
+                    total_time += t
+                    day_route.append(hotel_name)
+                
+                optimized_days.append({
+                    "day_number": i + 1,
+                    "route": day_route,
+                    "legs": day_legs
+                })
+
+            # 4. Fetch Details for UI
             places_result = session.run("""
                 MATCH (p:Place) WHERE toLower(p.name) IN $names
                 RETURN p.name AS name, p.category AS category, 
@@ -201,83 +199,51 @@ def calculate_optimal_route(place_names: list, hotel_name: str = None):
             """, {"names": lower_names})
             places_detail = [record.data() for record in places_result]
             
-            # Fill in details for places not found in DB
-            found_names_lower = {p['name'].lower() for p in places_detail}
-            for name in place_names:
-                if name.lower() not in found_names_lower:
+            # Map lng to lon for frontend consistency if needed
+            for p in places_detail:
+                if 'lng' not in p and 'lon' in p: p['lng'] = p['lon']
+
+            # Fill missing places
+            found_names = {p['name'].lower() for p in places_detail}
+            for name in all_unique_names:
+                if name.lower() not in found_names and (not hotel_name or name.lower() != hotel_name.lower()):
                     places_detail.append({
-                        "name": name, 
-                        "category": "Point of Interest", 
-                        "description": "Local attraction in Chennai", 
-                        "location": "Chennai",
-                        "lat": 13.0827, "lng": 80.2707, # Default to center
-                        "rating": 4.5
+                        "name": name, "category": "Point of Interest", "description": "Local spot",
+                        "location": "Chennai", "lat": 13.0827, "lng": 80.2707
                     })
 
-            # 5. Get hotel details
+            # Hotel Details
             hotels_detail = []
             if hotel_name:
                 hotel_result = session.run("""
                     MATCH (h:Hotel)-[:HAS_ROOM]->(r:Room)
-                    WHERE toLower(h.name) = $hotel
+                    WHERE ($hotel IS NULL AND h.name IS NULL) OR (toLower(h.name) = toLower($hotel))
                     RETURN h.name AS name, h.area AS location, h.description AS description,
                            h.lat AS lat, h.lon AS lng,
                            collect({room_type: r.type, price: r.price, amenities: r.amenities}) AS rooms
-                """, {"hotel": lower_hotel})
+                """, {"hotel": hotel_name})
                 hotels_detail = [record.data() for record in hotel_result]
-                
-                if not hotels_detail:
-                    # Try a partial match if exact fails
-                    hotel_partial = session.run("""
-                        MATCH (h:Hotel) WHERE toLower(h.name) CONTAINS $hotel
-                        RETURN h.name AS name, h.area AS location, h.description AS description,
-                               h.lat AS lat, h.lon AS lng LIMIT 1
-                    """, {"hotel": lower_hotel}).single()
-                    if hotel_partial:
-                        hotels_detail = [hotel_partial.data()]
-                        hotels_detail[0]['rooms'] = []
-                    else:
-                        hotels_detail = [{
-                            "name": hotel_name, "location": "Chennai", "description": "Selected stay", 
-                            "lat": 13.0827, "lng": 80.2707, "rooms": []
-                        }]
-            
-            # 6. Get transport options
-            transport_result = session.run("""
-                MATCH (a:Agency)-[:OWNS_VEHICLE]->(v:Vehicle)
-                RETURN a.name AS agency, a.rating AS rating,
-                       v.model AS model, v.type AS type, v.price AS price
-                ORDER BY v.price ASC LIMIT 10
-            """)
+                if hotels_detail:
+                    for h_det in hotels_detail: # Ensure all hotel details have 'lng'
+                        if 'lng' not in h_det and 'lon' in h_det: h_det['lng'] = h_det['lon']
+                else:
+                    hotels_detail = [{"name": hotel_name, "location": "Chennai", "lat": 13.0827, "lng": 80.2707, "rooms": []}]
+
+            # Transport
+            transport_result = session.run("MATCH (a:Agency)-[:OWNS_VEHICLE]->(v:Vehicle) RETURN a.name AS agency, v.model AS model, v.type AS type, v.price AS price ORDER BY v.price ASC LIMIT 5")
             transport_options = [record.data() for record in transport_result]
-            
+
             return {
-                "ordered_route": route,
-                "legs": legs,
+                "days": optimized_days,
                 "total_road_time_mins": total_time,
                 "places_detail": places_detail,
                 "hotels_detail": hotels_detail,
-                "transport_options": transport_options
+                "transport_options": transport_options,
+                # For backward compatibility
+                "ordered_route": optimized_days[0]["route"] if optimized_days and optimized_days[0]["route"] else [],
+                "legs": optimized_days[0]["legs"] if optimized_days and optimized_days[0]["legs"] else []
             }
+
     except Exception as e:
         print(f"⚠️  Route optimization failed: {e}")
-        return {
-            "error": str(e),
-            "ordered_route": place_names,
-            "legs": [{"from": place_names[i], "to": place_names[i+1], "road_time_mins": 30} for i in range(len(place_names)-1)],
-            "total_road_time_mins": (len(place_names)-1) * 30,
-            "places_detail": [{"name": n, "lat": 13.0827, "lng": 80.2707} for n in place_names],
-            "hotels_detail": [{"name": hotel_name, "lat": 13.0827, "lng": 80.2707}] if hotel_name else [],
-            "transport_options": []
-        }
-    except Exception as e:
-        print(f"⚠️  Route optimization failed: {e}")
-        return {
-            "error": str(e),
-            "ordered_route": place_names,
-            "legs": [{"from": place_names[i], "to": place_names[i+1], "road_time_mins": 30} for i in range(len(place_names)-1)],
-            "total_road_time_mins": (len(place_names)-1) * 30,
-            "places_detail": [{"name": n} for n in place_names],
-            "hotels_detail": [{"name": hotel_name}] if hotel_name else [],
-            "transport_options": []
-        }
+        return {"error": str(e)}

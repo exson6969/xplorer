@@ -200,11 +200,13 @@ def get_all_my_itinerary_bookings(user: dict = Depends(get_current_user)):
 # ─── 5. TRIP PLANNER (Route Optimization) ────────────────────────────────────
 
 from pydantic import BaseModel
+from typing import Optional
 from services.neo4j_service import calculate_optimal_route
 
 class TripPlanRequest(BaseModel):
-    place_names: List[str]
-    hotel_name: str = None
+    days: Optional[List[List[str]]] = None # List of lists (places per day)
+    place_names: Optional[List[str]] = None # Fallback for old flat format
+    hotel_name: Optional[str] = None
 
 @router.post("/trip/plan")
 def plan_optimized_trip(
@@ -212,11 +214,14 @@ def plan_optimized_trip(
     user: dict = Depends(get_current_user)
 ):
     """
-    Given a list of place names from a confirmed itinerary,
-    compute the optimal visiting route using the Neo4j graph
-    and return full trip details (places, hotels, transport, route).
+    Given a list of place names (grouped by day or flat) from a confirmed itinerary,
+    compute the optimal visiting route using the Neo4j graph.
     """
-    result = calculate_optimal_route(payload.place_names, payload.hotel_name)
+    # Prefer 'days' if provided
+    if payload.days:
+        result = calculate_optimal_route(payload.days, payload.hotel_name, is_multiday=True)
+    else:
+        result = calculate_optimal_route(payload.place_names, payload.hotel_name)
     return result
 
 @router.get("/maps/key")

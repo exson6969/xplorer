@@ -19,7 +19,7 @@ class TravelPlannerAI:
             username=os.getenv("NEO4J_USER"),
             password=os.getenv("NEO4J_PASSWORD")
         )
-        
+        print(os.getenv("GOOGLE_API_KEY"))
         # Initialize Pinecone
         self.pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
         self.review_index = self.pc.Index(os.getenv("PINECONE_INDEX_NAME"))
