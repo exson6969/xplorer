@@ -5,8 +5,9 @@ import {
     MapPin, Clock, Sun, Sunset, Moon, Coffee, UtensilsCrossed,
     ChevronDown, ChevronUp, ExternalLink, Navigation, Star,
     CalendarDays, Sparkles, Building2, Camera, ShoppingBag, Landmark,
-    Bus, Car
+    Bus, Car, CheckCircle2
 } from "lucide-react";
+import useChatStore from "../../store/useChatStore";
 
 // ─── HELPERS ───
 
@@ -67,12 +68,14 @@ function openInMaps(placeName) {
 function extractPlaceName(text) {
     // Try to find text after "Visit", "Explore", "at", "to" etc.
     const patterns = [
-        /(?:visit|explore|head to|go to|stop at|at|reach|check out)\s+(?:the\s+)?(.+?)(?:\.|,|!|\band\b|$)/i,
+        /(?:visit|explore|head to|go to|stop at|at|reach|check out|see)\s+(?:the\s+)?(.+?)(?:\.|,|!|\band\b|$)/i,
     ];
     for (const p of patterns) {
         const m = text.match(p);
         if (m && m[1] && m[1].trim().length > 3) return m[1].trim();
     }
+    // Fallback: if it's a short string, maybe it is just the name
+    if (text.length < 40 && text.length > 3) return text.trim();
     return null;
 }
 
@@ -174,6 +177,34 @@ function ActivityCard({ activity, index }) {
 
 function DayCard({ day, index }) {
     const [isExpanded, setIsExpanded] = useState(true);
+    const { bookHotel, bookTransport, bookings } = useChatStore();
+
+    const handleBookHotel = async (h) => {
+        try {
+            await bookHotel({
+                name: typeof h === 'string' ? h : h.name,
+                location: h.location || "Chennai",
+                room_type: h.room_type || "Standard",
+                price: h.price || "Contact for price"
+            });
+            alert("Hotel booked!");
+        } catch (err) { alert(err.message); }
+    };
+
+    const handleBookTransport = async (t) => {
+        try {
+            await bookTransport({
+                agency: t.agency || "Travel Agency",
+                model: typeof t === 'string' ? t : t.model,
+                type: t.type || "Cab",
+                price: t.price || "Contact for price"
+            });
+            alert("Transport booked!");
+        } catch (err) { alert(err.message); }
+    };
+
+    const isHotelBooked = (h) => bookings.hotels.some(b => b.name === (typeof h === 'string' ? h : h.name));
+    const isTransportBooked = (t) => bookings.transport.some(b => b.model === (typeof t === 'string' ? t : t.model));
 
     return (
         <div className="mb-6 last:mb-0">
@@ -204,43 +235,75 @@ function DayCard({ day, index }) {
                         <ActivityCard key={i} activity={activity} index={i} />
                     ))}
 
-                    {/* Hotel info */}
-                    {day.hotels && (
-                        <div className="flex gap-4 mt-2">
-                            <div className="flex flex-col items-center">
-                                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white shadow-md shrink-0">
-                                    <Building2 className="w-4 h-4" />
+                    <div className="grid grid-cols-1 gap-3 mt-2">
+                        {/* Hotel info */}
+                        {day.hotels && (
+                            <div className="flex gap-4">
+                                <div className="flex flex-col items-center">
+                                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white shadow-md shrink-0">
+                                        <Building2 className="w-4 h-4" />
+                                    </div>
+                                </div>
+                                <div className="flex-1 -mt-1">
+                                    <div className="flex items-center justify-between mb-1">
+                                        <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Stay</span>
+                                        {isHotelBooked(day.hotels) ? (
+                                            <span className="text-[10px] font-bold text-emerald-600 flex items-center gap-1 uppercase">
+                                                <CheckCircle2 className="w-3 h-3" /> Booked
+                                            </span>
+                                        ) : (
+                                            <button
+                                                onClick={() => handleBookHotel(day.hotels)}
+                                                className="text-[10px] font-bold text-indigo-600 hover:underline uppercase"
+                                            >
+                                                Book
+                                            </button>
+                                        )}
+                                    </div>
+                                    <div className="p-3 rounded-2xl border bg-emerald-50 dark:bg-emerald-500/10 border-emerald-200 dark:border-emerald-500/20 shadow-sm transition-all hover:shadow-md">
+                                        <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-100">
+                                            {typeof day.hotels === "string" ? day.hotels : day.hotels.name}
+                                        </p>
+                                        {day.hotels.room_type && <p className="text-[10px] text-zinc-500 mt-0.5">{day.hotels.room_type}</p>}
+                                    </div>
                                 </div>
                             </div>
-                            <div className="flex-1 -mt-1">
-                                <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-1 block">Stay</span>
-                                <div className="p-3 rounded-2xl border bg-emerald-50 dark:bg-emerald-500/10 border-emerald-200 dark:border-emerald-500/20">
-                                    <p className="text-sm text-zinc-700 dark:text-zinc-200">
-                                        {typeof day.hotels === "string" ? day.hotels : JSON.stringify(day.hotels)}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    )}
+                        )}
 
-                    {/* Transport info */}
-                    {day.transport && (
-                        <div className="flex gap-4 mt-4">
-                            <div className="flex flex-col items-center">
-                                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white shadow-md shrink-0">
-                                    <Car className="w-4 h-4" />
+                        {/* Transport info */}
+                        {day.transport && (
+                            <div className="flex gap-4 mt-1">
+                                <div className="flex flex-col items-center">
+                                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white shadow-md shrink-0">
+                                        <Car className="w-4 h-4" />
+                                    </div>
+                                </div>
+                                <div className="flex-1 -mt-1">
+                                    <div className="flex items-center justify-between mb-1">
+                                        <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Transport</span>
+                                        {isTransportBooked(day.transport) ? (
+                                            <span className="text-[10px] font-bold text-indigo-600 flex items-center gap-1 uppercase">
+                                                <CheckCircle2 className="w-3 h-3" /> Booked
+                                            </span>
+                                        ) : (
+                                            <button
+                                                onClick={() => handleBookTransport(day.transport)}
+                                                className="text-[10px] font-bold text-indigo-600 hover:underline uppercase"
+                                            >
+                                                Book
+                                            </button>
+                                        )}
+                                    </div>
+                                    <div className="p-3 rounded-2xl border bg-blue-50 dark:bg-blue-500/10 border-blue-200 dark:border-blue-500/20 shadow-sm transition-all hover:shadow-md">
+                                        <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-100">
+                                            {typeof day.transport === "string" ? day.transport : (day.transport.model || day.transport.type)}
+                                        </p>
+                                        {day.transport.agency && <p className="text-[10px] text-zinc-500 mt-0.5">{day.transport.agency}</p>}
+                                    </div>
                                 </div>
                             </div>
-                            <div className="flex-1 -mt-1">
-                                <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-1 block">Transport</span>
-                                <div className="p-3 rounded-2xl border bg-blue-50 dark:bg-blue-500/10 border-blue-200 dark:border-blue-500/20">
-                                    <p className="text-sm text-zinc-700 dark:text-zinc-200">
-                                        {typeof day.transport === "string" ? day.transport : JSON.stringify(day.transport)}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </div>
             )}
         </div>
@@ -257,7 +320,7 @@ export default function ItineraryPanel({ itinerary, onConfirm }) {
     if (days.length === 0) {
         // Fallback: render as formatted text if we can't parse
         return (
-            <aside className="w-96 border-l border-zinc-200 dark:border-zinc-800 bg-gradient-to-b from-white via-zinc-50/50 to-white dark:from-zinc-950 dark:via-zinc-900/50 dark:to-zinc-950 overflow-y-auto hidden xl:block">
+            <aside className="w-96  bg-gradient-to-b from-white via-zinc-50/50 to-white dark:from-zinc-950 dark:via-zinc-900/50 dark:to-zinc-950 overflow-y-auto hidden xl:block">
                 <div className="p-6">
                     <div className="flex items-center gap-3 mb-6">
                         <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/25">
@@ -319,7 +382,7 @@ export default function ItineraryPanel({ itinerary, onConfirm }) {
                     <button
                         onClick={() => {
                             // Extract all place names from activities
-                            const placeNames = [];
+                            let placeNames = [];
                             days.forEach(day => {
                                 day.activities.forEach(activity => {
                                     const place = extractPlaceName(activity);
@@ -328,6 +391,19 @@ export default function ItineraryPanel({ itinerary, onConfirm }) {
                                     }
                                 });
                             });
+
+                            // Critical Fallback: if no names extracted, use the first 5 words of each activity
+                            if (placeNames.length === 0) {
+                                days.forEach(day => {
+                                    day.activities.forEach(activity => {
+                                        const fallback = activity.split(" ").slice(0, 5).join(" ");
+                                        if (fallback && !placeNames.includes(fallback)) {
+                                            placeNames.push(fallback);
+                                        }
+                                    });
+                                });
+                            }
+
                             // Try to find hotel name
                             let hotelName = null;
                             for (const day of days) {

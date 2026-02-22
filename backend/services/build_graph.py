@@ -3,6 +3,7 @@ import json
 import googlemaps
 from neo4j import GraphDatabase
 from dotenv import load_dotenv
+from sentence_transformers import SentenceTransformer
 
 # Load from the backend folder root
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '..', '.env'))
@@ -15,6 +16,9 @@ class XplorerGraphBuilder:
             os.getenv("NEO4J_URI"), 
             auth=(os.getenv("NEO4J_USER"), os.getenv("NEO4J_PASSWORD"))
         )
+        # Initialize Embedding Model (lightweight)
+        print("Loading embedding model...")
+        self.encoder = SentenceTransformer('all-MiniLM-L6-v2')
 
     def close(self):
         self.driver.close()
@@ -28,12 +32,41 @@ class XplorerGraphBuilder:
     def reset_database(self):
         print("Emptying database and setting constraints...")
         self.query("MATCH (n) DETACH DELETE n")
+        # Constraints
         self.query("CREATE CONSTRAINT place_id IF NOT EXISTS FOR (p:Place) REQUIRE p.id IS UNIQUE")
         self.query("CREATE CONSTRAINT hotel_id IF NOT EXISTS FOR (h:Hotel) REQUIRE h.id IS UNIQUE")
         self.query("CREATE CONSTRAINT agency_id IF NOT EXISTS FOR (a:Agency) REQUIRE a.id IS UNIQUE")
+        
+        # Vector Indexes
+        print("Creating Vector Indexes...")
+        try:
+            self.query("""
+                CREATE VECTOR INDEX place_desc_index IF NOT EXISTS
+                FOR (p:Place) ON (p.embedding)
+                OPTIONS {indexConfig: {
+                    `vector.dimensions`: 384,
+                    `vector.similarity_function`: 'cosine'
+                }}
+            """)
+            self.query("""
+                CREATE VECTOR INDEX hotel_desc_index IF NOT EXISTS
+                FOR (h:Hotel) ON (h.embedding)
+                OPTIONS {indexConfig: {
+                    `vector.dimensions`: 384,
+                    `vector.similarity_function`: 'cosine'
+                }}
+            """)
+        except Exception as e:
+            print(f"Index creation warning (might already exist or version mismatch): {e}")
 
     def ingest_places(self, data):
         print(f"Ingesting {len(data)} Places...")
+        
+        # Generate embeddings
+        for p in data:
+            desc = p.get('description', '') or p.get('name', '')
+            p['embedding'] = self.encoder.encode(desc).tolist()
+
         cypher = """
         UNWIND $data AS p
         MERGE (place:Place {id: p.id})
@@ -41,6 +74,7 @@ class XplorerGraphBuilder:
             place.category = p.category,
             place.sub_category = p.sub_category,
             place.description = p.description,
+            place.embedding = p.embedding,
             place.lat = toFloat(p.location.latitude),
             place.lon = toFloat(p.location.longitude),
             place.area = p.location.area,
@@ -85,6 +119,9 @@ class XplorerGraphBuilder:
             area = h.get('location', 'Chennai')
             if isinstance(area, dict): area = area.get('area', 'Chennai')
             
+            desc = h.get("description", "") or h.get("name", "")
+            embedding = self.encoder.encode(desc).tolist()
+
             processed_hotels.append({
                 "id": h["hotel_id"], 
                 "name": h["name"], 
@@ -92,6 +129,7 @@ class XplorerGraphBuilder:
                 "lon": float(h["longitude"]), 
                 "area": area, 
                 "description": h.get("description", ""),
+                "embedding": embedding,
                 "rooms": h.get("rooms", []),
                 "reviews": h.get("reviews", [])
             })
@@ -103,7 +141,8 @@ class XplorerGraphBuilder:
             hotel.lat = h.lat, 
             hotel.lon = h.lon, 
             hotel.area = h.area,
-            hotel.description = h.description
+            hotel.description = h.description,
+            hotel.embedding = h.embedding
             
         MERGE (city:City {name: 'Chennai'})
         MERGE (hotel)-[:LOCATED_IN]->(city)

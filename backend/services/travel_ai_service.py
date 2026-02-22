@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 # Load environment variables
 _BACKEND_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-load_dotenv(dotenv_path=os.path.join(_BACKEND_DIR, ".env"))
+load_dotenv(dotenv_path=os.path.join(_BACKEND_DIR, ".env"), override=True)
 
 from google import genai
 from google.genai import types
@@ -17,14 +17,8 @@ from services.neo4j_service import query_graph
 from services.firestore_service import get_user_profile
 
 # Initialize Gemini
-MODEL = "gemini-2.5-flash"
+MODEL = "gemini-3.1-pro-preview"
 client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
-
-llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",
-    google_api_key=os.getenv("GOOGLE_API_KEY"),
-    temperature=0.3
-)
 
 # ─── TOOLS FOR THE AI ───
 
@@ -32,8 +26,12 @@ llm = ChatGoogleGenerativeAI(
 def search_travel_graph(query_type: str, params: dict):
     """
     Queries the Neo4j Graph for Chennai travel data. 
-    query_type: 'find_hotels', 'find_places', 'find_cabs', 'calculate_itinerary'
-    params: filters like {"max_price": 5000, "amenity": "Pool View", "vehicle_type": "SUV", "interests": ["beach"]}
+    query_type: 
+        - 'find_hotels': params={'max_price', 'amenity'}
+        - 'find_places': params={'interests': ['beach', 'temple']}
+        - 'find_cabs': params={'vehicle_type': 'SUV'}
+        - 'calculate_itinerary'
+        - 'vector_search': params={'query': 'romantic dinner spot'} (Use this for semantic/vague queries)
     """
     return query_graph(query_type, params)
 
@@ -84,6 +82,7 @@ class XplorerAI:
         response = await client.aio.models.generate_content(
             model=MODEL,
             contents=f"Generate a short, concise 3-5 word title for a travel conversation that starts with this message. Do not use quotes.\nUser: {user_input}",
+            config=types.GenerateContentConfig(temperature=0.5)
         )
         return response.text.strip()
 
@@ -103,25 +102,23 @@ class XplorerAI:
         - Origin: {self.user_profile.get('country')}
 
         CONVERSATIONAL GUIDELINES:
-        - This is a VOICE interface. Be concise, natural, and friendly.
-        - DO NOT repeat information the user has already provided.
-        - DO NOT ask redundant questions. 
-            * If the user specifies a vehicle type (e.g., "SUV"), do NOT ask how many people are traveling for the cab.
-            * If the user mentions relative dates like "tomorrow" or "next Friday", calculate them based on the Current Date ({today_str}).
-        - Handle missing data step-by-step. If you need dates or interests, ask for them before providing a final plan.
+        - Be concise, natural, and friendly.
+        - DO NOT repeat information.
+        - DO NOT acknowledge intent (e.g., don't say "I will check that for you"). Just use the tools immediately.
+        - Handle missing data step-by-step. Ask for dates or interests before providing a final plan.
         - DO NOT ask for a budget.
 
         CORE WORKFLOW:
         1. Identify intent: Itinerary, Hotel booking, Cab booking, or a mix.
-        2. Gather required info: Dates, traveler count (only if vehicle not specified), interests.
+        2. Gather info: Dates, traveler count, interests.
         3. Use Tools: 
-            * Use `get_current_date` if you need to confirm the exact live timestamp.
-            * Use `search_travel_graph` to find REAL results. 
+            * Use `search_travel_graph` with `query_type='vector_search'` for descriptive/vague requests (e.g. "romantic place", "quiet hotel").
+            * Use `search_travel_graph` with 'find_places'/'find_hotels' for specific categorical filters.
             * Use `check_chennai_weather` once dates are known.
-        4. Evaluate Weather: If tools return bad weather (heavy rain, >40°C), warn the user conversationally.
-        5. Present Options: If tool results are found, describe them clearly. If NOT found, inform the user and suggest an alternative.
+        4. Evaluation: If tools return errors or bad weather, inform the user and suggest alternatives.
+        5. Response: Provide the final plan or ask for missing info.
 
-        RESPONSE FORMAT:
+        RESPONSE FORMAT (JSON):
         You MUST respond ONLY with a valid JSON object:
         {{
             "text": "Your natural speech response.",
@@ -158,6 +155,7 @@ class XplorerAI:
             system_instruction=system_prompt,
             tools=TOOLS,
             temperature=0.3,
+            response_mime_type="application/json",
         )
 
         # Call the model

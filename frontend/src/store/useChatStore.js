@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { chatService, tripService } from "../services/api";
+import { chatService, tripService, bookingService } from "../services/api";
 
 /**
  * Helper: converts a backend message (MessageResponse) into an array of
@@ -34,6 +34,7 @@ const useChatStore = create((set, get) => ({
     routeData: null,
     isLoading: false,
     hasMoreSessions: true,
+    bookings: { hotels: [], transport: [] },
     error: null,
 
     fetchSessions: async (limit = 20) => {
@@ -207,6 +208,52 @@ const useChatStore = create((set, get) => ({
 
     clearConfirmedTrip: () => {
         set({ confirmedTrip: null, routeData: null });
+    },
+
+    fetchBookings: async () => {
+        set({ isLoading: true });
+        try {
+            const resp = await bookingService.listAllBookings();
+            set({ bookings: resp.data, isLoading: false });
+        } catch (err) {
+            set({ error: err.message, isLoading: false });
+        }
+    },
+
+    bookHotel: async (hotelData) => {
+        set({ isLoading: true });
+        try {
+            const resp = await bookingService.bookHotel(hotelData);
+            set(state => ({
+                bookings: {
+                    ...state.bookings,
+                    hotels: [resp.data, ...state.bookings.hotels]
+                },
+                isLoading: false
+            }));
+            return resp.data;
+        } catch (err) {
+            set({ error: err.message, isLoading: false });
+            throw err;
+        }
+    },
+
+    bookTransport: async (transportData) => {
+        set({ isLoading: true });
+        try {
+            const resp = await bookingService.bookTransport(transportData);
+            set(state => ({
+                bookings: {
+                    ...state.bookings,
+                    transport: [resp.data, ...state.bookings.transport]
+                },
+                isLoading: false
+            }));
+            return resp.data;
+        } catch (err) {
+            set({ error: err.message, isLoading: false });
+            throw err;
+        }
     },
 }));
 

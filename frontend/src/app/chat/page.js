@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import Sidebar from "../components/Sidebar";
 import MessageBubble from "../components/MessageBubble";
 import ItineraryPanel from "../components/ItineraryPanel";
@@ -11,6 +11,7 @@ import { Send, Sparkles, Loader2, Plus } from "lucide-react";
 
 export default function ChatPage() {
     const searchParams = useSearchParams();
+    const router = useRouter();
     const sessionId = searchParams.get("id");
 
     const {
@@ -30,6 +31,12 @@ export default function ChatPage() {
 
     const [input, setInput] = useState("");
     const scrollRef = useRef(null);
+
+    useEffect(() => {
+        if (currentSessionId && !sessionId) {
+            router.push(`/chat?id=${currentSessionId}`, { scroll: false });
+        }
+    }, [currentSessionId, sessionId, router]);
 
     useEffect(() => {
         fetchSessions();
@@ -78,11 +85,11 @@ export default function ChatPage() {
     // ─── CONFIRMED TRIP: SPLIT VIEW ───
     if (confirmedTrip && routeData) {
         return (
-            <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 flex font-sans">
+            <div className="min-h-screen  flex font-sans">
                 <Sidebar />
                 <main className="flex-1 ml-64 flex flex-col h-screen relative">
                     {/* Header */}
-                    <header className="h-16 border-b border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md flex items-center justify-between px-8 z-10 shrink-0">
+                    <header className="h-16  backdrop-blur-md flex items-center justify-between px-8 z-10 shrink-0">
                         <div className="flex items-center gap-3">
                             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white">
                                 <Sparkles className="w-5 h-5" />
@@ -142,12 +149,12 @@ export default function ChatPage() {
 
     // ─── NORMAL CHAT VIEW ───
     return (
-        <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 flex font-sans">
+        <div className="min-h-screen flex font-sans">
             <Sidebar />
 
             <main className="flex-1 ml-64 flex flex-col h-screen relative">
                 {/* Chat Header */}
-                <header className="h-16 border-b border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md flex items-center justify-between px-8 z-10">
+                <header className="h-16 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md flex items-center justify-between px-8 z-10">
                     <div className="flex items-center gap-3">
                         
                         <div>
@@ -162,7 +169,10 @@ export default function ChatPage() {
 
                     <div className="flex items-center gap-2">
                         <button
-                            onClick={() => window.location.href = '/chat'}
+                            onClick={() => {
+                                setCurrentSession(null);
+                                router.push('/chat');
+                            }}
                             className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-colors text-zinc-500"
                             title="New Chat"
                         >
@@ -173,36 +183,65 @@ export default function ChatPage() {
 
                 {/* Messages & Itinerary Layout */}
                 <div className="flex-1 flex overflow-hidden">
-                    {/* Messages Area */}
-                    <div
-                        ref={scrollRef}
-                        className="flex-1 overflow-y-auto p-8 space-y-8 scroll-smooth"
-                    >
-                        {currentMessages.length === 0 && !isLoading && (
-                            <div className="h-full flex flex-col items-center justify-center text-center max-w-md mx-auto pt-20">
-                                <div className="w-20 h-20 rounded-3xl bg-indigo-50 dark:bg-indigo-500/10 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-6 border border-indigo-100 dark:border-indigo-500/20">
-                                    <Sparkles className="w-10 h-10" />
+                    {/* Chat Column (Messages + Input) */}
+                    <div className="flex-1 flex flex-col min-w-0">
+                        {/* Messages Area */}
+                        <div
+                            ref={scrollRef}
+                            className="flex-1 overflow-y-auto p-8 space-y-8 scroll-smooth"
+                        >
+                            {currentMessages.length === 0 && !isLoading && (
+                                <div className="h-full flex flex-col items-center justify-center text-center max-w-md mx-auto pt-20">
+                                    <div className="w-20 h-20 rounded-3xl bg-indigo-50 dark:bg-indigo-500/10 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-6">
+                                        <Sparkles className="w-10 h-10" />
+                                    </div>
+                                    <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+                                        I'm your Xplorer AI. Mention your interests, travel dates, or specific spots you want to visit, and I'll craft the perfect itinerary.
+                                    </p>
                                 </div>
-                                <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
-                                    I'm your Xplorer AI. Mention your interests, travel dates, or specific spots you want to visit, and I'll craft the perfect itinerary.
-                                </p>
-                            </div>
-                        )}
+                            )}
 
-                        {currentMessages.map((msg) => (
-                            <MessageBubble
-                                key={msg.id}
-                                message={msg}
-                                onSubmitData={handleFormSubmit}
-                            />
-                        ))}
+                            {currentMessages.map((msg) => (
+                                <MessageBubble
+                                    key={msg.id}
+                                    message={msg}
+                                    onSubmitData={handleFormSubmit}
+                                />
+                            ))}
 
-                        {isLoading && (
-                            <div className="flex items-center gap-3 text-zinc-500 dark:text-zinc-400 text-xs font-medium pl-1">
-                                <Loader2 className="w-4 h-4 animate-spin text-indigo-600" />
-                                AI is thinking...
-                            </div>
-                        )}
+                            {isLoading && (
+                                <div className="flex items-center gap-3 text-zinc-500 dark:text-zinc-400 text-xs font-medium pl-1">
+                                    <Loader2 className="w-4 h-4 animate-spin text-indigo-600" />
+                                    AI is thinking...
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Input Area */}
+                        <div className="p-6 bg-white dark:bg-zinc-950 border-t border-zinc-100 dark:border-zinc-800">
+                            <form
+                                onSubmit={handleSend}
+                                className="max-w-4xl mx-auto relative group"
+                            >
+                                <input
+                                    type="text"
+                                    value={input}
+                                    onChange={(e) => setInput(e.target.value)}
+                                    placeholder="Message Xplorer AI..."
+                                    className="w-full border border-zinc-200 dark:border-zinc-800 rounded-2xl py-4 pl-6 pr-14 text-sm outline-none focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 transition-all shadow-sm group-hover:shadow-md"
+                                />
+                                <button
+                                    type="submit"
+                                    disabled={!input.trim() || isLoading}
+                                    className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 flex items-center justify-center hover:scale-105 transition-all disabled:opacity-50 disabled:scale-100"
+                                >
+                                    <Send className="w-5 h-5" />
+                                </button>
+                            </form>
+                            <p className="text-center mt-3 text-[10px] text-zinc-400 font-medium">
+                                Xplorer AI can make mistakes. Verify important travel information.
+                            </p>
+                        </div>
                     </div>
 
                     {/* Itinerary Side Panel */}
@@ -210,32 +249,6 @@ export default function ChatPage() {
                         itinerary={currentItinerary}
                         onConfirm={handleConfirmItinerary}
                     />
-                </div>
-
-                {/* Input Area */}
-                <div className="p-6 bg-white dark:bg-zinc-950 border-t border-zinc-200 dark:border-zinc-800">
-                    <form
-                        onSubmit={handleSend}
-                        className="max-w-4xl mx-auto relative group"
-                    >
-                        <input
-                            type="text"
-                            value={input}
-                            onChange={(e) => setInput(e.target.value)}
-                            placeholder="Message Xplorer AI..."
-                            className="w-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl py-4 pl-6 pr-14 text-sm outline-none focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 transition-all shadow-sm group-hover:shadow-md"
-                        />
-                        <button
-                            type="submit"
-                            disabled={!input.trim() || isLoading}
-                            className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 flex items-center justify-center hover:scale-105 transition-all disabled:opacity-50 disabled:scale-100"
-                        >
-                            <Send className="w-5 h-5" />
-                        </button>
-                    </form>
-                    <p className="text-center mt-3 text-[10px] text-zinc-400 font-medium">
-                        Xplorer AI can make mistakes. Verify important travel information.
-                    </p>
                 </div>
             </main>
         </div>

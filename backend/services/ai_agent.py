@@ -8,11 +8,11 @@ from langchain.schema import HumanMessage, AIMessage
 from langchain_community.embeddings import SentenceTransformerEmbeddings # Use HuggingFace embeddings
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override=True)
 
 class TravelPlannerAI:
     def __init__(self):
-        self.llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", google_api_key=os.getenv("GOOGLE_API_KEY"))
+        self.llm = ChatGoogleGenerativeAI(model="gemini-3.1-pro-preview", google_api_key=os.getenv("GOOGLE_API_KEY"))
         self.embeddings = GoogleGenerativeAIEmbeddings(model="models/text-embedding-004")
         self.graph = Neo4jGraph(
             url=os.getenv("NEO4J_URI"),

@@ -11,8 +11,9 @@ import {
 import {
     Car, MapPin, Clock, Navigation, Star, Building2,
     ChevronDown, ChevronUp, ArrowRight, Route, Hotel,
-    DollarSign, Shield, Fuel, Users
+    DollarSign, Shield, Fuel, Users, CheckCircle2
 } from "lucide-react";
+import useChatStore from "../../store/useChatStore";
 
 const CHENNAI_CENTER = { lat: 13.0827, lng: 80.2707 };
 
@@ -60,6 +61,25 @@ function TransportPanel({ routeData }) {
     const legs = routeData?.legs || [];
     const transport = routeData?.transport_options || [];
     const totalTime = routeData?.total_road_time_mins;
+
+    const { bookTransport, bookings } = useChatStore();
+
+    const handleBook = async (vehicle) => {
+        try {
+            await bookTransport({
+                agency: vehicle.agency,
+                model: vehicle.model,
+                type: vehicle.type,
+                price: vehicle.price,
+                rating: vehicle.rating
+            });
+            alert("Transport booked successfully!");
+        } catch (err) {
+            alert("Booking failed: " + err.message);
+        }
+    };
+
+    const isBooked = (v) => bookings.transport.some(b => b.model === v.model && b.agency === v.agency);
 
     return (
         <div className="h-full overflow-y-auto p-5 space-y-5">
@@ -133,36 +153,51 @@ function TransportPanel({ routeData }) {
                         Available Transport
                     </p>
                     <div className="space-y-2">
-                        {transport.map((t, i) => (
-                            <div
-                                key={i}
-                                className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 hover:border-indigo-300 dark:hover:border-indigo-600/50 transition-all hover:shadow-sm cursor-pointer"
-                            >
-                                <div className="flex items-center justify-between">
-                                    <div>
-                                        <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-100">
-                                            {t.model || t.type}
-                                        </p>
-                                        <p className="text-xs text-zinc-500 flex items-center gap-1 mt-0.5">
-                                            <Shield className="w-3 h-3" />
-                                            {t.agency}
-                                            {t.rating && (
-                                                <span className="flex items-center gap-0.5 ml-2">
-                                                    <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
-                                                    {t.rating}
+                        {transport.map((t, i) => {
+                            const booked = isBooked(t);
+                            return (
+                                <div
+                                    key={i}
+                                    className={`bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 transition-all shadow-sm ${booked ? 'ring-1 ring-emerald-500 border-emerald-500' : 'hover:border-indigo-300 dark:hover:border-indigo-600/50 cursor-pointer'}`}
+                                >
+                                    <div className="flex items-center justify-between">
+                                        <div>
+                                            <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-100">
+                                                {t.model || t.type}
+                                            </p>
+                                            <p className="text-xs text-zinc-500 flex items-center gap-1 mt-0.5">
+                                                <Shield className="w-3 h-3" />
+                                                {t.agency}
+                                                {t.rating && (
+                                                    <span className="flex items-center gap-0.5 ml-2">
+                                                        <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
+                                                        {t.rating}
+                                                    </span>
+                                                )}
+                                            </p>
+                                        </div>
+                                        <div className="text-right">
+                                            <p className="text-sm font-bold text-emerald-600 dark:text-emerald-400">
+                                                ₹{t.price}
+                                            </p>
+                                            <p className="text-[10px] text-zinc-400 mb-2">{t.type}</p>
+                                            {booked ? (
+                                                <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-600 uppercase">
+                                                    <CheckCircle2 className="w-3 h-3" /> Booked
                                                 </span>
+                                            ) : (
+                                                <button
+                                                    onClick={() => handleBook(t)}
+                                                    className="px-3 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-[10px] font-bold transition-colors"
+                                                >
+                                                    Book Now
+                                                </button>
                                             )}
-                                        </p>
-                                    </div>
-                                    <div className="text-right">
-                                        <p className="text-sm font-bold text-emerald-600 dark:text-emerald-400">
-                                            ₹{t.price}
-                                        </p>
-                                        <p className="text-[10px] text-zinc-400">{t.type}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
             )}
@@ -176,6 +211,24 @@ function PlacesPanel({ routeData, selectedPlace, onSelectPlace }) {
     const places = routeData?.places_detail || [];
     const hotels = routeData?.hotels_detail || [];
     const orderedRoute = routeData?.ordered_route || [];
+
+    const { bookHotel, bookings } = useChatStore();
+
+    const handleBookHotel = async (hotel, room) => {
+        try {
+            await bookHotel({
+                name: hotel.name,
+                location: hotel.location,
+                room_type: room.room_type,
+                price: room.price
+            });
+            alert("Hotel booked successfully!");
+        } catch (err) {
+            alert("Booking failed: " + err.message);
+        }
+    };
+
+    const isHotelBooked = (h, r) => bookings.hotels.some(b => b.name === h.name && b.room_type === r.room_type);
 
     // Sort places by route order
     const sortedPlaces = [...places].sort((a, b) => {
@@ -196,10 +249,10 @@ function PlacesPanel({ routeData, selectedPlace, onSelectPlace }) {
                     {hotels.map((h, i) => (
                         <div
                             key={i}
-                            className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-500/5 dark:to-orange-500/5 border border-amber-200 dark:border-amber-500/20 rounded-2xl p-4 cursor-pointer hover:shadow-md transition-shadow"
+                            className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-500/5 dark:to-orange-500/5 border border-amber-200 dark:border-amber-500/20 rounded-2xl p-4 cursor-pointer hover:shadow-md transition-shadow mb-4"
                             onClick={() => onSelectPlace && h.lat && onSelectPlace({ lat: h.lat, lng: h.lng, name: h.name })}
                         >
-                            <p className="font-bold text-zinc-800 dark:text-zinc-100">{h.name}</p>
+                            <p className="font-bold text-zinc-800 dark:text-zinc-100 text-lg">{h.name}</p>
                             {h.location && (
                                 <p className="text-xs text-zinc-500 flex items-center gap-1 mt-1">
                                     <MapPin className="w-3 h-3" /> {h.location}
@@ -209,15 +262,39 @@ function PlacesPanel({ routeData, selectedPlace, onSelectPlace }) {
                                 <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-2 leading-relaxed">{h.description}</p>
                             )}
                             {h.rooms && h.rooms.length > 0 && (
-                                <div className="mt-3 flex flex-wrap gap-2">
-                                    {h.rooms.slice(0, 3).map((room, j) => (
-                                        <span
-                                            key={j}
-                                            className="text-[10px] bg-white dark:bg-zinc-900 border border-amber-200 dark:border-amber-500/20 rounded-lg px-2 py-1 text-zinc-600 dark:text-zinc-300"
-                                        >
-                                            {room.room_type} • ₹{room.price}
-                                        </span>
-                                    ))}
+                                <div className="mt-4 space-y-2">
+                                    <p className="text-[10px] font-bold uppercase text-zinc-400">Available Rooms:</p>
+                                    <div className="grid grid-cols-1 gap-2">
+                                        {h.rooms.map((room, j) => {
+                                            const booked = isHotelBooked(h, room);
+                                            return (
+                                                <div
+                                                    key={j}
+                                                    className="flex items-center justify-between bg-white dark:bg-zinc-900 border border-amber-100 dark:border-amber-500/10 rounded-xl p-2 px-3 shadow-sm"
+                                                >
+                                                    <div>
+                                                        <p className="text-xs font-bold text-zinc-700 dark:text-zinc-200">{room.room_type}</p>
+                                                        <p className="text-[10px] text-emerald-600 font-bold">₹{room.price}</p>
+                                                    </div>
+                                                    {booked ? (
+                                                        <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-600 uppercase">
+                                                            <CheckCircle2 className="w-3 h-3" /> Booked
+                                                        </span>
+                                                    ) : (
+                                                        <button
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                handleBookHotel(h, room);
+                                                            }}
+                                                            className="px-3 py-1 rounded-lg bg-amber-500 hover:bg-amber-600 text-white text-[10px] font-bold transition-colors"
+                                                        >
+                                                            Book
+                                                        </button>
+                                                    )}
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
                                 </div>
                             )}
                         </div>
