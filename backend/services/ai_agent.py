@@ -1,8 +1,11 @@
 import os
-from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
+import json
+from pinecone import Pinecone
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_community.graphs import Neo4jGraph
 from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain.schema import HumanMessage, AIMessage
+from langchain_community.embeddings import SentenceTransformerEmbeddings # Use HuggingFace embeddings
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -16,12 +19,20 @@ class TravelPlannerAI:
             username=os.getenv("NEO4J_USER"),
             password=os.getenv("NEO4J_PASSWORD")
         )
+        
+        # Initialize Pinecone
+        self.pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
+        self.review_index = self.pc.Index(os.getenv("PINECONE_INDEX_NAME"))
 
-    def _get_context_from_graph(self, user_query: str):
-        """Perform a hybrid search: Vector (vibe) + Logic (distance)"""
-        # 1. Vector Search for relevant places
+    def _get_hybrid_suggestions(self, user_query: str, weight_graph=0.4, weight_reviews=0.6):
+        """
+        Calculates a hybrid score from Graph (popularity/rating) and Pinecone (vibe/reviews).
+        """
+        emb = self.embeddings.embed_query(user_query)
+
+        # 1. GRAPH SEARCH (Logical/Structural)
         vector_query = f"""
-        CALL db.index.vector.queryNodes('place_index', 5, $embedding)
+        CALL db.index.vector.queryNodes('place_index', 10, $embedding)
         YIELD node, score
         RETURN node.name as name, node.description as desc, node.open_time as open, 
                node.close_time as close, node.ideal_blocks as blocks, node.best_visit_time as best_time, node.rating as rating
@@ -32,25 +43,21 @@ class TravelPlannerAI:
         # 2. Get some top hotels
         hotels = self.graph.query("MATCH (h:Hotel) RETURN h.name as name, h.area as area LIMIT 3")
         
-        return {"places": places, "hotels": hotels}
-
-    async def get_ai_response(self, user_input: str, history: list, user_profile: dict):
-        # 1. Fetch data from Graph
-        context = self._get_context_from_graph(user_input)
-        
-        # 2. Build the System Prompt
+        # 3. Build the System Prompt
         system_prompt = f"""
         You are Xplorer AI, an expert travel agent for Chennai.
         User Profile: {user_profile}
         
-        Available Data:
-        - Places: {context['places']}
-        - Hotels: {context['hotels']}
+        Available Hybrid Suggestions (Weighted based on Knowledge Graph & User Reviews):
+        {json.dumps(suggestions, indent=2)}
+        
+        Top Hotels:
+        {json.dumps(hotels, indent=2)}
         
         Instructions:
-        1. If user query is vague (e.g. "I want a trip"), ASK for missing info: Dates, Group Size, Interests.
-        2. If you have enough info, suggest a logical ITINERARY using the 'road_time_mins' concept.
-        3. If the user mentions a specific hotel or cab, offer a MOCK BOOKING.
+        1. When recommending places, MENTION if the suggestion is strongly backed by user reviews (check 'sources').
+        2. If user query is vague (e.g. "I want a trip"), ASK for missing info: Dates, Group Size, Interests.
+        3. If you have enough info, suggest a logical ITINERARY using the 'road_time_mins' concept.
         4. ALWAYS respond in a helpful, conversational tone.
         5. If data is missing, ask clearly. Do not make up places.
         """
@@ -65,7 +72,6 @@ class TravelPlannerAI:
         chat_history = []
         for h in history[-5:]: # Last 5 turns
             chat_history.append(HumanMessage(content=h['user_input']))
-            # Ensure ai_generated_output is string for the prompt
             out = h['ai_generated_output']
             chat_history.append(AIMessage(content=str(out) if isinstance(out, dict) else out))
 

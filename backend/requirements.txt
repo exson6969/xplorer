@@ -67,3 +67,8 @@ urllib3==2.6.3
 uuid_utils==0.14.1
 uvicorn==0.39.0
 zstandard==0.25.0
+pinecone-client==5.0.1
+langchain-pinecone==0.2.1
+google-genai==1.47.0
+sentence-transformers==2.7.0
+
