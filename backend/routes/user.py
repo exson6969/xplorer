@@ -64,25 +64,38 @@ async def start_new_travel_consultation(
     uid = user["uid"]
     agent = XplorerAI(uid)
     
-    # Generate dynamic title based on first input
-    title = await agent.generate_title(payload.user_input)
+    try:
+        # Generate dynamic title based on first input
+        title = await agent.generate_title(payload.user_input)
+    except Exception as e:
+        print(f"❌ AI title generation failed: {e}")
+        title = "New Trip Plan"
     
     # Create the conversation in Firestore
     session = create_conversation(uid, title)
     convo_id = session["convo_id"]
     
-    # Process the first message
-    ai_response = await agent.process_chat(
-        user_input=payload.user_input,
-        history={"messages": []} # Empty history for a new chat
-    )
+    try:
+        # Process the first message
+        ai_response = await agent.process_chat(
+            user_input=payload.user_input,
+            history={"messages": []}, # Empty history for a new chat
+            submitted_data=payload.submitted_data
+        )
+    except Exception as e:
+        print(f"❌ AI chat failed: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail=f"AI service is temporarily unavailable. Please try again in a minute. Error: {type(e).__name__}"
+        )
     
     # Save the turn to Firestore
     saved_msg = add_message(
         uid=uid,
         convo_id=convo_id,
         user_input=payload.user_input,
-        ai_generated_output=ai_response # Contains text/itinerary data
+        ai_generated_output=ai_response, # Contains text/itinerary data
+        submitted_data=payload.submitted_data
     )
     
     return ConversationStartResponse(
@@ -102,7 +115,7 @@ async def send_message_to_agent(
     The main AI logic hub:
     1. Retrieves user preferences (Interests).
     2. Pulls chat history.
-    3. Uses LangChain to query Neo4j (Graph) and Gemini (LLM).
+    3. Uses GenAI to query Neo4j (Graph) and Gemini (LLM).
     4. Handles missing info by asking the user questions.
     """
     uid = user["uid"]
@@ -113,18 +126,27 @@ async def send_message_to_agent(
     # 2. Initialize Xplorer AI Agent
     agent = XplorerAI(uid)
     
-    # 3. Generate Intelligent Response (LangChain + Gemini + Neo4j)
-    ai_response = await agent.process_chat(
-        user_input=payload.user_input,
-        history=history
-    )
+    try:
+        # 3. Generate Intelligent Response (Gemini + Neo4j)
+        ai_response = await agent.process_chat(
+            user_input=payload.user_input,
+            history=history,
+            submitted_data=payload.submitted_data
+        )
+    except Exception as e:
+        print(f"❌ AI chat failed: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail=f"AI service is temporarily unavailable. Please try again in a minute. Error: {type(e).__name__}"
+        )
     
     # 4. Save the turn to Firestore
     saved_msg = add_message(
         uid=uid,
         convo_id=session_id,
         user_input=payload.user_input,
-        ai_generated_output=ai_response # Contains text or structured itinerary
+        ai_generated_output=ai_response, # Contains text or structured itinerary
+        submitted_data=payload.submitted_data
     )
     
     return MessageResponse(**saved_msg)
@@ -170,3 +192,31 @@ def get_all_my_itinerary_bookings(user: dict = Depends(get_current_user)):
         "hotels": get_hotel_bookings(uid),
         "transport": get_transport_bookings(uid)
     }
+
+# ─── 5. TRIP PLANNER (Route Optimization) ────────────────────────────────────
+
+from pydantic import BaseModel
+from services.neo4j_service import calculate_optimal_route
+
+class TripPlanRequest(BaseModel):
+    place_names: List[str]
+    hotel_name: str = None
+
+@router.post("/trip/plan")
+def plan_optimized_trip(
+    payload: TripPlanRequest,
+    user: dict = Depends(get_current_user)
+):
+    """
+    Given a list of place names from a confirmed itinerary,
+    compute the optimal visiting route using the Neo4j graph
+    and return full trip details (places, hotels, transport, route).
+    """
+    result = calculate_optimal_route(payload.place_names, payload.hotel_name)
+    return result
+
+@router.get("/maps/key")
+def get_maps_api_key(user: dict = Depends(get_current_user)):
+    """Returns the Google Maps API key for the frontend embed."""
+    import os
+    return {"key": os.getenv("GOOGLE_MAPS_API_KEY", "")}

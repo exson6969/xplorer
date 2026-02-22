@@ -2,9 +2,15 @@ import os
 import json
 import httpx
 from datetime import datetime
-from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain.schema import SystemMessage, HumanMessage, AIMessage
-from langchain.tools import tool
+from dotenv import load_dotenv
+
+# Load environment variables
+_BACKEND_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+load_dotenv(dotenv_path=os.path.join(_BACKEND_DIR, ".env"))
+
+from google import genai
+from google.genai import types
+
 from services.neo4j_service import query_graph
 from services.firestore_service import get_user_profile
 
@@ -54,18 +60,22 @@ class XplorerAI:
     def __init__(self, uid: str):
         self.uid = uid
         self.user_profile = get_user_profile(uid)
-        
+
     async def generate_title(self, user_input: str) -> str:
         """Generates a concise title for the chat session based on the first message."""
-        prompt = f"Generate a short, concise 3-5 word title for a travel conversation that starts with this message. Do not use quotes.\nUser: {user_input}"
-        response = await llm.ainvoke([HumanMessage(content=prompt)])
-        return response.content.strip()
+        response = await client.aio.models.generate_content(
+            model=MODEL,
+            contents=f"Generate a short, concise 3-5 word title for a travel conversation that starts with this message. Do not use quotes.\nUser: {user_input}",
+        )
+        return response.text.strip()
 
-    async def process_chat(self, user_input: str, history: dict):
-        # Today's reference date for the AI
+    async def process_chat(self, user_input: str, history: dict, submitted_data: dict = None):
         today_str = datetime.now().strftime("%A, %B %d, %Y")
 
-        # 1. Prepare System Prompt with strict flow logic
+        if submitted_data:
+            user_input = f"[USER SUBMITTED FORM DATA: {json.dumps(submitted_data)}]\n{user_input}"
+
+        # System Prompt
         system_prompt = f"""
         You are Xplorer AI, an expert travel agent for Chennai, India. 
         Current Date: {today_str}.
@@ -101,52 +111,92 @@ class XplorerAI:
         }}
         """
 
-        # 2. Build the Message Chain
-        messages = [SystemMessage(content=system_prompt)]
-        
-        # Add past context
+        # Build conversation contents
+        contents = []
+
+        # Add past messages
         past_messages = history.get('messages', [])
         for msg in past_messages:
-            messages.append(HumanMessage(content=msg.get('user_input', '')))
+            contents.append(types.Content(
+                role="user",
+                parts=[types.Part.from_text(text=msg.get('user_input', ''))]
+            ))
             ai_out = msg.get('ai_generated_output', '')
             if isinstance(ai_out, dict):
                 ai_out = json.dumps(ai_out)
-            messages.append(AIMessage(content=ai_out))
-            
+            contents.append(types.Content(
+                role="model",
+                parts=[types.Part.from_text(text=str(ai_out))]
+            ))
+
         # Append current user input
-        messages.append(HumanMessage(content=user_input))
+        contents.append(types.Content(
+            role="user",
+            parts=[types.Part.from_text(text=user_input)]
+        ))
 
-        # Bind tools to the LLM
-        llm_with_tools = llm.bind_tools([search_travel_graph, check_chennai_weather, get_current_date])
+        # Configuration
+        config = types.GenerateContentConfig(
+            system_instruction=system_prompt,
+            tools=[TOOLS],
+            temperature=0.3,
+        )
 
-        # 3. Call LLM (First Turn)
-        response = await llm_with_tools.ainvoke(messages)
-        
-        # Handle Tool Execution Loop
-        while response.tool_calls:
-            messages.append(response)
-            for tool_call in response.tool_calls:
-                if tool_call["name"] == "search_travel_graph":
-                    tool_result = search_travel_graph.invoke(tool_call["args"])
-                    messages.append(AIMessage(content=f"[SYSTEM: Graph tool result: {json.dumps(tool_result)}]"))
-                elif tool_call["name"] == "check_chennai_weather":
-                    tool_result = await check_chennai_weather.ainvoke(tool_call["args"])
-                    messages.append(AIMessage(content=f"[SYSTEM: Weather tool result: {json.dumps(tool_result)}]"))
-                elif tool_call["name"] == "get_current_date":
-                    tool_result = get_current_date.invoke(tool_call["args"])
-                    messages.append(AIMessage(content=f"[SYSTEM: Current Date result: {tool_result}]"))
-            
-            # Get updated AI response with tool knowledge
-            response = await llm_with_tools.ainvoke(messages)
+        # Call the model
+        response = await client.aio.models.generate_content(
+            model=MODEL,
+            contents=contents,
+            config=config,
+        )
 
-        # 4. Final JSON Extraction
-        raw_text = response.content.strip()
-        # Clean up markdown code blocks if present
+        # Tool calling loop
+        while response.candidates and response.candidates[0].content.parts:
+            has_function_call = False
+            tool_response_parts = []
+
+            for part in response.candidates[0].content.parts:
+                if part.function_call:
+                    has_function_call = True
+                    fn_name = part.function_call.name
+                    fn_args = dict(part.function_call.args) if part.function_call.args else {}
+
+                    print(f"🔧 Tool call: {fn_name}({fn_args})")
+                    tool_result = await execute_tool(fn_name, fn_args)
+                    print(f"   ↳ Result: {tool_result[:200]}...")
+
+                    tool_response_parts.append(
+                        types.Part.from_function_response(
+                            name=fn_name,
+                            response={"result": tool_result}
+                        )
+                    )
+
+            if not has_function_call:
+                break
+
+            # Add the model's function call message and our tool responses
+            contents.append(response.candidates[0].content)
+            contents.append(types.Content(
+                role="user",
+                parts=tool_response_parts
+            ))
+
+            # Get updated response
+            response = await client.aio.models.generate_content(
+                model=MODEL,
+                contents=contents,
+                config=config,
+            )
+
+        # Extract final text
+        raw_text = response.text.strip() if response.text else '{"text": "I encountered an issue. Please try again.", "itinerary": null}'
+
+        # Clean up markdown code blocks
         if raw_text.startswith("```json"):
             raw_text = raw_text[7:-3].strip()
         elif raw_text.startswith("```"):
             raw_text = raw_text[3:-3].strip()
-            
+
         try:
             return json.loads(raw_text)
         except json.JSONDecodeError:

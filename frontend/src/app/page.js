@@ -1,12 +1,18 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Sparkles, Map, Coffee, Star, Quote } from "lucide-react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import AuthOverlay from "./components/AuthOverlay";
+import { useAuth } from "../context/AuthContext";
 
 export default function LandingPage() {
+  const { user } = useAuth();
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen flex flex-col bg-white dark:bg-zinc-950">
       <Navbar />
@@ -38,10 +44,16 @@ export default function LandingPage() {
 
               <div className="flex flex-col sm:flex-row w-full max-w-md gap-4">
                 <Link
-                  href="/home"
+                  href={user ? "/home" : "#"}
+                  onClick={(e) => {
+                    if (!user) {
+                      e.preventDefault();
+                      setIsAuthModalOpen(true);
+                    }
+                  }}
                   className="flex-1 flex justify-center items-center gap-2 bg-zinc-900 hover:bg-zinc-800 dark:bg-white dark:hover:bg-zinc-100 text-white dark:text-zinc-900 px-8 py-4 rounded-full font-medium transition-transform hover:scale-105"
                 >
-                  Start Exploring
+                  {user ? "Go to Dashboard" : "Start Exploring"}
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
@@ -56,12 +68,12 @@ export default function LandingPage() {
               <div className="mt-12 flex items-center gap-4">
                 <div className="flex -space-x-3">
                   {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className="w-10 h-10 rounded-full border-2 border-white dark:border-zinc-950 bg-zinc-200 dark:bg-zinc-800 overflow-hidden">
+                    <div key={i} className="w-10 h-10 rounded-full border-2 border-white dark:border-zinc-950 bg-zinc-200 dark:bg-zinc-800 overflow-hidden relative">
                       <Image
                         src={`https://images.unsplash.com/photo-${1534528741775 + i * 100}?ixlib=rb-4.0.3&w=100&h=100&fit=crop`}
                         alt="User avatar"
-                        width={40}
-                        height={40}
+                        fill
+                        className="object-cover"
                       />
                     </div>
                   ))}
@@ -100,7 +112,7 @@ export default function LandingPage() {
                   className="object-cover"
                 />
                 <div className="absolute bottom-4 left-4 right-4 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md p-3 rounded-xl shadow-lg border border-white/20">
-                  <p className="font-semibold text-sm mb-1">Authentic Filter Filter</p>
+                  <p className="font-semibold text-sm mb-1 text-zinc-900 dark:text-white">Authentic Filter Coffee</p>
                   <p className="text-xs text-zinc-500 flex items-center gap-1"><Coffee className="w-3 h-3" /> Culinary Trail</p>
                 </div>
               </div>
@@ -148,6 +160,11 @@ export default function LandingPage() {
       </main>
 
       <Footer />
+
+      <AuthOverlay
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+      />
     </div>
   );
 }

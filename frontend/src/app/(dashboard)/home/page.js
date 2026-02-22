@@ -1,6 +1,7 @@
 "use client";
 
 import Sidebar from "../../components/Sidebar";
+import Link from "next/link";
 import { Sparkles, ArrowRight, Calendar, MapPin } from "lucide-react";
 
 export default function HomeDashboard() {
@@ -20,10 +21,10 @@ export default function HomeDashboard() {
                                 <Sparkles className="w-8 h-8 mb-4 text-white/80" />
                                 <h3 className="text-xl font-bold mb-2">Plan a New Trip</h3>
                                 <p className="text-white/80 mb-6 max-w-sm">Let our AI craft the perfect itinerary tailored to your schedule and interests.</p>
-                                <button className="bg-white text-indigo-600 px-6 py-2.5 rounded-full font-medium inline-flex items-center gap-2 hover:bg-zinc-50 transition-colors">
+                                <Link href="/chat" className="bg-white text-indigo-600 px-6 py-2.5 rounded-full font-medium inline-flex items-center gap-2 hover:bg-zinc-50 transition-colors">
                                     Start Planning
                                     <ArrowRight className="w-4 h-4" />
-                                </button>
+                                </Link>
                             </div>
                             <div className="absolute right-0 top-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none" />
                         </div>

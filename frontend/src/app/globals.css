@@ -39,8 +39,8 @@
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-ring: var(--sidebar-ring);
 
-    --font-sans: var(--font-poppins);
-    --font-display: var(--font-poppins);
+    --font-sans: var(--font-montserrat);
+    --font-display: var(--font-montserrat);
 
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);

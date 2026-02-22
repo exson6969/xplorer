@@ -1,7 +1,15 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
-import { Search, Compass, LogIn } from "lucide-react";
+import { useAuth } from "../../context/AuthContext";
+import AuthOverlay from "./AuthOverlay";
+import { Search, Compass, LogIn, LayoutDashboard } from "lucide-react";
 
 export default function Navbar() {
+    const { user } = useAuth();
+    const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+
     return (
         <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-zinc-200 dark:bg-zinc-950/80 dark:border-zinc-800 transition-colors">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -31,17 +39,42 @@ export default function Navbar() {
 
                     {/* Right Actions */}
                     <div className="flex items-center gap-4">
-                        <Link href="/home" className="hidden sm:flex items-center gap-2 text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50 transition-colors">
-                            <LogIn className="w-4 h-4" />
-                            Sign In
-                        </Link>
-                        <Link href="/home" className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-full font-medium text-sm transition-all hover:shadow-lg hover:shadow-indigo-500/25 flex items-center gap-2">
+                        {user ? (
+                            <Link href="/home" className="hidden sm:flex items-center gap-2 text-sm font-bold text-indigo-600 dark:text-indigo-400 transition-colors">
+                                <LayoutDashboard className="w-4 h-4" />
+                                Dashboard
+                            </Link>
+                        ) : (
+                            <button
+                                onClick={() => setIsAuthModalOpen(true)}
+                                className="hidden sm:flex items-center gap-2 text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50 transition-colors"
+                            >
+                                <LogIn className="w-4 h-4" />
+                                Sign In
+                            </button>
+                        )}
+
+                        <Link
+                            href={user ? "/chat" : "#"}
+                            onClick={(e) => {
+                                if (!user) {
+                                    e.preventDefault();
+                                    setIsAuthModalOpen(true);
+                                }
+                            }}
+                            className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-full font-medium text-sm transition-all hover:shadow-lg hover:shadow-indigo-500/25 flex items-center gap-2"
+                        >
                             <Compass className="w-4 h-4" />
-                            Start Exploring
+                            {user ? "Start Planning" : "Start Exploring"}
                         </Link>
                     </div>
                 </div>
             </div>
+
+            <AuthOverlay
+                isOpen={isAuthModalOpen}
+                onClose={() => setIsAuthModalOpen(false)}
+            />
         </nav>
     );
 }
