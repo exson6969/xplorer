@@ -239,7 +239,7 @@ export default function MessageBubble({ message, onSubmitData }) {
                 {/* AI Label */}
                 <div className="flex items-center gap-2 mb-2">
                     <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
-                        Explorer Agent
+                        Xplorer Agent
                     </span>
                 </div>
 

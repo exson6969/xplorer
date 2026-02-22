@@ -2,11 +2,11 @@
 
 import { useEffect, useState, useRef } from "react";
 import { useSearchParams } from "next/navigation";
-import Sidebar from "../../components/Sidebar";
-import MessageBubble from "../../components/MessageBubble";
-import ItineraryPanel from "../../components/ItineraryPanel";
-import TripPlannerView from "../../components/TripPlannerView";
-import useChatStore from "../../../store/useChatStore";
+import Sidebar from "../components/Sidebar";
+import MessageBubble from "../components/MessageBubble";
+import ItineraryPanel from "../components/ItineraryPanel";
+import TripPlannerView from "../components/TripPlannerView";
+import useChatStore from "../../store/useChatStore";
 import { Send, Sparkles, Loader2, Plus } from "lucide-react";
 
 export default function ChatPage() {
@@ -149,9 +149,7 @@ export default function ChatPage() {
                 {/* Chat Header */}
                 <header className="h-16 border-b border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md flex items-center justify-between px-8 z-10">
                     <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white">
-                            <Sparkles className="w-5 h-5" />
-                        </div>
+                        
                         <div>
                             <h2 className="font-bold text-zinc-900 dark:text-zinc-50">
                                 {currentSessionId
@@ -159,10 +157,6 @@ export default function ChatPage() {
                                     : "New Consultation"
                                 }
                             </h2>
-                            <p className="text-[10px] text-emerald-600 dark:text-emerald-500 font-bold uppercase tracking-widest flex items-center gap-1">
-                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                                AI Agent Online
-                            </p>
                         </div>
                     </div>
 
@@ -189,7 +183,6 @@ export default function ChatPage() {
                                 <div className="w-20 h-20 rounded-3xl bg-indigo-50 dark:bg-indigo-500/10 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-6 border border-indigo-100 dark:border-indigo-500/20">
                                     <Sparkles className="w-10 h-10" />
                                 </div>
-                                <h3 className="text-2xl font-bold mb-3 text-zinc-900 dark:text-zinc-50">Experience Chennai like never before</h3>
                                 <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
                                     I'm your Xplorer AI. Mention your interests, travel dates, or specific spots you want to visit, and I'll craft the perfect itinerary.
                                 </p>

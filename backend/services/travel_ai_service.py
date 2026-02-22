@@ -10,13 +10,18 @@ load_dotenv(dotenv_path=os.path.join(_BACKEND_DIR, ".env"))
 
 from google import genai
 from google.genai import types
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain.tools import tool
 
 from services.neo4j_service import query_graph
 from services.firestore_service import get_user_profile
 
 # Initialize Gemini
+MODEL = "gemini-2.5-flash"
+client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
+
 llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash-lite",
+    model="gemini-2.5-flash",
     google_api_key=os.getenv("GOOGLE_API_KEY"),
     temperature=0.3
 )
@@ -55,6 +60,19 @@ def get_current_date() -> str:
     Call this tool whenever the user mentions relative times like 'tomorrow', 'next week', 'today', etc. to calculate the exact dates.
     """
     return datetime.now().strftime("%A, %B %d, %Y")
+
+# Define tools list for GenAI
+TOOLS = [search_travel_graph, check_chennai_weather, get_current_date]
+
+async def execute_tool(name: str, args: dict):
+    """Router to execute the correct tool based on GenAI's function call."""
+    if name == "search_travel_graph":
+        return search_travel_graph.func(**args)
+    elif name == "check_chennai_weather":
+        return await check_chennai_weather.func(**args)
+    elif name == "get_current_date":
+        return get_current_date.func()
+    return f"Error: Tool '{name}' not found."
 
 class XplorerAI:
     def __init__(self, uid: str):
@@ -138,7 +156,7 @@ class XplorerAI:
         # Configuration
         config = types.GenerateContentConfig(
             system_instruction=system_prompt,
-            tools=[TOOLS],
+            tools=TOOLS,
             temperature=0.3,
         )
 

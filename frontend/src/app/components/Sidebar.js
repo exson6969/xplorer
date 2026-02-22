@@ -1,20 +1,27 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "../../context/AuthContext";
 import useChatStore from "../../store/useChatStore";
-import { Home, Compass, Map, User, Settings, LogOut, Clock, MessageSquare, Trash2 } from "lucide-react";
+import { Home, Compass, Map, User, Settings, LogOut, Clock, MessageSquare, Trash2, ChevronRight } from "lucide-react";
 
 export default function Sidebar() {
     const { logout } = useAuth();
     const pathname = usePathname();
-    const { sessions, deleteSession } = useChatStore();
+    const { sessions, deleteSession, fetchSessions } = useChatStore();
+
+    useEffect(() => {
+        // Fetch sessions on mount if we don't have any
+        if (sessions.length === 0) {
+            fetchSessions(10);
+        }
+    }, []);
 
     const navItems = [
-        { href: "/home", label: "Dashboard", icon: Home },
-        { href: "/trips", label: "My Trips", icon: Map },
         { href: "/chat", label: "AI Consultation", icon: Compass },
+        { href: "/trips", label: "My Trips", icon: Map },
         { href: "/history", label: "History", icon: Clock },
     ];
 
@@ -23,7 +30,7 @@ export default function Sidebar() {
             <div className="h-16 flex items-center px-6 border-b border-zinc-200 dark:border-zinc-800">
                 <Link href="/" className="flex items-center gap-2">
                     <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-600 to-indigo-800 text-white flex items-center justify-center font-bold text-xl">
-                        X
+                        E
                     </div>
                     <span className="font-bold text-xl tracking-tight text-zinc-900 dark:text-zinc-50">
                         XPLORER
@@ -52,8 +59,13 @@ export default function Sidebar() {
                 {/* Recent Chat Sessions */}
                 {sessions.length > 0 && (
                     <div className="mt-6 pt-4 border-t border-zinc-200 dark:border-zinc-800">
-                        <p className="px-3 text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-2">Recent Chats</p>
-                        {sessions.slice(0, 5).map(session => (
+                        <div className="flex items-center justify-between px-3 mb-2">
+                            <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Recent Chats</p>
+                            <Link href="/history" className="text-[10px] font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-0.5 transition-colors">
+                                See all <ChevronRight className="w-2.5 h-2.5" />
+                            </Link>
+                        </div>
+                        {sessions.slice(0, 8).map(session => (
                             <div key={session.convo_id} className="group flex items-center gap-2">
                                 <Link
                                     href={`/chat?id=${session.convo_id}`}

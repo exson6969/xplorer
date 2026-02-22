@@ -154,9 +154,13 @@ async def send_message_to_agent(
 # ─── 3. TRIP HISTORY & SESSIONS ─────────────────────────────────────────────
 
 @router.get("/chat/sessions", response_model=List[ConversationListItem])
-def list_my_trip_consultations(user: dict = Depends(get_current_user)):
-    """Returns a list of all past AI chat sessions."""
-    return list_conversations(user["uid"])
+def list_my_trip_consultations(
+    limit: int = 20,
+    last_updated_at: str = None,
+    user: dict = Depends(get_current_user)
+):
+    """Returns a list of all past AI chat sessions with pagination."""
+    return list_conversations(user["uid"], limit=limit, last_updated_at=last_updated_at)
 
 @router.get("/chat/sessions/{session_id}", response_model=ConversationResponse)
 def get_full_chat_details(session_id: str, user: dict = Depends(get_current_user)):

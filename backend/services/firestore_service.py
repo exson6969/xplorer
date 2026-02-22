@@ -183,10 +183,16 @@ def add_message(uid: str, convo_id: str, user_input: str, ai_generated_output: U
 
         # Update conversation metadata
         existing = convo_doc.to_dict()
-        convo_ref.update({
+        update_payload = {
             "updated_at": now,
             "message_count": existing.get("message_count", 0) + 1,
-        })
+        }
+
+        # Check if this response contains an itinerary
+        if isinstance(ai_generated_output, dict) and ai_generated_output.get("itinerary"):
+            update_payload["has_itinerary"] = True
+
+        convo_ref.update(update_payload)
 
         return {
             "message_id": message_id,
@@ -238,22 +244,29 @@ def get_conversation(uid: str, convo_id: str) -> dict:
     }
 
 
-def list_conversations(uid: str) -> list:
+def list_conversations(uid: str, limit: int = 20, last_updated_at: str = None) -> list:
     """
     List all conversations for a user (summary only — no messages).
     Returns empty list [] if the user has never started a conversation.
     Ordered by most recently updated first.
+    Includes pagination via limit and last_updated_at (ISO string).
     """
     db = get_firestore()
 
     try:
-        docs = (
+        query = (
             db.collection("users")
             .document(uid)
             .collection("conversations")
             .order_by("updated_at", direction="DESCENDING")
-            .stream()
         )
+
+        if last_updated_at:
+            query = query.start_after({"updated_at": last_updated_at})
+
+        query = query.limit(limit)
+        
+        docs = query.stream()
         result = []
         for doc in docs:
             d = doc.to_dict()
@@ -263,6 +276,7 @@ def list_conversations(uid: str) -> list:
                 "created_at": d.get("created_at", ""),
                 "updated_at": d.get("updated_at", ""),
                 "message_count": d.get("message_count", 0),
+                "has_itinerary": d.get("has_itinerary", False),
             })
         return result  # Will be [] for new users — perfectly normal
     except Exception as e:

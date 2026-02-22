@@ -40,9 +40,9 @@ export default function Navbar() {
                     {/* Right Actions */}
                     <div className="flex items-center gap-4">
                         {user ? (
-                            <Link href="/home" className="hidden sm:flex items-center gap-2 text-sm font-bold text-indigo-600 dark:text-indigo-400 transition-colors">
-                                <LayoutDashboard className="w-4 h-4" />
-                                Dashboard
+                            <Link href="/chat" className="hidden sm:flex items-center gap-2 text-sm font-bold text-indigo-600 dark:text-indigo-400 transition-colors">
+                                <Compass className="w-4 h-4" />
+                                Start Planning
                             </Link>
                         ) : (
                             <button

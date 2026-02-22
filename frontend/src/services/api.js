@@ -26,7 +26,11 @@ export const authService = {
 };
 
 export const chatService = {
-    listRecentChats: () => api.get("/user/chat/sessions"),
+    listRecentChats: (limit = 20, lastUpdatedAt = null) => {
+        let url = `/user/chat/sessions?limit=${limit}`;
+        if (lastUpdatedAt) url += `&last_updated_at=${encodeURIComponent(lastUpdatedAt)}`;
+        return api.get(url);
+    },
     getChatDetails: (sessionId) => api.get(`/user/chat/sessions/${sessionId}`),
     startNewChat: (userInput, submittedData = null) =>
         api.post("/user/chat/new", { user_input: userInput, submitted_data: submittedData }),

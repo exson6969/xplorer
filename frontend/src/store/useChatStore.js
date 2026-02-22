@@ -33,14 +33,39 @@ const useChatStore = create((set, get) => ({
     confirmedTrip: null,
     routeData: null,
     isLoading: false,
+    hasMoreSessions: true,
     error: null,
 
-    fetchSessions: async () => {
+    fetchSessions: async (limit = 20) => {
+        set({ isLoading: true });
         try {
-            const resp = await chatService.listRecentChats();
-            set({ sessions: resp.data });
+            const resp = await chatService.listRecentChats(limit);
+            set({ 
+                sessions: resp.data, 
+                hasMoreSessions: resp.data.length === limit,
+                isLoading: false 
+            });
         } catch (err) {
-            set({ error: err.message });
+            set({ error: err.message, isLoading: false });
+        }
+    },
+
+    fetchMoreSessions: async (limit = 20) => {
+        const { sessions, hasMoreSessions, isLoading } = get();
+        if (!hasMoreSessions || isLoading || sessions.length === 0) return;
+
+        set({ isLoading: true });
+        try {
+            const lastSession = sessions[sessions.length - 1];
+            const resp = await chatService.listRecentChats(limit, lastSession.updated_at);
+            
+            set({ 
+                sessions: [...sessions, ...resp.data],
+                hasMoreSessions: resp.data.length === limit,
+                isLoading: false 
+            });
+        } catch (err) {
+            set({ error: err.message, isLoading: false });
         }
     },
 

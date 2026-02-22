@@ -44,7 +44,7 @@ export default function LandingPage() {
 
               <div className="flex flex-col sm:flex-row w-full max-w-md gap-4">
                 <Link
-                  href={user ? "/home" : "#"}
+                  href={user ? "/chat" : "#"}
                   onClick={(e) => {
                     if (!user) {
                       e.preventDefault();
@@ -53,7 +53,7 @@ export default function LandingPage() {
                   }}
                   className="flex-1 flex justify-center items-center gap-2 bg-zinc-900 hover:bg-zinc-800 dark:bg-white dark:hover:bg-zinc-100 text-white dark:text-zinc-900 px-8 py-4 rounded-full font-medium transition-transform hover:scale-105"
                 >
-                  {user ? "Go to Dashboard" : "Start Exploring"}
+                  {user ? "Go to Chat" : "Start Exploring"}
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
