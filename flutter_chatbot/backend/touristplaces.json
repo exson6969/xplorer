@@ -1,0 +1,549 @@
+[
+    {
+        "id": "TP001",
+        "name": "Marina Beach",
+        "city": "Chennai",
+        "category": "Beach",
+        "entry_fee": 0,
+        "best_time": "Evening (5 PM – 8 PM)",
+        "duration_hours": 2,
+        "description": "India's longest urban beach along the Bay of Bengal. Famous for evening walks, street food stalls, statues, and spectacular sunrises.",
+        "suitable_for": [
+            "Family",
+            "Couple",
+            "Solo",
+            "Friends"
+        ],
+        "lat": 13.05,
+        "lng": 80.2824
+    },
+    {
+        "id": "TP002",
+        "name": "Kapaleeshwarar Temple",
+        "city": "Chennai",
+        "category": "Temple",
+        "entry_fee": 0,
+        "best_time": "Morning (6 AM – 9 AM)",
+        "duration_hours": 1,
+        "description": "7th-century Dravidian architecture temple in Mylapore dedicated to Lord Shiva, with a stunning colorful gopuram and sacred tank.",
+        "suitable_for": [
+            "Family",
+            "Solo"
+        ],
+        "lat": 13.0335,
+        "lng": 80.2689
+    },
+    {
+        "id": "TP003",
+        "name": "Fort St. George",
+        "city": "Chennai",
+        "category": "Heritage",
+        "entry_fee": 15,
+        "best_time": "Morning (9 AM – 12 PM)",
+        "duration_hours": 1.5,
+        "description": "First English fortress in India built in 1644, now housing the Tamil Nadu Legislature and a colonial-era museum.",
+        "suitable_for": [
+            "Family",
+            "Solo",
+            "Business"
+        ],
+        "lat": 13.0805,
+        "lng": 80.2872
+    },
+    {
+        "id": "TP004",
+        "name": "Government Museum Chennai",
+        "city": "Chennai",
+        "category": "Museum",
+        "entry_fee": 15,
+        "best_time": "Morning (10 AM – 1 PM)",
+        "duration_hours": 2,
+        "description": "One of India's oldest museums with over 46,000 artifacts including Bronze Age relics, Roman coins, and Egyptian mummies.",
+        "suitable_for": [
+            "Family",
+            "Solo",
+            "Business"
+        ],
+        "lat": 13.0722,
+        "lng": 80.257
+    },
+    {
+        "id": "TP005",
+        "name": "Elliot's Beach",
+        "city": "Chennai",
+        "category": "Beach",
+        "entry_fee": 0,
+        "best_time": "Evening (4 PM – 8 PM)",
+        "duration_hours": 2,
+        "description": "Calm and clean beach in Besant Nagar. Popular for jogging, cafes, and the nearby Ashtalakshmi Temple.",
+        "suitable_for": [
+            "Couple",
+            "Solo",
+            "Friends"
+        ],
+        "lat": 12.9994,
+        "lng": 80.2721
+    },
+    {
+        "id": "TP006",
+        "name": "Guindy National Park",
+        "city": "Chennai",
+        "category": "Nature",
+        "entry_fee": 20,
+        "best_time": "Morning (9 AM – 11 AM)",
+        "duration_hours": 2,
+        "description": "Urban national park with spotted deer, black buck, and rare birds. Includes a snake park for family visits.",
+        "suitable_for": [
+            "Family",
+            "Solo"
+        ],
+        "lat": 13.0067,
+        "lng": 80.2415
+    },
+    {
+        "id": "TP007",
+        "name": "Pondy Bazaar",
+        "city": "Chennai",
+        "category": "Shopping",
+        "entry_fee": 0,
+        "best_time": "Evening (6 PM – 9 PM)",
+        "duration_hours": 2,
+        "description": "Bustling T Nagar shopping street famous for sarees, jewelry, electronics, and delicious street food.",
+        "suitable_for": [
+            "Family",
+            "Couple",
+            "Friends"
+        ],
+        "lat": 13.0396,
+        "lng": 80.2372
+    },
+    {
+        "id": "TP008",
+        "name": "Gateway of India",
+        "city": "Mumbai",
+        "category": "Heritage",
+        "entry_fee": 0,
+        "best_time": "Morning (7 AM – 10 AM)",
+        "duration_hours": 1,
+        "description": "Iconic 1924 arch monument overlooking the Arabian Sea. Built to commemorate the visit of King George V. Great for boat rides to Elephanta Caves.",
+        "suitable_for": [
+            "Family",
+            "Couple",
+            "Solo",
+            "Business"
+        ],
+        "lat": 18.922,
+        "lng": 72.8347
+    },
+    {
+        "id": "TP009",
+        "name": "Marine Drive",
+        "city": "Mumbai",
+        "category": "Beach",
+        "entry_fee": 0,
+        "best_time": "Evening (6 PM – 9 PM)",
+        "duration_hours": 1.5,
+        "description": "The famous 'Queen's Necklace' boulevard along the Arabian Sea, perfect for sunset walks and city ambience.",
+        "suitable_for": [
+            "Couple",
+            "Solo",
+            "Friends",
+            "Family"
+        ],
+        "lat": 18.944,
+        "lng": 72.8226
+    },
+    {
+        "id": "TP010",
+        "name": "Elephanta Caves",
+        "city": "Mumbai",
+        "category": "Heritage",
+        "entry_fee": 40,
+        "best_time": "Morning (9 AM – 12 PM)",
+        "duration_hours": 3,
+        "description": "UNESCO World Heritage cave temples dedicated to Lord Shiva on Elephanta Island. Accessible by ferry from Gateway of India.",
+        "suitable_for": [
+            "Family",
+            "Solo",
+            "Couple"
+        ],
+        "lat": 18.9633,
+        "lng": 72.9315
+    },
+    {
+        "id": "TP011",
+        "name": "Juhu Beach",
+        "city": "Mumbai",
+        "category": "Beach",
+        "entry_fee": 0,
+        "best_time": "Evening (5 PM – 8 PM)",
+        "duration_hours": 2,
+        "description": "Popular beach famous for street food (pani puri, bhel puri), sunsets, and celebrity spotting.",
+        "suitable_for": [
+            "Family",
+            "Couple",
+            "Friends"
+        ],
+        "lat": 19.0988,
+        "lng": 72.8267
+    },
+    {
+        "id": "TP012",
+        "name": "Chhatrapati Shivaji Maharaj Terminus",
+        "city": "Mumbai",
+        "category": "Heritage",
+        "entry_fee": 0,
+        "best_time": "Morning (8 AM – 10 AM)",
+        "duration_hours": 1,
+        "description": "UNESCO World Heritage Victorian-Gothic railway station built in 1888. Architectural masterpiece blending European and Mughal styles.",
+        "suitable_for": [
+            "Solo",
+            "Couple",
+            "Business"
+        ],
+        "lat": 18.9398,
+        "lng": 72.8354
+    },
+    {
+        "id": "TP013",
+        "name": "Calangute Beach",
+        "city": "Goa",
+        "category": "Beach",
+        "entry_fee": 0,
+        "best_time": "Morning (8 AM – 11 AM)",
+        "duration_hours": 3,
+        "description": "Most popular beach in Goa known as the 'Queen of Beaches'. Ideal for water sports, sunbathing, and vibrant beach shacks.",
+        "suitable_for": [
+            "Friends",
+            "Couple",
+            "Solo"
+        ],
+        "lat": 15.5494,
+        "lng": 73.7626
+    },
+    {
+        "id": "TP014",
+        "name": "Basilica of Bom Jesus",
+        "city": "Goa",
+        "category": "Heritage",
+        "entry_fee": 0,
+        "best_time": "Morning (9 AM – 11 AM)",
+        "duration_hours": 1,
+        "description": "UNESCO World Heritage 16th-century Baroque church housing the mortal remains of St. Francis Xavier.",
+        "suitable_for": [
+            "Family",
+            "Solo",
+            "Couple"
+        ],
+        "lat": 15.4989,
+        "lng": 73.9115
+    },
+    {
+        "id": "TP015",
+        "name": "Dudhsagar Falls",
+        "city": "Goa",
+        "category": "Nature",
+        "entry_fee": 400,
+        "best_time": "Post-monsoon (Oct – Dec)",
+        "duration_hours": 5,
+        "description": "One of India's tallest waterfalls at 310m, accessible by jeep safari through the jungle. Breathtaking natural beauty.",
+        "suitable_for": [
+            "Friends",
+            "Solo",
+            "Couple"
+        ],
+        "lat": 15.3144,
+        "lng": 74.3143
+    },
+    {
+        "id": "TP016",
+        "name": "Anjuna Flea Market",
+        "city": "Goa",
+        "category": "Shopping",
+        "entry_fee": 0,
+        "best_time": "Wednesday (8 AM – 6 PM)",
+        "duration_hours": 3,
+        "description": "Famous weekly flea market with handicrafts, clothes, spices, and global street food. Held every Wednesday.",
+        "suitable_for": [
+            "Couple",
+            "Friends",
+            "Solo"
+        ],
+        "lat": 15.5786,
+        "lng": 73.742
+    },
+    {
+        "id": "TP017",
+        "name": "Baga Beach",
+        "city": "Goa",
+        "category": "Beach",
+        "entry_fee": 0,
+        "best_time": "Evening (4 PM – 9 PM)",
+        "duration_hours": 3,
+        "description": "Vibrant beach with beach clubs, water sports, night markets, and famous shacks. Best for nightlife and adventure activities.",
+        "suitable_for": [
+            "Friends",
+            "Couple"
+        ],
+        "lat": 15.5553,
+        "lng": 73.7517
+    },
+    {
+        "id": "TP018",
+        "name": "Red Fort",
+        "city": "Delhi",
+        "category": "Heritage",
+        "entry_fee": 35,
+        "best_time": "Morning (9 AM – 12 PM)",
+        "duration_hours": 2,
+        "description": "UNESCO World Heritage Mughal-era fort built by Shah Jahan in 1648. Main site of India's Independence Day ceremony.",
+        "suitable_for": [
+            "Family",
+            "Solo",
+            "Couple",
+            "Business"
+        ],
+        "lat": 28.6562,
+        "lng": 77.241
+    },
+    {
+        "id": "TP019",
+        "name": "Qutub Minar",
+        "city": "Delhi",
+        "category": "Heritage",
+        "entry_fee": 35,
+        "best_time": "Morning (7 AM – 10 AM)",
+        "duration_hours": 1.5,
+        "description": "UNESCO World Heritage 73m tall minaret built in 1193. Surrounded by ruins of the Quwwat-ul-Islam mosque.",
+        "suitable_for": [
+            "Family",
+            "Solo",
+            "Business"
+        ],
+        "lat": 28.5245,
+        "lng": 77.1855
+    },
+    {
+        "id": "TP020",
+        "name": "India Gate",
+        "city": "Delhi",
+        "category": "Monument",
+        "entry_fee": 0,
+        "best_time": "Evening (6 PM – 9 PM)",
+        "duration_hours": 1,
+        "description": "War memorial arch dedicated to Indian soldiers. Especially beautiful at night when lit up, with lush lawns for picnics.",
+        "suitable_for": [
+            "Family",
+            "Couple",
+            "Solo"
+        ],
+        "lat": 28.6129,
+        "lng": 77.2295
+    },
+    {
+        "id": "TP021",
+        "name": "Lotus Temple",
+        "city": "Delhi",
+        "category": "Temple",
+        "entry_fee": 0,
+        "best_time": "Afternoon (2 PM – 5 PM)",
+        "duration_hours": 1,
+        "description": "Bahai House of Worship in stunning lotus-flower shape, open to people of all faiths. Architectural marvel with serene gardens.",
+        "suitable_for": [
+            "Family",
+            "Solo",
+            "Couple"
+        ],
+        "lat": 28.5535,
+        "lng": 77.2588
+    },
+    {
+        "id": "TP022",
+        "name": "Humayun's Tomb",
+        "city": "Delhi",
+        "category": "Heritage",
+        "entry_fee": 35,
+        "best_time": "Morning (7 AM – 10 AM)",
+        "duration_hours": 1.5,
+        "description": "UNESCO World Heritage tomb that inspired the Taj Mahal. Beautiful Mughal architecture set in Persian-style gardens.",
+        "suitable_for": [
+            "Couple",
+            "Solo",
+            "Family"
+        ],
+        "lat": 28.5933,
+        "lng": 77.2507
+    },
+    {
+        "id": "TP023",
+        "name": "Lalbagh Botanical Garden",
+        "city": "Bangalore",
+        "category": "Nature",
+        "entry_fee": 20,
+        "best_time": "Morning (6 AM – 9 AM)",
+        "duration_hours": 2,
+        "description": "240-acre garden with 1,800 species of tropical plants, a Victorian glasshouse, and a famous lotus pond. Ideal for morning walks.",
+        "suitable_for": [
+            "Family",
+            "Couple",
+            "Solo"
+        ],
+        "lat": 12.9507,
+        "lng": 77.5848
+    },
+    {
+        "id": "TP024",
+        "name": "Bangalore Palace",
+        "city": "Bangalore",
+        "category": "Heritage",
+        "entry_fee": 230,
+        "best_time": "Morning (10 AM – 12 PM)",
+        "duration_hours": 1.5,
+        "description": "Tudor-style palace built in 1878 inspired by England's Windsor Castle, with fortified towers and elegant interiors.",
+        "suitable_for": [
+            "Family",
+            "Couple",
+            "Solo"
+        ],
+        "lat": 12.9982,
+        "lng": 77.592
+    },
+    {
+        "id": "TP025",
+        "name": "UB City Mall",
+        "city": "Bangalore",
+        "category": "Shopping",
+        "entry_fee": 0,
+        "best_time": "Evening (4 PM – 9 PM)",
+        "duration_hours": 3,
+        "description": "Luxury lifestyle destination with premium brands, fine dining, and art installations. Bangalore's most premium shopping hub.",
+        "suitable_for": [
+            "Couple",
+            "Business",
+            "Friends"
+        ],
+        "lat": 12.9716,
+        "lng": 77.595
+    },
+    {
+        "id": "TP026",
+        "name": "Charminar",
+        "city": "Hyderabad",
+        "category": "Heritage",
+        "entry_fee": 25,
+        "best_time": "Morning (9 AM – 12 PM)",
+        "duration_hours": 1,
+        "description": "Iconic 1591 monument and mosque symbolizing Hyderabad. Surrounded by bustling Laad Bazaar with colorful bangles and pearls.",
+        "suitable_for": [
+            "Family",
+            "Couple",
+            "Solo",
+            "Business"
+        ],
+        "lat": 17.3616,
+        "lng": 78.4747
+    },
+    {
+        "id": "TP027",
+        "name": "Golconda Fort",
+        "city": "Hyderabad",
+        "category": "Heritage",
+        "entry_fee": 15,
+        "best_time": "Morning (9 AM – 11 AM)",
+        "duration_hours": 3,
+        "description": "Magnificent medieval fort famous for its acoustics, diamond mines (Koh-i-Noor), and panoramic city views from the top.",
+        "suitable_for": [
+            "Family",
+            "Solo",
+            "Couple"
+        ],
+        "lat": 17.3833,
+        "lng": 78.4011
+    },
+    {
+        "id": "TP028",
+        "name": "Hussain Sagar Lake",
+        "city": "Hyderabad",
+        "category": "Nature",
+        "entry_fee": 0,
+        "best_time": "Evening (5 PM – 8 PM)",
+        "duration_hours": 1.5,
+        "description": "1562 artificial lake with a giant Buddha statue in the middle. Boat rides, lakeshore promenade, and evening light shows.",
+        "suitable_for": [
+            "Family",
+            "Couple",
+            "Friends"
+        ],
+        "lat": 17.4239,
+        "lng": 78.4738
+    },
+    {
+        "id": "TP029",
+        "name": "Amber Fort",
+        "city": "Jaipur",
+        "category": "Heritage",
+        "entry_fee": 200,
+        "best_time": "Morning (8 AM – 11 AM)",
+        "duration_hours": 3,
+        "description": "UNESCO World Heritage hilltop fort with stunning Rajput and Mughal architecture, elephant rides, and panoramic lake views.",
+        "suitable_for": [
+            "Family",
+            "Couple",
+            "Solo"
+        ],
+        "lat": 26.9855,
+        "lng": 75.8513
+    },
+    {
+        "id": "TP030",
+        "name": "Hawa Mahal",
+        "city": "Jaipur",
+        "category": "Heritage",
+        "entry_fee": 50,
+        "best_time": "Morning (9 AM – 11 AM)",
+        "duration_hours": 1,
+        "description": "Iconic five-story palace of winds with 953 small windows built for royal women to observe street life. Pink sandstone architecture.",
+        "suitable_for": [
+            "Couple",
+            "Solo",
+            "Family"
+        ],
+        "lat": 26.9239,
+        "lng": 75.8267
+    },
+    {
+        "id": "TP031",
+        "name": "Victoria Memorial",
+        "city": "Kolkata",
+        "category": "Heritage",
+        "entry_fee": 30,
+        "best_time": "Morning (10 AM – 12 PM)",
+        "duration_hours": 2,
+        "description": "Grand white marble monument built for Queen Victoria, now a museum. Set in 64 acres of lush gardens. Kolkata's most iconic landmark.",
+        "suitable_for": [
+            "Family",
+            "Couple",
+            "Solo",
+            "Business"
+        ],
+        "lat": 22.5448,
+        "lng": 88.3426
+    },
+    {
+        "id": "TP032",
+        "name": "Howrah Bridge",
+        "city": "Kolkata",
+        "category": "Monument",
+        "entry_fee": 0,
+        "best_time": "Evening (6 PM – 8 PM)",
+        "duration_hours": 1,
+        "description": "Iconic cantilever bridge over the Hooghly River, one of the busiest bridges in the world. Spectacular during sunrise and sunset.",
+        "suitable_for": [
+            "Couple",
+            "Solo",
+            "Friends"
+        ],
+        "lat": 22.5851,
+        "lng": 88.3468
+    }
+]
