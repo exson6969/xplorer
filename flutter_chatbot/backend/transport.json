@@ -1,0 +1,407 @@
+[
+    {
+        "id": "T001",
+        "agency": "Chennai Cabs Express",
+        "city": "Chennai",
+        "rating": 4.6,
+        "contact": "+91-9900112233",
+        "vehicles": [
+            {
+                "type": "Sedan",
+                "capacity": 4,
+                "price_per_day": 1200,
+                "available": true
+            },
+            {
+                "type": "SUV",
+                "capacity": 7,
+                "price_per_day": 2000,
+                "available": true
+            },
+            {
+                "type": "Mini Bus",
+                "capacity": 14,
+                "price_per_day": 3500,
+                "available": false
+            }
+        ]
+    },
+    {
+        "id": "T002",
+        "agency": "TravGo Chennai",
+        "city": "Chennai",
+        "rating": 4.3,
+        "contact": "+91-9811223344",
+        "vehicles": [
+            {
+                "type": "Hatchback",
+                "capacity": 4,
+                "price_per_day": 900,
+                "available": true
+            },
+            {
+                "type": "Sedan",
+                "capacity": 4,
+                "price_per_day": 1300,
+                "available": true
+            },
+            {
+                "type": "Tempo Traveller",
+                "capacity": 20,
+                "price_per_day": 5000,
+                "available": true
+            }
+        ]
+    },
+    {
+        "id": "T003",
+        "agency": "Mumbai Road Kings",
+        "city": "Mumbai",
+        "rating": 4.7,
+        "contact": "+91-9922334455",
+        "vehicles": [
+            {
+                "type": "Sedan",
+                "capacity": 4,
+                "price_per_day": 1500,
+                "available": true
+            },
+            {
+                "type": "Luxury SUV",
+                "capacity": 6,
+                "price_per_day": 4000,
+                "available": true
+            },
+            {
+                "type": "Mini Bus",
+                "capacity": 14,
+                "price_per_day": 6000,
+                "available": false
+            }
+        ]
+    },
+    {
+        "id": "T004",
+        "agency": "GoMumbai Travels",
+        "city": "Mumbai",
+        "rating": 4.2,
+        "contact": "+91-9833445566",
+        "vehicles": [
+            {
+                "type": "Hatchback",
+                "capacity": 4,
+                "price_per_day": 1000,
+                "available": true
+            },
+            {
+                "type": "SUV",
+                "capacity": 7,
+                "price_per_day": 2500,
+                "available": true
+            },
+            {
+                "type": "Tempo Traveller",
+                "capacity": 20,
+                "price_per_day": 7000,
+                "available": true
+            }
+        ]
+    },
+    {
+        "id": "T005",
+        "agency": "Goa Sun Rides",
+        "city": "Goa",
+        "rating": 4.8,
+        "contact": "+91-9944556677",
+        "vehicles": [
+            {
+                "type": "Scooty Rental",
+                "capacity": 1,
+                "price_per_day": 400,
+                "available": true
+            },
+            {
+                "type": "Sedan",
+                "capacity": 4,
+                "price_per_day": 1400,
+                "available": true
+            },
+            {
+                "type": "SUV",
+                "capacity": 7,
+                "price_per_day": 2200,
+                "available": true
+            }
+        ]
+    },
+    {
+        "id": "T006",
+        "agency": "GoGoa Tours",
+        "city": "Goa",
+        "rating": 4.5,
+        "contact": "+91-9866778899",
+        "vehicles": [
+            {
+                "type": "Bike Rental",
+                "capacity": 2,
+                "price_per_day": 500,
+                "available": true
+            },
+            {
+                "type": "Sedan",
+                "capacity": 4,
+                "price_per_day": 1600,
+                "available": true
+            },
+            {
+                "type": "Tempo Traveller",
+                "capacity": 20,
+                "price_per_day": 5500,
+                "available": false
+            }
+        ]
+    },
+    {
+        "id": "T007",
+        "agency": "Delhi Drive Pro",
+        "city": "Delhi",
+        "rating": 4.5,
+        "contact": "+91-9711223344",
+        "vehicles": [
+            {
+                "type": "Sedan",
+                "capacity": 4,
+                "price_per_day": 1300,
+                "available": true
+            },
+            {
+                "type": "SUV",
+                "capacity": 7,
+                "price_per_day": 2300,
+                "available": true
+            },
+            {
+                "type": "Luxury Sedan",
+                "capacity": 4,
+                "price_per_day": 3500,
+                "available": true
+            }
+        ]
+    },
+    {
+        "id": "T008",
+        "agency": "Capital Cabs Delhi",
+        "city": "Delhi",
+        "rating": 4.1,
+        "contact": "+91-9788334455",
+        "vehicles": [
+            {
+                "type": "Hatchback",
+                "capacity": 4,
+                "price_per_day": 900,
+                "available": true
+            },
+            {
+                "type": "Sedan",
+                "capacity": 4,
+                "price_per_day": 1200,
+                "available": true
+            },
+            {
+                "type": "Mini Bus",
+                "capacity": 14,
+                "price_per_day": 4000,
+                "available": true
+            }
+        ]
+    },
+    {
+        "id": "T009",
+        "agency": "Namma Rides Bangalore",
+        "city": "Bangalore",
+        "rating": 4.6,
+        "contact": "+91-9900223388",
+        "vehicles": [
+            {
+                "type": "Sedan",
+                "capacity": 4,
+                "price_per_day": 1200,
+                "available": true
+            },
+            {
+                "type": "SUV",
+                "capacity": 7,
+                "price_per_day": 2000,
+                "available": true
+            },
+            {
+                "type": "Luxury SUV",
+                "capacity": 6,
+                "price_per_day": 3800,
+                "available": false
+            }
+        ]
+    },
+    {
+        "id": "T010",
+        "agency": "Garden City Cabs Bangalore",
+        "city": "Bangalore",
+        "rating": 4.3,
+        "contact": "+91-9966554433",
+        "vehicles": [
+            {
+                "type": "Hatchback",
+                "capacity": 4,
+                "price_per_day": 800,
+                "available": true
+            },
+            {
+                "type": "Sedan",
+                "capacity": 4,
+                "price_per_day": 1400,
+                "available": true
+            },
+            {
+                "type": "Tempo Traveller",
+                "capacity": 20,
+                "price_per_day": 6000,
+                "available": true
+            }
+        ]
+    },
+    {
+        "id": "T011",
+        "agency": "Hyderabad City Tours",
+        "city": "Hyderabad",
+        "rating": 4.7,
+        "contact": "+91-9844112233",
+        "vehicles": [
+            {
+                "type": "Sedan",
+                "capacity": 4,
+                "price_per_day": 1100,
+                "available": true
+            },
+            {
+                "type": "SUV",
+                "capacity": 7,
+                "price_per_day": 1900,
+                "available": true
+            },
+            {
+                "type": "Luxury Sedan",
+                "capacity": 4,
+                "price_per_day": 3000,
+                "available": true
+            }
+        ]
+    },
+    {
+        "id": "T012",
+        "agency": "Biryani City Cabs",
+        "city": "Hyderabad",
+        "rating": 4.0,
+        "contact": "+91-9822334466",
+        "vehicles": [
+            {
+                "type": "Hatchback",
+                "capacity": 4,
+                "price_per_day": 850,
+                "available": true
+            },
+            {
+                "type": "Sedan",
+                "capacity": 4,
+                "price_per_day": 1300,
+                "available": false
+            },
+            {
+                "type": "Mini Bus",
+                "capacity": 14,
+                "price_per_day": 4500,
+                "available": true
+            }
+        ]
+    },
+    {
+        "id": "T013",
+        "agency": "Pink City Rides Jaipur",
+        "city": "Jaipur",
+        "rating": 4.8,
+        "contact": "+91-9755443322",
+        "vehicles": [
+            {
+                "type": "Sedan",
+                "capacity": 4,
+                "price_per_day": 1000,
+                "available": true
+            },
+            {
+                "type": "SUV",
+                "capacity": 7,
+                "price_per_day": 1800,
+                "available": true
+            },
+            {
+                "type": "Luxury SUV",
+                "capacity": 6,
+                "price_per_day": 3500,
+                "available": true
+            }
+        ]
+    },
+    {
+        "id": "T014",
+        "agency": "Royal Rajasthan Tours",
+        "city": "Jaipur",
+        "rating": 4.5,
+        "contact": "+91-9733221100",
+        "vehicles": [
+            {
+                "type": "Sedan",
+                "capacity": 4,
+                "price_per_day": 1200,
+                "available": true
+            },
+            {
+                "type": "Tempo Traveller",
+                "capacity": 20,
+                "price_per_day": 5000,
+                "available": true
+            },
+            {
+                "type": "Camel Cart",
+                "capacity": 4,
+                "price_per_day": 600,
+                "available": true
+            }
+        ]
+    },
+    {
+        "id": "T015",
+        "agency": "Kolkata Heritage Rides",
+        "city": "Kolkata",
+        "rating": 4.4,
+        "contact": "+91-9933221188",
+        "vehicles": [
+            {
+                "type": "Ambassador Cab",
+                "capacity": 4,
+                "price_per_day": 900,
+                "available": true
+            },
+            {
+                "type": "Sedan",
+                "capacity": 4,
+                "price_per_day": 1100,
+                "available": true
+            },
+            {
+                "type": "SUV",
+                "capacity": 7,
+                "price_per_day": 1900,
+                "available": false
+            }
+        ]
+    }
+]

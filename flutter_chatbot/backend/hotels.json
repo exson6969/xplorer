@@ -1,0 +1,396 @@
+[
+    {
+        "id": "H001",
+        "name": "The Leela Palace Chennai",
+        "city": "Chennai",
+        "price_per_night": 12000,
+        "budget_category": "Luxury",
+        "star_rating": 5,
+        "available_rooms": 8,
+        "amenities": [
+            "Pool",
+            "Spa",
+            "Gym",
+            "Restaurant",
+            "Bar",
+            "Valet",
+            "Concierge",
+            "WiFi"
+        ],
+        "description": "Iconic oceanfront luxury palace hotel in Chennai with stunning Bay of Bengal views, world-class dining, and award-winning spa.",
+        "lat": 13.0186,
+        "lng": 80.2741
+    },
+    {
+        "id": "H002",
+        "name": "ITC Grand Chola",
+        "city": "Chennai",
+        "price_per_night": 9500,
+        "budget_category": "Luxury",
+        "star_rating": 5,
+        "available_rooms": 12,
+        "amenities": [
+            "Pool",
+            "Spa",
+            "Gym",
+            "Restaurant",
+            "Bar",
+            "WiFi",
+            "Business Center"
+        ],
+        "description": "Grand Chola-inspired 5-star property in Chennai featuring multiple restaurants and India's largest banquet facilities.",
+        "lat": 13.0104,
+        "lng": 80.2206
+    },
+    {
+        "id": "H003",
+        "name": "Hyatt Regency Chennai",
+        "city": "Chennai",
+        "price_per_night": 6500,
+        "budget_category": "Luxury",
+        "star_rating": 5,
+        "available_rooms": 15,
+        "amenities": [
+            "Pool",
+            "Gym",
+            "Restaurant",
+            "Bar",
+            "WiFi",
+            "Business Center"
+        ],
+        "description": "Modern luxury hotel near the airport with rooftop pool and contemporary design, ideal for business and leisure travelers.",
+        "lat": 13.0426,
+        "lng": 80.2483
+    },
+    {
+        "id": "H004",
+        "name": "Radisson Blu Hotel Chennai",
+        "city": "Chennai",
+        "price_per_night": 4200,
+        "budget_category": "Medium",
+        "star_rating": 4,
+        "available_rooms": 20,
+        "amenities": [
+            "Pool",
+            "Gym",
+            "Restaurant",
+            "WiFi",
+            "Business Center"
+        ],
+        "description": "Comfortable 4-star business hotel in GK Road offering modern amenities, excellent service, and great city connectivity.",
+        "lat": 12.9868,
+        "lng": 80.1746
+    },
+    {
+        "id": "H005",
+        "name": "Hotel Saravana Bhavan Grand",
+        "city": "Chennai",
+        "price_per_night": 1800,
+        "budget_category": "Low",
+        "star_rating": 3,
+        "available_rooms": 30,
+        "amenities": [
+            "Restaurant",
+            "WiFi",
+            "AC"
+        ],
+        "description": "Budget-friendly hotel affiliated with the famous Saravana Bhavan chain, offering clean rooms and authentic South Indian meals.",
+        "lat": 13.0827,
+        "lng": 80.2707
+    },
+    {
+        "id": "H006",
+        "name": "Hotel Comfort Inn Marina",
+        "city": "Chennai",
+        "price_per_night": 1200,
+        "budget_category": "Low",
+        "star_rating": 2,
+        "available_rooms": 25,
+        "amenities": [
+            "Restaurant",
+            "WiFi",
+            "AC"
+        ],
+        "description": "Simple and affordable hotel near Marina Beach, ideal for backpackers and budget-conscious travelers exploring Chennai.",
+        "lat": 13.0504,
+        "lng": 80.2825
+    },
+    {
+        "id": "H007",
+        "name": "The Taj Mahal Palace Mumbai",
+        "city": "Mumbai",
+        "price_per_night": 18000,
+        "budget_category": "Luxury",
+        "star_rating": 5,
+        "available_rooms": 5,
+        "amenities": [
+            "Pool",
+            "Spa",
+            "Gym",
+            "Restaurant",
+            "Bar",
+            "Valet",
+            "Concierge",
+            "WiFi",
+            "Sea View"
+        ],
+        "description": "Iconic heritage hotel overlooking the Gateway of India. Symbol of Mumbai's grandeur with legendary hospitality since 1903.",
+        "lat": 18.9213,
+        "lng": 72.8332
+    },
+    {
+        "id": "H008",
+        "name": "Hotel Trident Mumbai",
+        "city": "Mumbai",
+        "price_per_night": 7500,
+        "budget_category": "Luxury",
+        "star_rating": 5,
+        "available_rooms": 10,
+        "amenities": [
+            "Pool",
+            "Spa",
+            "Gym",
+            "Restaurant",
+            "Bar",
+            "WiFi",
+            "Sea View"
+        ],
+        "description": "Contemporary luxury hotel in Nariman Point with stunning views of Marine Drive and Back Bay.",
+        "lat": 18.9271,
+        "lng": 72.8222
+    },
+    {
+        "id": "H009",
+        "name": "Ginger Hotel Mumbai",
+        "city": "Mumbai",
+        "price_per_night": 2200,
+        "budget_category": "Low",
+        "star_rating": 3,
+        "available_rooms": 35,
+        "amenities": [
+            "Restaurant",
+            "WiFi",
+            "Gym"
+        ],
+        "description": "Smart economy hotel chain offering clean, modern rooms at affordable prices in Mumbai near business and travel hubs.",
+        "lat": 19.1171,
+        "lng": 72.8643
+    },
+    {
+        "id": "H010",
+        "name": "The Leela Goa",
+        "city": "Goa",
+        "price_per_night": 11000,
+        "budget_category": "Luxury",
+        "star_rating": 5,
+        "available_rooms": 6,
+        "amenities": [
+            "Private Beach",
+            "Pool",
+            "Spa",
+            "Gym",
+            "Restaurant",
+            "Bar",
+            "Water Sports",
+            "WiFi"
+        ],
+        "description": "Stunning 5-star beach resort on Mobor Beach with private beach access, Ayurvedic spa, and tropical lagoon pools.",
+        "lat": 15.1558,
+        "lng": 73.9478
+    },
+    {
+        "id": "H011",
+        "name": "Cidade de Goa",
+        "city": "Goa",
+        "price_per_night": 5500,
+        "budget_category": "Medium",
+        "star_rating": 4,
+        "available_rooms": 18,
+        "amenities": [
+            "Pool",
+            "Beach Access",
+            "Restaurant",
+            "Bar",
+            "Water Sports",
+            "WiFi"
+        ],
+        "description": "Portuguese-style village resort near Dona Paula with vibrant beach access, multiple dining options, and water activities.",
+        "lat": 15.4573,
+        "lng": 73.8055
+    },
+    {
+        "id": "H012",
+        "name": "OYO Silver Beach Resort Goa",
+        "city": "Goa",
+        "price_per_night": 1500,
+        "budget_category": "Low",
+        "star_rating": 2,
+        "available_rooms": 22,
+        "amenities": [
+            "Restaurant",
+            "WiFi",
+            "AC"
+        ],
+        "description": "Budget beach resort in North Goa within 5 minutes of Calangute Beach. Clean rooms, friendly staff, basic amenities.",
+        "lat": 15.5494,
+        "lng": 73.7626
+    },
+    {
+        "id": "H013",
+        "name": "The Imperial New Delhi",
+        "city": "Delhi",
+        "price_per_night": 14000,
+        "budget_category": "Luxury",
+        "star_rating": 5,
+        "available_rooms": 7,
+        "amenities": [
+            "Pool",
+            "Spa",
+            "Gym",
+            "Restaurant",
+            "Bar",
+            "Valet",
+            "WiFi",
+            "Art Gallery"
+        ],
+        "description": "Heritage 5-star hotel on Janpath, a colonial-era masterpiece with curated art, impeccable service, and timeless charm.",
+        "lat": 28.6234,
+        "lng": 77.2186
+    },
+    {
+        "id": "H014",
+        "name": "Radisson Hotel Noida Delhi",
+        "city": "Delhi",
+        "price_per_night": 3800,
+        "budget_category": "Medium",
+        "star_rating": 4,
+        "available_rooms": 25,
+        "amenities": [
+            "Pool",
+            "Gym",
+            "Restaurant",
+            "WiFi",
+            "Business Center"
+        ],
+        "description": "Upscale business hotel near Delhi-Noida border with modern amenities, great connectivity, and professional service.",
+        "lat": 28.6186,
+        "lng": 77.3195
+    },
+    {
+        "id": "H015",
+        "name": "Zostel Delhi",
+        "city": "Delhi",
+        "price_per_night": 600,
+        "budget_category": "Low",
+        "star_rating": 2,
+        "available_rooms": 40,
+        "amenities": [
+            "WiFi",
+            "Common Lounge",
+            "Lockers"
+        ],
+        "description": "Trendy backpacker hostel in Paharganj near New Delhi railway station. Popular with solo travelers and budget explorers.",
+        "lat": 28.6436,
+        "lng": 77.2119
+    },
+    {
+        "id": "H016",
+        "name": "The Oberoi Bangalore",
+        "city": "Bangalore",
+        "price_per_night": 10000,
+        "budget_category": "Luxury",
+        "star_rating": 5,
+        "available_rooms": 8,
+        "amenities": [
+            "Pool",
+            "Spa",
+            "Gym",
+            "Restaurant",
+            "Bar",
+            "WiFi",
+            "Butler Service"
+        ],
+        "description": "Award-winning luxury hotel on MG Road surrounded by landscaped gardens, offering world-class dining and spa experiences.",
+        "lat": 12.9734,
+        "lng": 77.619
+    },
+    {
+        "id": "H017",
+        "name": "Ibis Bangalore",
+        "city": "Bangalore",
+        "price_per_night": 2800,
+        "budget_category": "Medium",
+        "star_rating": 3,
+        "available_rooms": 30,
+        "amenities": [
+            "Restaurant",
+            "Gym",
+            "WiFi",
+            "Bar"
+        ],
+        "description": "Reliable mid-range hotel chain near Bangalore airport with comfortable rooms, good restaurant, and professional service.",
+        "lat": 13.2014,
+        "lng": 77.7126
+    },
+    {
+        "id": "H018",
+        "name": "Vivanta Hyderabad",
+        "city": "Hyderabad",
+        "price_per_night": 6000,
+        "budget_category": "Luxury",
+        "star_rating": 5,
+        "available_rooms": 10,
+        "amenities": [
+            "Pool",
+            "Spa",
+            "Gym",
+            "Restaurant",
+            "Bar",
+            "WiFi",
+            "Business Center"
+        ],
+        "description": "Sophisticated Taj property in Begumpet with contemporary design, multiple award-winning restaurants, and excellent business facilities.",
+        "lat": 17.4389,
+        "lng": 78.4619
+    },
+    {
+        "id": "H019",
+        "name": "Lemon Tree Hotel Hyderabad",
+        "city": "Hyderabad",
+        "price_per_night": 2500,
+        "budget_category": "Medium",
+        "star_rating": 3,
+        "available_rooms": 28,
+        "amenities": [
+            "Restaurant",
+            "Gym",
+            "WiFi",
+            "Pool"
+        ],
+        "description": "Cheerful mid-scale hotel chain near Hyderabad airport with vibrant decor, dependable amenities, and great value.",
+        "lat": 17.4429,
+        "lng": 78.3842
+    },
+    {
+        "id": "H020",
+        "name": "Umaid Bhawan Palace Jaipur",
+        "city": "Jaipur",
+        "price_per_night": 22000,
+        "budget_category": "Luxury",
+        "star_rating": 5,
+        "available_rooms": 4,
+        "amenities": [
+            "Pool",
+            "Spa",
+            "Gym",
+            "Restaurant",
+            "Bar",
+            "Valet",
+            "Tennis Court",
+            "WiFi"
+        ],
+        "description": "Part of a living palace, this Taj heritage hotel in Jaipur offers regal Rajputana hospitality, lush gardens, and a museum.",
+        "lat": 26.9202,
+        "lng": 75.8208
+    }
+]
